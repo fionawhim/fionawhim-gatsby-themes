@@ -6,7 +6,10 @@ export = (options: ConfigOptions) => ({
     {
       resolve: 'gatsby-theme-blog-core',
       options: {
-        basePath: options.basePath || DEFAULT_CONFIG_OPTIONS.basePath,
+        basePath:
+          options.slugPrefix ||
+          options.basePath ||
+          DEFAULT_CONFIG_OPTIONS.basePath,
       },
     },
   ],

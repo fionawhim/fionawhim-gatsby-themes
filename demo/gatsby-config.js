@@ -10,7 +10,11 @@ module.exports = {
     },
     {
       resolve: '@fionawhim-site/gatsby-theme-blog',
-      options: { contentPath: 'content/posts', basePath: 'blog' },
+      options: {
+        contentPath: 'content/posts',
+        basePath: '/',
+        slugPrefix: '/blog',
+      },
     },
   ],
   siteMetadata: {

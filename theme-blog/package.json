@@ -1,11 +1,11 @@
 {
   "name": "@fionawhim-site/gatsby-theme-blog",
   "author": "Fiona Hopkins",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "prepare": "tsc",
+    "prepare": "tsc -p tsconfig.build.json",
     "develop": "tsc -w -p tsconfig.build.json",
     "graphql-types": "gql-gen --config codegen.yml"
   },
