@@ -1,0 +1,13 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "build",
+    "target": "es2018",
+    "module": "commonjs",
+    "noEmit": false,
+    "declaration": true,
+    "noImplicitUseStrict": true,
+    "alwaysStrict": false
+  },
+  "include": ["lib/**/*"]
+}

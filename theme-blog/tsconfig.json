@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "noEmit": true,
+
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "node",
+    "jsx": "react",
+
+    "strict": true,
+    "noImplicitAny": false,
+
+    "plugins": [
+      {
+        "name": "@divyenduz/ts-graphql-plugin"
+      }
+    ]
+  },
+  "exclude": ["build/**/*"]
+}

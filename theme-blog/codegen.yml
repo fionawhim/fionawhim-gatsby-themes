@@ -1,0 +1,20 @@
+overwrite: true
+schema: "../demo-schema.json"
+documents:
+  - ./lib/**/*.{ts,tsx}
+  - ./src/**/*.{ts,tsx}
+  - ./node_modules/gatsby-*/**/*.js
+generates:
+  lib/graphql.ts:
+    plugins:
+      - "typescript-common"
+      - "typescript-client"
+config:
+  namingConvention:
+    enumValues: keep
+
+pluckConfig:
+  modules:
+    - name: fake-tag
+    - name: gatsby
+      identifier: graphql
