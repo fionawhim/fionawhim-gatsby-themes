@@ -504,6 +504,10 @@ export interface MdxBlogPostSortInput {
 
 export interface SitePageContextFilterInput {
   id?: Maybe<StringQueryOperatorInput>;
+
+  previousId?: Maybe<StringQueryOperatorInput>;
+
+  nextId?: Maybe<StringQueryOperatorInput>;
 }
 
 export interface SitePluginFilterInput {
@@ -537,6 +541,8 @@ export interface SitePluginFilterInput {
 export interface SitePluginPluginOptionsFilterInput {
   dest?: Maybe<StringQueryOperatorInput>;
 
+  fonts?: Maybe<StringQueryOperatorInput>;
+
   extensions?: Maybe<StringQueryOperatorInput>;
 
   gatsbyRemarkPlugins?: Maybe<
@@ -550,6 +556,8 @@ export interface SitePluginPluginOptionsFilterInput {
   basePath?: Maybe<StringQueryOperatorInput>;
 
   contentPath?: Maybe<StringQueryOperatorInput>;
+
+  slugPrefix?: Maybe<StringQueryOperatorInput>;
 
   pathCheck?: Maybe<BooleanQueryOperatorInput>;
 }
@@ -1550,6 +1558,8 @@ export enum SitePageFieldsEnum {
   componentChunkName = 'componentChunkName',
   isCreatedByStatefulCreatePages = 'isCreatedByStatefulCreatePages',
   context___id = 'context___id',
+  context___previousId = 'context___previousId',
+  context___nextId = 'context___nextId',
   pluginCreator___id = 'pluginCreator___id',
   pluginCreator___parent___id = 'pluginCreator___parent___id',
   pluginCreator___parent___parent___id = 'pluginCreator___parent___parent___id',
@@ -1592,6 +1602,7 @@ export enum SitePageFieldsEnum {
   pluginCreator___name = 'pluginCreator___name',
   pluginCreator___version = 'pluginCreator___version',
   pluginCreator___pluginOptions___dest = 'pluginCreator___pluginOptions___dest',
+  pluginCreator___pluginOptions___fonts = 'pluginCreator___pluginOptions___fonts',
   pluginCreator___pluginOptions___extensions = 'pluginCreator___pluginOptions___extensions',
   pluginCreator___pluginOptions___gatsbyRemarkPlugins = 'pluginCreator___pluginOptions___gatsbyRemarkPlugins',
   pluginCreator___pluginOptions___gatsbyRemarkPlugins___resolve = 'pluginCreator___pluginOptions___gatsbyRemarkPlugins___resolve',
@@ -1599,6 +1610,7 @@ export enum SitePageFieldsEnum {
   pluginCreator___pluginOptions___name = 'pluginCreator___pluginOptions___name',
   pluginCreator___pluginOptions___basePath = 'pluginCreator___pluginOptions___basePath',
   pluginCreator___pluginOptions___contentPath = 'pluginCreator___pluginOptions___contentPath',
+  pluginCreator___pluginOptions___slugPrefix = 'pluginCreator___pluginOptions___slugPrefix',
   pluginCreator___pluginOptions___pathCheck = 'pluginCreator___pluginOptions___pathCheck',
   pluginCreator___nodeAPIs = 'pluginCreator___nodeAPIs',
   pluginCreator___browserAPIs = 'pluginCreator___browserAPIs',
@@ -1715,6 +1727,7 @@ export enum SitePluginFieldsEnum {
   name = 'name',
   version = 'version',
   pluginOptions___dest = 'pluginOptions___dest',
+  pluginOptions___fonts = 'pluginOptions___fonts',
   pluginOptions___extensions = 'pluginOptions___extensions',
   pluginOptions___gatsbyRemarkPlugins = 'pluginOptions___gatsbyRemarkPlugins',
   pluginOptions___gatsbyRemarkPlugins___resolve = 'pluginOptions___gatsbyRemarkPlugins___resolve',
@@ -1732,6 +1745,7 @@ export enum SitePluginFieldsEnum {
   pluginOptions___name = 'pluginOptions___name',
   pluginOptions___basePath = 'pluginOptions___basePath',
   pluginOptions___contentPath = 'pluginOptions___contentPath',
+  pluginOptions___slugPrefix = 'pluginOptions___slugPrefix',
   pluginOptions___pathCheck = 'pluginOptions___pathCheck',
   nodeAPIs = 'nodeAPIs',
   browserAPIs = 'browserAPIs',
@@ -1987,6 +2001,30 @@ export type Json = any;
 // Documents
 // ====================================================
 
+export namespace Layout {
+  export type Variables = {};
+
+  export type Query = {
+    __typename?: 'Query';
+
+    site: Maybe<Site>;
+  };
+
+  export type Site = {
+    __typename?: 'Site';
+
+    siteMetadata: Maybe<SiteMetadata>;
+  };
+
+  export type SiteMetadata = {
+    __typename?: 'SiteSiteMetadata';
+
+    title: Maybe<string>;
+
+    description: Maybe<string>;
+  };
+}
+
 export namespace ExtendedPostsQuery {
   export type Variables = {};
 
@@ -2023,16 +2061,10 @@ export namespace ExtendedPostsQuery {
   export type AllBlogPost = {
     __typename?: 'BlogPostConnection';
 
-    edges: Edges[];
+    nodes: Nodes[];
   };
 
-  export type Edges = {
-    __typename?: 'BlogPostEdge';
-
-    node: Node;
-  };
-
-  export type Node = {
+  export type Nodes = {
     __typename?: 'BlogPost';
 
     id: string;

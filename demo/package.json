@@ -12,6 +12,7 @@
     "@fionawhim-site/gatsby-theme-blog": "*",
     "gatsby": "^2.13.67",
     "gatsby-plugin-extract-schema": "^0.0.5",
+    "gatsby-theme-style-guide": "^0.2.35",
     "react": "^16.9.0",
     "react-dom": "^16.9.0"
   }

@@ -2,6 +2,7 @@ const path = require('path');
 
 module.exports = {
   plugins: [
+    'gatsby-theme-style-guide',
     {
       resolve: 'gatsby-plugin-extract-schema',
       options: {
