@@ -2001,7 +2001,7 @@ export type Json = any;
 // Documents
 // ====================================================
 
-export namespace Layout {
+export namespace LayoutQuery {
   export type Variables = {};
 
   export type Query = {
@@ -2070,6 +2070,156 @@ export namespace ExtendedPostsQuery {
     id: string;
 
     body: string;
+
+    slug: string;
+
+    title: string;
+
+    date: Date;
+  };
+}
+
+export namespace PostPageQuery {
+  export type Variables = {
+    id: string;
+    previousId?: Maybe<string>;
+    nextId?: Maybe<string>;
+  };
+
+  export type Query = {
+    __typename?: 'Query';
+
+    site: Maybe<Site>;
+
+    blogPost: Maybe<BlogPost>;
+
+    previous: Maybe<Previous>;
+
+    next: Maybe<Next>;
+  };
+
+  export type Site = {
+    __typename?: 'Site';
+
+    siteMetadata: Maybe<SiteMetadata>;
+  };
+
+  export type SiteMetadata = {
+    __typename?: 'SiteSiteMetadata';
+
+    title: Maybe<string>;
+
+    social: Maybe<(Maybe<Social>)[]>;
+  };
+
+  export type Social = {
+    __typename?: 'SiteSiteMetadataSocial';
+
+    name: Maybe<string>;
+
+    url: Maybe<string>;
+  };
+
+  export type BlogPost = {
+    __typename?: 'BlogPost';
+
+    id: string;
+
+    excerpt: string;
+
+    body: string;
+
+    slug: string;
+
+    title: string;
+
+    tags: (Maybe<string>)[];
+
+    keywords: (Maybe<string>)[];
+
+    date: Date;
+  };
+
+  export type Previous = {
+    __typename?: 'BlogPost';
+
+    id: string;
+
+    excerpt: string;
+
+    slug: string;
+
+    title: string;
+
+    date: Date;
+  };
+
+  export type Next = {
+    __typename?: 'BlogPost';
+
+    id: string;
+
+    excerpt: string;
+
+    slug: string;
+
+    title: string;
+
+    date: Date;
+  };
+}
+
+export namespace PostsQuery {
+  export type Variables = {};
+
+  export type Query = {
+    __typename?: 'Query';
+
+    site: Maybe<Site>;
+
+    allBlogPost: AllBlogPost;
+  };
+
+  export type Site = {
+    __typename?: 'Site';
+
+    siteMetadata: Maybe<SiteMetadata>;
+  };
+
+  export type SiteMetadata = {
+    __typename?: 'SiteSiteMetadata';
+
+    title: Maybe<string>;
+
+    social: Maybe<(Maybe<Social>)[]>;
+  };
+
+  export type Social = {
+    __typename?: 'SiteSiteMetadataSocial';
+
+    name: Maybe<string>;
+
+    url: Maybe<string>;
+  };
+
+  export type AllBlogPost = {
+    __typename?: 'BlogPostConnection';
+
+    edges: Edges[];
+  };
+
+  export type Edges = {
+    __typename?: 'BlogPostEdge';
+
+    node: Node;
+  };
+
+  export type Node = {
+    __typename?: 'BlogPost';
+
+    id: string;
+
+    excerpt: string;
 
     slug: string;
 

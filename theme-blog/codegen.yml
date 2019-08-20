@@ -3,7 +3,7 @@ schema: "../demo-schema.json"
 documents:
   - ./lib/**/*.{ts,tsx}
   - ./src/**/*.{ts,tsx}
-  - ./node_modules/gatsby-*/**/*.js
+  - ../node_modules/gatsby-theme-*/**/templates/*.js
 generates:
   lib/graphql.ts:
     plugins:

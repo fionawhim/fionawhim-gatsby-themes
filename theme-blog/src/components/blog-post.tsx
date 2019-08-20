@@ -2,7 +2,7 @@ import { Styled } from 'theme-ui';
 
 import React from 'react';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
-import { css } from '@emotion/core';
+import { Link } from 'gatsby';
 
 interface Props {
   body: string;
@@ -11,10 +11,12 @@ interface Props {
   date: string;
 }
 
-const BlogPost: React.FunctionComponent<Props> = ({ body, title }) => {
+const BlogPost: React.FunctionComponent<Props> = ({ body, title, slug }) => {
   return (
     <div>
-      <Styled.h2>{title}</Styled.h2>
+      <Styled.h2>
+        <Link to={slug}>{title}</Link>
+      </Styled.h2>
       <MDXRenderer>{body}</MDXRenderer>
     </div>
   );
