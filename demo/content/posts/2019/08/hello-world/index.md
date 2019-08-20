@@ -16,3 +16,5 @@ This site is built with [Gatsby](https://www.gatsbyjs.org/) and hosted on
 content backend, though I’m publishing the theme source in my
 [fionawhim-gatsby-themes](https://github.com/fionawhim/fionawhim-gatsby-themes)
 repo.
+
+![Weather Clock](IMG_2698.jpg)
