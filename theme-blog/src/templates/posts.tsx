@@ -12,7 +12,7 @@ interface Props extends PageRendererProps {
 export default (props: Props) => (
   <Layout>
     {props.data.allBlogPost.nodes.map(p => (
-      <BlogPost {...p} />
+      <BlogPost key={p.slug} {...p} />
     ))}
   </Layout>
 );

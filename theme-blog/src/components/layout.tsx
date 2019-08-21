@@ -34,7 +34,7 @@ const Layout: React.FunctionComponent<Props> = ({ title, children }) => {
     <ThemedLayout>
       <Helmet>
         <title>
-          {title && `${title} | `}
+          {title ? `${title} | ` : ''}
           {data.site!.siteMetadata!.title}
         </title>
       </Helmet>
@@ -46,6 +46,7 @@ const Layout: React.FunctionComponent<Props> = ({ title, children }) => {
             padding: 0,
             color: theme.colors.text,
             backgroundColor: theme.colors.background,
+            fontFamily: theme.fonts.body,
           },
 
           a: {
@@ -83,7 +84,7 @@ const Layout: React.FunctionComponent<Props> = ({ title, children }) => {
           </Link>
         </Styled.h1>
 
-        <Styled.p sx={{ m: 0 }}>
+        <Styled.p sx={{ m: 0, fontStyle: 'italic' }}>
           {data.site!.siteMetadata!.description}
         </Styled.p>
       </Header>

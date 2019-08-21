@@ -12,11 +12,21 @@ export = (options: ConfigOptions) => ({
         fonts: ['poppins:400,400i,900,900i,700,700i'],
       },
     },
+
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        name: 'projects',
+        path: options.projectsContentPath,
+      },
+    },
+
     {
       resolve: 'gatsby-theme-blog-core',
       options: {
+        contentPath: options.blogContentPath,
         basePath:
-          options.slugPrefix ||
+          options.blogPostPath ||
           options.basePath ||
           DEFAULT_CONFIG_OPTIONS.basePath,
       },

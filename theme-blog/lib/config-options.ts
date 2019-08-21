@@ -1,11 +1,19 @@
 export interface ConfigOptions {
-  contentPath?: string;
+  blogContentPath?: string;
+  blogPostPath?: string;
+
+  projectsContentPath?: string;
+  projectsPath?: string;
+
   basePath?: string;
-  slugPrefix?: string;
 }
 
 export const DEFAULT_CONFIG_OPTIONS: Required<ConfigOptions> = {
-  contentPath: 'assets/posts',
+  blogContentPath: 'assets/posts',
+  blogPostPath: '/blog',
+
+  projectsContentPath: 'content/projects',
+  projectsPath: '/projects',
+
   basePath: '/',
-  slugPrefix: '/blog',
 };
