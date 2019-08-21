@@ -12,7 +12,10 @@ interface Props {
 
 const Post: React.FunctionComponent<Props> = ({ data }) => (
   <Layout title={data.blogPost!.title}>
-    <BlogPost {...data.blogPost!} project={data.mdx!.fields!.project} />
+    <BlogPost
+      {...data.blogPost!}
+      project={data.mdx!.fields && data.mdx!.fields.project}
+    />
   </Layout>
 );
 

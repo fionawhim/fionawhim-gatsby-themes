@@ -1,7 +1,7 @@
 {
   "name": "@fionawhim-site/gatsby-theme-blog",
   "author": "Fiona Hopkins",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
