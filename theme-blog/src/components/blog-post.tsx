@@ -1,8 +1,7 @@
 /** @jsx jsx */
 
-import { Styled, jsx } from 'theme-ui';
-
 import React from 'react';
+import { Styled, jsx } from 'theme-ui';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import { Link } from 'gatsby';
 import { Maybe } from '../../lib/graphql';
@@ -40,9 +39,9 @@ const BlogPost: React.FunctionComponent<Props> = ({
         position: 'relative',
       }}
     >
-      <Styled.h2>
+      <Styled.h3>
         <Link to={slug}>{title}</Link>
-      </Styled.h2>
+      </Styled.h3>
 
       <div
         sx={{
@@ -62,9 +61,8 @@ const BlogPost: React.FunctionComponent<Props> = ({
       </div>
 
       {project && (
-        <i>
-          See more about this project:{' '}
-          <Link to={project.slug!}>{project.title!}</Link>
+        <i sx={{ fontSize: 1 }}>
+          Filed under: <Link to={project.slug!}>{project.title!}</Link>
         </i>
       )}
 

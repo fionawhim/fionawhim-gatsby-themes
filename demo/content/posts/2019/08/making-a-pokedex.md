@@ -1,7 +1,7 @@
 ---
 title: Making a Pokédex
 date: 2019-08-20
-project: pyportal-pokedex
+project: pybadge-pokedex
 tags: ["CircuitPython", "Pokémon"]
 ---
 

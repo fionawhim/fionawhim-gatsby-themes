@@ -175,6 +175,8 @@ export interface MdxFrontmatterFilterInput {
 
   status?: Maybe<StringQueryOperatorInput>;
 
+  path?: Maybe<StringQueryOperatorInput>;
+
   date?: Maybe<DateQueryOperatorInput>;
 
   project?: Maybe<StringQueryOperatorInput>;
@@ -546,6 +548,14 @@ export interface SitePageContextFilterInput {
   previousId?: Maybe<StringQueryOperatorInput>;
 
   nextId?: Maybe<StringQueryOperatorInput>;
+
+  frontmatter?: Maybe<SitePageContextFrontmatterFilterInput>;
+}
+
+export interface SitePageContextFrontmatterFilterInput {
+  title?: Maybe<StringQueryOperatorInput>;
+
+  path?: Maybe<StringQueryOperatorInput>;
 }
 
 export interface SitePluginFilterInput {
@@ -1054,6 +1064,7 @@ export enum FileFieldsEnum {
   childMdx___fileAbsolutePath = 'childMdx___fileAbsolutePath',
   childMdx___frontmatter___title = 'childMdx___frontmatter___title',
   childMdx___frontmatter___status = 'childMdx___frontmatter___status',
+  childMdx___frontmatter___path = 'childMdx___frontmatter___path',
   childMdx___frontmatter___date = 'childMdx___frontmatter___date',
   childMdx___frontmatter___project = 'childMdx___frontmatter___project',
   childMdx___frontmatter___tags = 'childMdx___frontmatter___tags',
@@ -1233,6 +1244,7 @@ export enum MdxFieldsEnum {
   fileAbsolutePath = 'fileAbsolutePath',
   frontmatter___title = 'frontmatter___title',
   frontmatter___status = 'frontmatter___status',
+  frontmatter___path = 'frontmatter___path',
   frontmatter___date = 'frontmatter___date',
   frontmatter___project = 'frontmatter___project',
   frontmatter___tags = 'frontmatter___tags',
@@ -1735,6 +1747,8 @@ export enum SitePageFieldsEnum {
   context___id = 'context___id',
   context___previousId = 'context___previousId',
   context___nextId = 'context___nextId',
+  context___frontmatter___title = 'context___frontmatter___title',
+  context___frontmatter___path = 'context___frontmatter___path',
   pluginCreator___id = 'pluginCreator___id',
   pluginCreator___parent___id = 'pluginCreator___parent___id',
   pluginCreator___parent___parent___id = 'pluginCreator___parent___parent___id',
@@ -2310,6 +2324,66 @@ export namespace CreateProjectPagesQuery {
   };
 }
 
+export namespace LatestBlogPostsQuery {
+  export type Variables = {};
+
+  export type Query = {
+    __typename?: 'Query';
+
+    allBlogPost: AllBlogPost;
+  };
+
+  export type AllBlogPost = {
+    __typename?: 'BlogPostConnection';
+
+    nodes: Nodes[];
+  };
+
+  export type Nodes = {
+    __typename?: MdxBlogPostInlineFragment['__typename'];
+
+    id: string;
+
+    body: string;
+
+    slug: string;
+
+    title: string;
+
+    date: Date;
+  } & MdxBlogPostInlineFragment;
+
+  export type MdxBlogPostInlineFragment = {
+    __typename?: 'MdxBlogPost';
+
+    parent: Maybe<Parent>;
+  };
+
+  export type Parent = MdxInlineFragment;
+
+  export type MdxInlineFragment = {
+    __typename?: 'Mdx';
+
+    fields: Maybe<Fields>;
+  };
+
+  export type Fields = {
+    __typename?: 'MdxFields';
+
+    project: Maybe<Project>;
+  };
+
+  export type Project = {
+    __typename?: 'Project';
+
+    projectId: Maybe<string>;
+
+    slug: Maybe<string>;
+
+    title: Maybe<string>;
+  };
+}
+
 export namespace LayoutQuery {
   export type Variables = {};
 
@@ -2422,60 +2496,6 @@ export namespace ExtendedPostPageQuery {
   };
 }
 
-export namespace ExtendedPostsQuery {
-  export type Variables = {};
-
-  export type Query = {
-    __typename?: 'Query';
-
-    site: Maybe<Site>;
-
-    allBlogPost: AllBlogPost;
-  };
-
-  export type Site = {
-    __typename?: 'Site';
-
-    siteMetadata: Maybe<SiteMetadata>;
-  };
-
-  export type SiteMetadata = {
-    __typename?: 'SiteSiteMetadata';
-
-    title: Maybe<string>;
-
-    social: Maybe<(Maybe<Social>)[]>;
-  };
-
-  export type Social = {
-    __typename?: 'SiteSiteMetadataSocial';
-
-    name: Maybe<string>;
-
-    url: Maybe<string>;
-  };
-
-  export type AllBlogPost = {
-    __typename?: 'BlogPostConnection';
-
-    nodes: Nodes[];
-  };
-
-  export type Nodes = {
-    __typename?: 'BlogPost';
-
-    id: string;
-
-    body: string;
-
-    slug: string;
-
-    title: string;
-
-    date: Date;
-  };
-}
-
 export namespace ProjectPageQuery {
   export type Variables = {
     slug: string;
@@ -2577,11 +2597,11 @@ export namespace PostPageQuery {
 
     excerpt: string;
 
+    body: string;
+
     slug: string;
 
     title: string;
-
-    body: string;
 
     tags: (Maybe<string>)[];
 

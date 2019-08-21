@@ -16,8 +16,20 @@ export = (options: ConfigOptions) => ({
     {
       resolve: 'gatsby-source-filesystem',
       options: {
-        name: 'projects',
-        path: options.projectsContentPath,
+        name:
+          options.projectsContentPath ||
+          DEFAULT_CONFIG_OPTIONS.projectsContentPath,
+        path:
+          options.projectsContentPath ||
+          DEFAULT_CONFIG_OPTIONS.projectsContentPath,
+      },
+    },
+
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        name: 'pages',
+        path: 'src/pages',
       },
     },
 
@@ -25,10 +37,7 @@ export = (options: ConfigOptions) => ({
       resolve: 'gatsby-theme-blog-core',
       options: {
         contentPath: options.blogContentPath,
-        basePath:
-          options.blogPostPath ||
-          options.basePath ||
-          DEFAULT_CONFIG_OPTIONS.basePath,
+        basePath: options.blogPostPath || DEFAULT_CONFIG_OPTIONS.blogPostPath,
       },
     },
   ],

@@ -4,16 +4,12 @@ export interface ConfigOptions {
 
   projectsContentPath?: string;
   projectsPath?: string;
-
-  basePath?: string;
 }
 
 export const DEFAULT_CONFIG_OPTIONS: Required<ConfigOptions> = {
-  blogContentPath: 'assets/posts',
+  blogContentPath: 'content/posts',
   blogPostPath: '/blog',
 
   projectsContentPath: 'content/projects',
   projectsPath: '/projects',
-
-  basePath: '/',
 };

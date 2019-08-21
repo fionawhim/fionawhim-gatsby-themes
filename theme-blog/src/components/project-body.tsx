@@ -27,7 +27,9 @@ const Project: React.FunctionComponent<Props> = ({ body, title, slug }) => {
       }}
     >
       <Styled.h2>
-        Project: <Link to={slug}>{title}</Link>
+        Project:
+        <br />
+        <Link to={slug}>{title}</Link>
       </Styled.h2>
 
       <div style={{ position: 'relative' }}>

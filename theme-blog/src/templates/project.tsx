@@ -31,11 +31,11 @@ const ProjectPage: React.FunctionComponent<Props> = props => {
       {data.relatedPosts.nodes.length !== 0 && (
         <React.Fragment>
           <Styled.h3>Related Posts</Styled.h3>
-          <div>
+          <ul>
             {data.relatedPosts.nodes.map(
               ({ childMdxBlogPost }) =>
                 childMdxBlogPost && (
-                  <div key={childMdxBlogPost.slug}>
+                  <li key={childMdxBlogPost.slug}>
                     <Styled.h4 sx={{ mb: 1 }}>
                       <Link to={childMdxBlogPost.slug}>
                         {childMdxBlogPost.title}
@@ -45,10 +45,10 @@ const ProjectPage: React.FunctionComponent<Props> = props => {
                     <Styled.p css={{ marginTop: 0 }}>
                       {childMdxBlogPost.excerpt}
                     </Styled.p>
-                  </div>
+                  </li>
                 )
             )}
-          </div>
+          </ul>
         </React.Fragment>
       )}
     </Layout>

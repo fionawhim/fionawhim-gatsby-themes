@@ -16,7 +16,6 @@ import { CreateProjectPagesQuery } from './graphql';
 import { ConfigOptions, DEFAULT_CONFIG_OPTIONS } from './config-options';
 
 const PostTemplate = require.resolve(`../src/templates/post.tsx`);
-const PostsTemplate = require.resolve(`../src/templates/posts.tsx`);
 const ProjectTemplate = require.resolve(`../src/templates/project.tsx`);
 
 let createNodeId: (str: string) => string = null as any;
@@ -26,24 +25,32 @@ exports.onPreBootstrap = (args: NodePluginArgs, options: ConfigOptions) => {
 
   createNodeId = args.createNodeId as any;
 
-  const projectsContentPath =
-    options.projectsContentPath || DEFAULT_CONFIG_OPTIONS.projectsContentPath;
+  const dirs = [
+    options.projectsContentPath || DEFAULT_CONFIG_OPTIONS.projectsContentPath,
+  ];
 
-  const dir = path.join(program.directory, projectsContentPath);
+  dirs.forEach(p => {
+    const dir = path.join(program.directory, p);
 
-  if (!fs.existsSync(dir)) {
-    mkdirp.sync(dir);
-  }
+    if (!fs.existsSync(dir)) {
+      mkdirp.sync(dir);
+    }
+  });
 };
 
-exports.createPages = async ({
-  actions,
-  graphql,
-  reporter,
-}: CreatePagesArgs) => {
+exports.createPages = async (
+  { actions, graphql, reporter }: CreatePagesArgs,
+  options: ConfigOptions
+) => {
+  const { createPage } = actions;
+
+  const {
+    projectsContentPath = DEFAULT_CONFIG_OPTIONS.projectsContentPath,
+  } = options;
+
   const result = await graphql<CreateProjectPagesQuery.Query>(gql`
     query CreateProjectPagesQuery {
-      allFile(filter: { sourceInstanceName: { eq: "projects" } }) {
+      allFile(filter: { sourceInstanceName: { eq: "${projectsContentPath}" } }) {
         nodes {
           childMdx {
             fields {
@@ -70,7 +77,7 @@ exports.createPages = async ({
       projectId,
     };
 
-    actions.createPage({
+    createPage({
       path: slug,
       component: ProjectTemplate,
       context,
@@ -99,7 +106,7 @@ exports.onCreateNode = async (
   const fileNode = getNode(node.parent);
   const source = fileNode.sourceInstanceName;
 
-  if (source === 'projects') {
+  if (source === projectsContentPath) {
     const filePath = createFilePath({
       node: fileNode,
       getNode,
@@ -146,10 +153,7 @@ exports.onCreateNode = async (
   }
 };
 
-exports.onCreatePage = (
-  { page, actions }: CreatePageArgs,
-  options: ConfigOptions
-) => {
+exports.onCreatePage = ({ page, actions }: CreatePageArgs) => {
   const { createPage, deletePage } = actions;
   const oldPage = { ...page };
 
@@ -159,11 +163,7 @@ exports.onCreatePage = (
     page.component ===
     require.resolve('gatsby-theme-blog-core/src/templates/posts-query')
   ) {
-    page.path = options.basePath || page.path;
-    page.component = PostsTemplate;
-
     deletePage(oldPage as any);
-    createPage(page as any);
   }
 
   if (
@@ -171,6 +171,21 @@ exports.onCreatePage = (
     require.resolve('gatsby-theme-blog-core/src/templates/post-query')
   ) {
     page.component = PostTemplate;
+
+    deletePage(oldPage as any);
+    createPage(page as any);
+  }
+
+  const ext = path.extname((page as any).component);
+  const frontmatter = (page.context as any).frontmatter;
+
+  if (
+    ext === '.mdx' &&
+    frontmatter &&
+    frontmatter.path &&
+    page.path !== frontmatter.path
+  ) {
+    page.path = frontmatter.path;
 
     deletePage(oldPage as any);
     createPage(page as any);
