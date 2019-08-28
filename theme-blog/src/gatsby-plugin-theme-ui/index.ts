@@ -11,6 +11,7 @@ export default {
     background: '#f0f9fb',
     banner: '#BC007B',
     muted: '#027798',
+    dark: '#72004A',
   },
   fonts: {
     heading: 'Poppins, sans-serif',

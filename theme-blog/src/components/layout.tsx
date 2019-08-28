@@ -73,11 +73,15 @@ const Layout: React.FunctionComponent<Props> = ({ title, children }) => {
 
             a: {
               textDecoration: 'none',
-              color: theme.colors.active,
+              color: theme.colors.primary,
             },
 
             'p a, li a': {
               textDecoration: 'underline',
+            },
+
+            'p a:visited, li a:visited': {
+              color: theme.colors.dark,
             },
 
             'h1::after': {
