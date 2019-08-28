@@ -2350,7 +2350,11 @@ export namespace LatestBlogPostsQuery {
 
     title: string;
 
-    date: Date;
+    day: Date;
+
+    month: Date;
+
+    year: Date;
   } & MdxBlogPostInlineFragment;
 
   export type MdxBlogPostInlineFragment = {
