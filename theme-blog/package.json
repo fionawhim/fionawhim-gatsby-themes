@@ -31,7 +31,7 @@
     "gatsby-theme-blog-core": "^1.1.0",
     "mkdirp": "^0.5.1",
     "react-helmet": "^5.2.1",
-    "theme-ui": "^0.2.35"
+    "theme-ui": "^0.2.36"
   },
   "devDependencies": {
     "@divyenduz/ts-graphql-plugin": "^0.1.0",

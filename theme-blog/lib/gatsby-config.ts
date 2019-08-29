@@ -18,16 +18,26 @@ const FEED_SITE_QUERY = gql`
 `;
 
 const FEED_POSTS_QUERY = gql`
-  query FeedPostsQuery {
-    allBlogPost(sort: { order: DESC, fields: date }) {
-      nodes {
-        excerpt
-        date
-        title
-        slug
+query FeedPostsQuery {
+  allBlogPost(sort: {order: DESC, fields: date}) {
+    nodes {
+      excerpt
+      date
+      title
+      slug
+      ... on MdxBlogPost {
+        id
+        body
+        parent {
+          ... on Mdx {
+            id
+            html
+          }
+        }
       }
     }
   }
+}
 `;
 
 export = (options: ConfigOptions) => ({
@@ -64,7 +74,7 @@ export = (options: ConfigOptions) => ({
                 date: node.date,
                 url: site!.siteMetadata!.siteUrl + node.slug,
                 guid: site!.siteMetadata!.siteUrl + node.slug,
-                // custom_elements: [{ 'content:encoded': node.html }],
+                custom_elements: [{ 'content:encoded': node.parent!.html }],
               }));
             },
             query: FEED_POSTS_QUERY,

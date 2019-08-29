@@ -611,6 +611,8 @@ export interface SitePluginPluginOptionsFilterInput {
 
   pathCheck?: Maybe<BooleanQueryOperatorInput>;
 
+  query?: Maybe<StringQueryOperatorInput>;
+
   feeds?: Maybe<SitePluginPluginOptionsFeedsFilterListInput>;
 }
 
@@ -784,10 +786,6 @@ export interface SiteFilterInput {
   internal?: Maybe<InternalFilterInput>;
 
   siteMetadata?: Maybe<SiteSiteMetadataFilterInput>;
-
-  port?: Maybe<IntQueryOperatorInput>;
-
-  host?: Maybe<StringQueryOperatorInput>;
 
   polyfill?: Maybe<BooleanQueryOperatorInput>;
 
@@ -1813,6 +1811,7 @@ export enum SitePageFieldsEnum {
   pluginCreator___pluginOptions___projectsContentPath = 'pluginCreator___pluginOptions___projectsContentPath',
   pluginCreator___pluginOptions___projectsPath = 'pluginCreator___pluginOptions___projectsPath',
   pluginCreator___pluginOptions___pathCheck = 'pluginCreator___pluginOptions___pathCheck',
+  pluginCreator___pluginOptions___query = 'pluginCreator___pluginOptions___query',
   pluginCreator___pluginOptions___feeds = 'pluginCreator___pluginOptions___feeds',
   pluginCreator___pluginOptions___feeds___query = 'pluginCreator___pluginOptions___feeds___query',
   pluginCreator___pluginOptions___feeds___output = 'pluginCreator___pluginOptions___feeds___output',
@@ -1955,6 +1954,7 @@ export enum SitePluginFieldsEnum {
   pluginOptions___projectsContentPath = 'pluginOptions___projectsContentPath',
   pluginOptions___projectsPath = 'pluginOptions___projectsPath',
   pluginOptions___pathCheck = 'pluginOptions___pathCheck',
+  pluginOptions___query = 'pluginOptions___query',
   pluginOptions___feeds = 'pluginOptions___feeds',
   pluginOptions___feeds___query = 'pluginOptions___feeds___query',
   pluginOptions___feeds___output = 'pluginOptions___feeds___output',
@@ -2075,8 +2075,6 @@ export enum SiteFieldsEnum {
   siteMetadata___social___name = 'siteMetadata___social___name',
   siteMetadata___social___url = 'siteMetadata___social___url',
   siteMetadata___siteUrl = 'siteMetadata___siteUrl',
-  port = 'port',
-  host = 'host',
   polyfill = 'polyfill',
   pathPrefix = 'pathPrefix',
   buildTime = 'buildTime',
@@ -2350,7 +2348,7 @@ export namespace FeedPostsQuery {
   };
 
   export type Nodes = {
-    __typename?: 'BlogPost';
+    __typename?: MdxBlogPostInlineFragment['__typename'];
 
     excerpt: string;
 
@@ -2359,6 +2357,26 @@ export namespace FeedPostsQuery {
     title: string;
 
     slug: string;
+  } & MdxBlogPostInlineFragment;
+
+  export type MdxBlogPostInlineFragment = {
+    __typename?: 'MdxBlogPost';
+
+    id: string;
+
+    body: string;
+
+    parent: Maybe<Parent>;
+  };
+
+  export type Parent = MdxInlineFragment;
+
+  export type MdxInlineFragment = {
+    __typename?: 'Mdx';
+
+    id: string;
+
+    html: Maybe<string>;
   };
 }
 
