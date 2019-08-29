@@ -1,9 +1,8 @@
 /** @jsx jsx */
 
 import React from 'react';
-import { Styled, jsx } from 'theme-ui';
+import { jsx } from 'theme-ui';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
-import { Link } from 'gatsby';
 import { Maybe } from '../../lib/graphql';
 import { BASELINE } from '../gatsby-plugin-theme-ui';
 import BlogPostHeader from './blog-post-header';

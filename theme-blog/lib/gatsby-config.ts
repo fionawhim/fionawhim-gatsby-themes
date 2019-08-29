@@ -71,6 +71,7 @@ export = (options: ConfigOptions) => ({
             }) => {
               return allBlogPost.nodes.map(node => ({
                 description: node.excerpt,
+                title: node.title,
                 date: node.date,
                 url: site!.siteMetadata!.siteUrl + node.slug,
                 guid: site!.siteMetadata!.siteUrl + node.slug,

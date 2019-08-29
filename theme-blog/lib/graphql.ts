@@ -587,6 +587,10 @@ export interface SitePluginPluginOptionsFilterInput {
 
   fonts?: Maybe<StringQueryOperatorInput>;
 
+  query?: Maybe<StringQueryOperatorInput>;
+
+  feeds?: Maybe<SitePluginPluginOptionsFeedsFilterListInput>;
+
   name?: Maybe<StringQueryOperatorInput>;
 
   path?: Maybe<StringQueryOperatorInput>;
@@ -610,10 +614,18 @@ export interface SitePluginPluginOptionsFilterInput {
   projectsPath?: Maybe<StringQueryOperatorInput>;
 
   pathCheck?: Maybe<BooleanQueryOperatorInput>;
+}
 
+export interface SitePluginPluginOptionsFeedsFilterListInput {
+  elemMatch?: Maybe<SitePluginPluginOptionsFeedsFilterInput>;
+}
+
+export interface SitePluginPluginOptionsFeedsFilterInput {
   query?: Maybe<StringQueryOperatorInput>;
 
-  feeds?: Maybe<SitePluginPluginOptionsFeedsFilterListInput>;
+  output?: Maybe<StringQueryOperatorInput>;
+
+  title?: Maybe<StringQueryOperatorInput>;
 }
 
 export interface SitePluginPluginOptionsGatsbyRemarkPluginsFilterListInput {
@@ -646,18 +658,6 @@ export interface SitePluginPluginOptionsGatsbyRemarkPluginsOptionsFilterInput {
   tracedSVG?: Maybe<BooleanQueryOperatorInput>;
 
   loading?: Maybe<StringQueryOperatorInput>;
-}
-
-export interface SitePluginPluginOptionsFeedsFilterListInput {
-  elemMatch?: Maybe<SitePluginPluginOptionsFeedsFilterInput>;
-}
-
-export interface SitePluginPluginOptionsFeedsFilterInput {
-  query?: Maybe<StringQueryOperatorInput>;
-
-  output?: Maybe<StringQueryOperatorInput>;
-
-  title?: Maybe<StringQueryOperatorInput>;
 }
 
 export interface SitePluginPackageJsonFilterInput {
@@ -786,6 +786,10 @@ export interface SiteFilterInput {
   internal?: Maybe<InternalFilterInput>;
 
   siteMetadata?: Maybe<SiteSiteMetadataFilterInput>;
+
+  port?: Maybe<IntQueryOperatorInput>;
+
+  host?: Maybe<StringQueryOperatorInput>;
 
   polyfill?: Maybe<BooleanQueryOperatorInput>;
 
@@ -1799,6 +1803,11 @@ export enum SitePageFieldsEnum {
   pluginCreator___version = 'pluginCreator___version',
   pluginCreator___pluginOptions___dest = 'pluginCreator___pluginOptions___dest',
   pluginCreator___pluginOptions___fonts = 'pluginCreator___pluginOptions___fonts',
+  pluginCreator___pluginOptions___query = 'pluginCreator___pluginOptions___query',
+  pluginCreator___pluginOptions___feeds = 'pluginCreator___pluginOptions___feeds',
+  pluginCreator___pluginOptions___feeds___query = 'pluginCreator___pluginOptions___feeds___query',
+  pluginCreator___pluginOptions___feeds___output = 'pluginCreator___pluginOptions___feeds___output',
+  pluginCreator___pluginOptions___feeds___title = 'pluginCreator___pluginOptions___feeds___title',
   pluginCreator___pluginOptions___name = 'pluginCreator___pluginOptions___name',
   pluginCreator___pluginOptions___path = 'pluginCreator___pluginOptions___path',
   pluginCreator___pluginOptions___extensions = 'pluginCreator___pluginOptions___extensions',
@@ -1811,11 +1820,6 @@ export enum SitePageFieldsEnum {
   pluginCreator___pluginOptions___projectsContentPath = 'pluginCreator___pluginOptions___projectsContentPath',
   pluginCreator___pluginOptions___projectsPath = 'pluginCreator___pluginOptions___projectsPath',
   pluginCreator___pluginOptions___pathCheck = 'pluginCreator___pluginOptions___pathCheck',
-  pluginCreator___pluginOptions___query = 'pluginCreator___pluginOptions___query',
-  pluginCreator___pluginOptions___feeds = 'pluginCreator___pluginOptions___feeds',
-  pluginCreator___pluginOptions___feeds___query = 'pluginCreator___pluginOptions___feeds___query',
-  pluginCreator___pluginOptions___feeds___output = 'pluginCreator___pluginOptions___feeds___output',
-  pluginCreator___pluginOptions___feeds___title = 'pluginCreator___pluginOptions___feeds___title',
   pluginCreator___nodeAPIs = 'pluginCreator___nodeAPIs',
   pluginCreator___browserAPIs = 'pluginCreator___browserAPIs',
   pluginCreator___ssrAPIs = 'pluginCreator___ssrAPIs',
@@ -1932,6 +1936,11 @@ export enum SitePluginFieldsEnum {
   version = 'version',
   pluginOptions___dest = 'pluginOptions___dest',
   pluginOptions___fonts = 'pluginOptions___fonts',
+  pluginOptions___query = 'pluginOptions___query',
+  pluginOptions___feeds = 'pluginOptions___feeds',
+  pluginOptions___feeds___query = 'pluginOptions___feeds___query',
+  pluginOptions___feeds___output = 'pluginOptions___feeds___output',
+  pluginOptions___feeds___title = 'pluginOptions___feeds___title',
   pluginOptions___name = 'pluginOptions___name',
   pluginOptions___path = 'pluginOptions___path',
   pluginOptions___extensions = 'pluginOptions___extensions',
@@ -1954,11 +1963,6 @@ export enum SitePluginFieldsEnum {
   pluginOptions___projectsContentPath = 'pluginOptions___projectsContentPath',
   pluginOptions___projectsPath = 'pluginOptions___projectsPath',
   pluginOptions___pathCheck = 'pluginOptions___pathCheck',
-  pluginOptions___query = 'pluginOptions___query',
-  pluginOptions___feeds = 'pluginOptions___feeds',
-  pluginOptions___feeds___query = 'pluginOptions___feeds___query',
-  pluginOptions___feeds___output = 'pluginOptions___feeds___output',
-  pluginOptions___feeds___title = 'pluginOptions___feeds___title',
   nodeAPIs = 'nodeAPIs',
   browserAPIs = 'browserAPIs',
   ssrAPIs = 'ssrAPIs',
@@ -2075,6 +2079,8 @@ export enum SiteFieldsEnum {
   siteMetadata___social___name = 'siteMetadata___social___name',
   siteMetadata___social___url = 'siteMetadata___social___url',
   siteMetadata___siteUrl = 'siteMetadata___siteUrl',
+  port = 'port',
+  host = 'host',
   polyfill = 'polyfill',
   pathPrefix = 'pathPrefix',
   buildTime = 'buildTime',
@@ -2560,7 +2566,11 @@ export namespace ExtendedPostPageQuery {
 
     keywords: (Maybe<string>)[];
 
-    date: Date;
+    day: Date;
+
+    month: Date;
+
+    year: Date;
   };
 
   export type Previous = {

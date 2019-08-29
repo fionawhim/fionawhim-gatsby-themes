@@ -44,7 +44,9 @@ export const query = graphql`
       title
       tags
       keywords
-      date(formatString: "MMMM DD, YYYY")
+      day: date(formatString: "DD")
+      month: date(formatString: "MMMM")
+      year: date(formatString: "YYYY")
     }
 
     previous: blogPost(id: { eq: $previousId }) {
