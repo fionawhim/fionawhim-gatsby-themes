@@ -1,3 +1,4 @@
+import path from 'path';
 import { ConfigOptions, DEFAULT_CONFIG_OPTIONS } from './config-options';
 
 export = (options: ConfigOptions) => ({
@@ -6,6 +7,12 @@ export = (options: ConfigOptions) => ({
     'gatsby-plugin-emotion',
     'gatsby-plugin-theme-ui',
     'gatsby-plugin-react-helmet',
+    {
+      resolve: require.resolve('gatsby-plugin-extract-schema'),
+      options: {
+        dest: path.resolve(__dirname, '..', 'schema.json'),
+      },
+    },
     {
       resolve: 'gatsby-plugin-google-fonts',
       options: {

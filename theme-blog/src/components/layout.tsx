@@ -88,11 +88,11 @@ const Layout: React.FunctionComponent<Props> = ({ title, children }) => {
               content: '"<<<"',
             },
 
-            'section:nth-of-type(1) h2::before': {
+            'section:nth-of-type(2) h2::before': {
               content: '"^"',
             },
 
-            'section:nth-of-type(2) h2::after': {
+            'section:nth-of-type(1) h2::before': {
               content: '"&"',
             },
 

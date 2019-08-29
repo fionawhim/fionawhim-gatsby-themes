@@ -61,9 +61,7 @@ export default {
       fontFamily: 'heading',
       variant: 'text.huge',
       color: 'muted',
-      // borderBottom: '4px dashed',
-      borderColor: 'muted',
-      marginBottom: BASELINE * 2,
+      marginBottom: BASELINE,
     },
     h3: {
       fontFamily: 'heading',

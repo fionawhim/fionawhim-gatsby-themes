@@ -4,12 +4,6 @@ module.exports = {
   plugins: [
     'gatsby-theme-style-guide',
     {
-      resolve: 'gatsby-plugin-extract-schema',
-      options: {
-        dest: path.resolve(__dirname, '..', 'demo-schema.json'),
-      },
-    },
-    {
       resolve: '@fionawhim-site/gatsby-theme-blog',
       options: {
         blogContentPath: 'content/posts',
