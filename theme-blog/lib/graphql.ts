@@ -180,8 +180,6 @@ export interface MdxFrontmatterFilterInput {
   date?: Maybe<DateQueryOperatorInput>;
 
   project?: Maybe<StringQueryOperatorInput>;
-
-  tags?: Maybe<StringQueryOperatorInput>;
 }
 
 export interface MdxHeadingMdxFilterListInput {
@@ -553,8 +551,6 @@ export interface SitePageContextFilterInput {
 }
 
 export interface SitePageContextFrontmatterFilterInput {
-  title?: Maybe<StringQueryOperatorInput>;
-
   path?: Maybe<StringQueryOperatorInput>;
 }
 
@@ -614,6 +610,8 @@ export interface SitePluginPluginOptionsFilterInput {
   projectsPath?: Maybe<StringQueryOperatorInput>;
 
   pathCheck?: Maybe<BooleanQueryOperatorInput>;
+
+  feeds?: Maybe<SitePluginPluginOptionsFeedsFilterListInput>;
 }
 
 export interface SitePluginPluginOptionsGatsbyRemarkPluginsFilterListInput {
@@ -646,6 +644,18 @@ export interface SitePluginPluginOptionsGatsbyRemarkPluginsOptionsFilterInput {
   tracedSVG?: Maybe<BooleanQueryOperatorInput>;
 
   loading?: Maybe<StringQueryOperatorInput>;
+}
+
+export interface SitePluginPluginOptionsFeedsFilterListInput {
+  elemMatch?: Maybe<SitePluginPluginOptionsFeedsFilterInput>;
+}
+
+export interface SitePluginPluginOptionsFeedsFilterInput {
+  query?: Maybe<StringQueryOperatorInput>;
+
+  output?: Maybe<StringQueryOperatorInput>;
+
+  title?: Maybe<StringQueryOperatorInput>;
 }
 
 export interface SitePluginPackageJsonFilterInput {
@@ -750,6 +760,8 @@ export interface SiteSiteMetadataFilterInput {
   description?: Maybe<StringQueryOperatorInput>;
 
   social?: Maybe<SiteSiteMetadataSocialFilterListInput>;
+
+  siteUrl?: Maybe<StringQueryOperatorInput>;
 }
 
 export interface SiteSiteMetadataSocialFilterListInput {
@@ -1067,7 +1079,6 @@ export enum FileFieldsEnum {
   childMdx___frontmatter___path = 'childMdx___frontmatter___path',
   childMdx___frontmatter___date = 'childMdx___frontmatter___date',
   childMdx___frontmatter___project = 'childMdx___frontmatter___project',
-  childMdx___frontmatter___tags = 'childMdx___frontmatter___tags',
   childMdx___body = 'childMdx___body',
   childMdx___excerpt = 'childMdx___excerpt',
   childMdx___headings = 'childMdx___headings',
@@ -1247,7 +1258,6 @@ export enum MdxFieldsEnum {
   frontmatter___path = 'frontmatter___path',
   frontmatter___date = 'frontmatter___date',
   frontmatter___project = 'frontmatter___project',
-  frontmatter___tags = 'frontmatter___tags',
   body = 'body',
   excerpt = 'excerpt',
   headings = 'headings',
@@ -1747,7 +1757,6 @@ export enum SitePageFieldsEnum {
   context___id = 'context___id',
   context___previousId = 'context___previousId',
   context___nextId = 'context___nextId',
-  context___frontmatter___title = 'context___frontmatter___title',
   context___frontmatter___path = 'context___frontmatter___path',
   pluginCreator___id = 'pluginCreator___id',
   pluginCreator___parent___id = 'pluginCreator___parent___id',
@@ -1804,6 +1813,10 @@ export enum SitePageFieldsEnum {
   pluginCreator___pluginOptions___projectsContentPath = 'pluginCreator___pluginOptions___projectsContentPath',
   pluginCreator___pluginOptions___projectsPath = 'pluginCreator___pluginOptions___projectsPath',
   pluginCreator___pluginOptions___pathCheck = 'pluginCreator___pluginOptions___pathCheck',
+  pluginCreator___pluginOptions___feeds = 'pluginCreator___pluginOptions___feeds',
+  pluginCreator___pluginOptions___feeds___query = 'pluginCreator___pluginOptions___feeds___query',
+  pluginCreator___pluginOptions___feeds___output = 'pluginCreator___pluginOptions___feeds___output',
+  pluginCreator___pluginOptions___feeds___title = 'pluginCreator___pluginOptions___feeds___title',
   pluginCreator___nodeAPIs = 'pluginCreator___nodeAPIs',
   pluginCreator___browserAPIs = 'pluginCreator___browserAPIs',
   pluginCreator___ssrAPIs = 'pluginCreator___ssrAPIs',
@@ -1942,6 +1955,10 @@ export enum SitePluginFieldsEnum {
   pluginOptions___projectsContentPath = 'pluginOptions___projectsContentPath',
   pluginOptions___projectsPath = 'pluginOptions___projectsPath',
   pluginOptions___pathCheck = 'pluginOptions___pathCheck',
+  pluginOptions___feeds = 'pluginOptions___feeds',
+  pluginOptions___feeds___query = 'pluginOptions___feeds___query',
+  pluginOptions___feeds___output = 'pluginOptions___feeds___output',
+  pluginOptions___feeds___title = 'pluginOptions___feeds___title',
   nodeAPIs = 'nodeAPIs',
   browserAPIs = 'browserAPIs',
   ssrAPIs = 'ssrAPIs',
@@ -2057,6 +2074,7 @@ export enum SiteFieldsEnum {
   siteMetadata___social = 'siteMetadata___social',
   siteMetadata___social___name = 'siteMetadata___social___name',
   siteMetadata___social___url = 'siteMetadata___social___url',
+  siteMetadata___siteUrl = 'siteMetadata___siteUrl',
   port = 'port',
   host = 'host',
   polyfill = 'polyfill',
@@ -2287,6 +2305,62 @@ export type Json = any;
 // ====================================================
 // Documents
 // ====================================================
+
+export namespace FeedSiteQuery {
+  export type Variables = {};
+
+  export type Query = {
+    __typename?: 'Query';
+
+    site: Maybe<Site>;
+  };
+
+  export type Site = {
+    __typename?: 'Site';
+
+    siteMetadata: Maybe<SiteMetadata>;
+  };
+
+  export type SiteMetadata = {
+    __typename?: 'SiteSiteMetadata';
+
+    title: Maybe<string>;
+
+    description: Maybe<string>;
+
+    siteUrl: Maybe<string>;
+
+    site_url: Maybe<string>;
+  };
+}
+
+export namespace FeedPostsQuery {
+  export type Variables = {};
+
+  export type Query = {
+    __typename?: 'Query';
+
+    allBlogPost: AllBlogPost;
+  };
+
+  export type AllBlogPost = {
+    __typename?: 'BlogPostConnection';
+
+    nodes: Nodes[];
+  };
+
+  export type Nodes = {
+    __typename?: 'BlogPost';
+
+    excerpt: string;
+
+    date: Date;
+
+    title: string;
+
+    slug: string;
+  };
+}
 
 export namespace CreateProjectPagesQuery {
   export type Variables = {};
@@ -2550,155 +2624,5 @@ export namespace ProjectPageQuery {
     slug: string;
 
     title: string;
-  };
-}
-
-export namespace PostPageQuery {
-  export type Variables = {
-    id: string;
-    previousId?: Maybe<string>;
-    nextId?: Maybe<string>;
-  };
-
-  export type Query = {
-    __typename?: 'Query';
-
-    site: Maybe<Site>;
-
-    blogPost: Maybe<BlogPost>;
-
-    previous: Maybe<Previous>;
-
-    next: Maybe<Next>;
-  };
-
-  export type Site = {
-    __typename?: 'Site';
-
-    siteMetadata: Maybe<SiteMetadata>;
-  };
-
-  export type SiteMetadata = {
-    __typename?: 'SiteSiteMetadata';
-
-    title: Maybe<string>;
-
-    social: Maybe<(Maybe<Social>)[]>;
-  };
-
-  export type Social = {
-    __typename?: 'SiteSiteMetadataSocial';
-
-    name: Maybe<string>;
-
-    url: Maybe<string>;
-  };
-
-  export type BlogPost = {
-    __typename?: 'BlogPost';
-
-    id: string;
-
-    excerpt: string;
-
-    body: string;
-
-    slug: string;
-
-    title: string;
-
-    tags: (Maybe<string>)[];
-
-    keywords: (Maybe<string>)[];
-
-    date: Date;
-  };
-
-  export type Previous = {
-    __typename?: 'BlogPost';
-
-    id: string;
-
-    excerpt: string;
-
-    slug: string;
-
-    title: string;
-
-    date: Date;
-  };
-
-  export type Next = {
-    __typename?: 'BlogPost';
-
-    id: string;
-
-    excerpt: string;
-
-    slug: string;
-
-    title: string;
-
-    date: Date;
-  };
-}
-
-export namespace PostsQuery {
-  export type Variables = {};
-
-  export type Query = {
-    __typename?: 'Query';
-
-    site: Maybe<Site>;
-
-    allBlogPost: AllBlogPost;
-  };
-
-  export type Site = {
-    __typename?: 'Site';
-
-    siteMetadata: Maybe<SiteMetadata>;
-  };
-
-  export type SiteMetadata = {
-    __typename?: 'SiteSiteMetadata';
-
-    title: Maybe<string>;
-
-    social: Maybe<(Maybe<Social>)[]>;
-  };
-
-  export type Social = {
-    __typename?: 'SiteSiteMetadataSocial';
-
-    name: Maybe<string>;
-
-    url: Maybe<string>;
-  };
-
-  export type AllBlogPost = {
-    __typename?: 'BlogPostConnection';
-
-    edges: Edges[];
-  };
-
-  export type Edges = {
-    __typename?: 'BlogPostEdge';
-
-    node: Node;
-  };
-
-  export type Node = {
-    __typename?: 'BlogPost';
-
-    id: string;
-
-    excerpt: string;
-
-    slug: string;
-
-    title: string;
-
-    date: Date;
   };
 }
