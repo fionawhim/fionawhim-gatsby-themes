@@ -6,6 +6,7 @@ import { MDXRenderer } from 'gatsby-plugin-mdx';
 import { Link } from 'gatsby';
 import { Maybe } from '../../lib/graphql';
 import { BASELINE } from '../gatsby-plugin-theme-ui';
+import BlogPostHeader from './blog-post-header';
 
 interface Props {
   body: string;
@@ -27,7 +28,6 @@ const BlogPost: React.FunctionComponent<Props> = ({
   day,
   month,
   year,
-  project,
 }) => {
   return (
     <article
@@ -38,58 +38,31 @@ const BlogPost: React.FunctionComponent<Props> = ({
           borderWidth: 3,
           my: 2,
         },
+
+        'p, ul': {
+          marginTop: BASELINE * 0.75,
+        },
+
+        '* + h4': {
+          marginTop: BASELINE * 1.5,
+        },
+
+        'h4 + *': {
+          marginTop: BASELINE * 0.5,
+        },
+
+        li: {
+          marginTop: BASELINE * 0.5,
+        },
+
+        ul: {
+          px: 2
+        }
       }}
     >
-      <div sx={{ display: ['block', 'flex'], alignItems: 'center' }}>
-        <div
-          sx={{
-            width: ['auto', 6 * BASELINE],
-            marginRight: [0, BASELINE],
-            borderRight: ['none', '4px solid'],
-            borderColor: 'muted',
-            textAlign: 'left',
-            color: 'muted',
-            fontFamily: 'heading',
-          }}
-        >
-          <div
-            sx={{
-              variant: ['text.normal', 'text.huge'],
-              fontFamily: 'heading',
-              fontWeight: ['normal', 'bold'],
-              display: ['inline', 'block'],
-            }}
-          >
-            {day}
-          </div>{' '}
-          <div sx={{ display: ['inline', 'block'] }}>
-            {month} {year}
-          </div>
-        </div>
+      <BlogPostHeader title={title} date={{ month, day, year }} slug={slug} />
 
-        <Styled.h3 css={{ flex: 1, marginBottom: 0 }}>
-          <Link to={slug}>{title}</Link>
-        </Styled.h3>
-      </div>
-
-      {/* <div
-        sx={{
-          fontSize: 4,
-          fontFamily: 'heading',
-          m: 0,
-          transform: 'rotate(-90deg)',
-          transformOrigin: 'right top 0',
-          position: 'absolute',
-          right: 'calc(100% + 2em)',
-          top: '4px',
-          color: 'muted',
-          whiteSpace: 'nowrap',
-        }}
-      >
-        {date}
-      </div> */}
-
-      {project && (
+      {/* {project && (
         <div
           sx={{
             fontSize: 0,
@@ -102,9 +75,11 @@ const BlogPost: React.FunctionComponent<Props> = ({
         >
           Filed under: <Link to={project.slug!}>{project.title!}</Link>
         </div>
-      )}
+      )} */}
 
-      <MDXRenderer>{body}</MDXRenderer>
+      <div>
+        <MDXRenderer>{body}</MDXRenderer>
+      </div>
     </article>
   );
 };

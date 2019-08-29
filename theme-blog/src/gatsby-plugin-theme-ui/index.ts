@@ -3,7 +3,17 @@ export const BASELINE = 24;
 // COLORS: #F4BDE1,#EA48B1,#EB0099,#BC007B,#72004A,#B9E2ED,#49BBDB,#07AEDE,#027798,#01485C,#1C0365
 
 export default {
-  space: [0, BASELINE, BASELINE * 2, BASELINE * 3],
+  space: [0, BASELINE, BASELINE * 2, BASELINE * 3, BASELINE * 4, BASELINE * 5],
+  sizes: [
+    0,
+    BASELINE,
+    BASELINE * 2,
+    BASELINE * 3,
+    BASELINE * 4,
+    BASELINE * 5,
+    BASELINE * 6,
+    BASELINE * 7,
+  ],
   colors: {
     primary: '#BC007B',
     text: '#1C0365',
@@ -29,14 +39,24 @@ export default {
     },
     xlarge: {
       fontSize: [23, 32],
-      lineHeight: [1.0434, 1.25],
-      padding: [0, '0 4'],
+      lineHeight: [1.0434, 1.5],
+    },
+    xlargeCentered: {
+      fontSize: [23, 32],
+      lineHeight: [1.0434, 1.125],
     },
     large: {
       fontSize: [16, 23],
       lineHeight: [1.5, 1.0434],
-      marginBottom: 1,
     },
+    normal: {
+      fontSize: 16,
+      lineHeight: 1.5,
+    },
+    code: {
+      fontSize: 13,
+      lineHeight: 1.846
+    }
   },
   containers: {
     section: {
@@ -62,6 +82,10 @@ export default {
       variant: 'text.huge',
       color: 'muted',
       marginBottom: BASELINE,
+
+      a: {
+        color: 'primary',
+      },
     },
     h3: {
       fontFamily: 'heading',
@@ -76,8 +100,9 @@ export default {
       fontFamily: 'heading',
       variant: 'text.large',
     },
-    li: {
-      marginBottom: BASELINE * 0.25,
-    },
+    inlineCode: {
+      fontFamily: 'monospace',
+      variant: 'text.code',
+    }
   },
 };

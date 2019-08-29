@@ -58,19 +58,6 @@ const Layout: React.FunctionComponent<Props> = ({ title, children }) => {
               margin: 0,
             },
 
-            '* + p': {
-              marginTop: BASELINE * 0.75,
-              marginBottom: BASELINE * 0.75,
-            },
-
-            'p + h4': {
-              marginTop: BASELINE * 1.5,
-            },
-
-            'h4 + p': {
-              marginTop: BASELINE * 0.5,
-            },
-
             a: {
               textDecoration: 'none',
               color: theme.colors.primary,
