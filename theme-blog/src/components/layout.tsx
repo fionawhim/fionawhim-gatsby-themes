@@ -39,6 +39,27 @@ const Layout: React.FunctionComponent<Props> = ({ title, children }) => {
           {data.site!.siteMetadata!.title}
         </title>
 
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/apple-touch-icon.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="/favicon-32x32.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="/favicon-16x16.png"
+        />
+        <link rel="manifest" href="/site.webmanifest" />
+        <meta name="msapplication-TileColor" content="#ffffff" />
+        <meta name="theme-color" content="#BC007B" />
+
         {/* <link rel="stylesheet" href="//basehold.it/24"></link> */}
       </Helmet>
 
@@ -75,12 +96,16 @@ const Layout: React.FunctionComponent<Props> = ({ title, children }) => {
               content: '"<<<"',
             },
 
-            'section:nth-of-type(2) h2::before': {
-              content: '"^"',
+            'section h2::before': {
+              content: '"&"',
             },
 
-            'section:nth-of-type(1) h2::before': {
-              content: '"&"',
+            'aside h3:nth-of-type(1)::after': {
+              content: '"/"',
+            },
+
+            'aside h3:nth-of-type(2)::before': {
+              content: '"…"',
             },
 
             'h3 a::before': {
@@ -90,14 +115,6 @@ const Layout: React.FunctionComponent<Props> = ({ title, children }) => {
             'a:hover': {
               textDecoration: 'underline',
               color: theme.colors.active,
-            },
-
-            'article + article': {
-              marginTop: 3 * BASELINE,
-            },
-
-            'section.main': {
-              ...theme.containers.section,
             },
 
             // HACK(fiona): Work-around for https://github.com/gatsbyjs/gatsby/issues/15486

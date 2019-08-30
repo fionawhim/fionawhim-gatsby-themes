@@ -55,14 +55,14 @@ export default {
     },
     code: {
       fontSize: 13,
-      lineHeight: 1.846
-    }
+      lineHeight: 1.846,
+    },
   },
   containers: {
-    section: {
+    main: {
       maxWidth: '700px',
     },
-    content: {
+    sidebar: {
       // width: ['90%', '85%'],
     },
   },
@@ -95,6 +95,10 @@ export default {
       a: {
         color: 'primary',
       },
+
+      '* + &': {
+        mt: 2,
+      },
     },
     h4: {
       fontFamily: 'heading',
@@ -103,6 +107,16 @@ export default {
     inlineCode: {
       fontFamily: 'monospace',
       variant: 'text.code',
-    }
+    },
+    p: {
+      mt: BASELINE * 0.75,
+    },
+    ul: {
+      mt: BASELINE * 0.75,
+      px: 2,
+    },
+    li: {
+      mt: BASELINE * 0.5,
+    },
   },
 };

@@ -18,26 +18,26 @@ const FEED_SITE_QUERY = gql`
 `;
 
 const FEED_POSTS_QUERY = gql`
-query FeedPostsQuery {
-  allBlogPost(sort: {order: DESC, fields: date}) {
-    nodes {
-      excerpt
-      date
-      title
-      slug
-      ... on MdxBlogPost {
-        id
-        body
-        parent {
-          ... on Mdx {
-            id
-            html
+  query FeedPostsQuery {
+    allBlogPost(sort: { order: DESC, fields: date }) {
+      nodes {
+        excerpt
+        date
+        title
+        slug
+        ... on MdxBlogPost {
+          id
+          body
+          parent {
+            ... on Mdx {
+              id
+              html
+            }
           }
         }
       }
     }
   }
-}
 `;
 
 export = (options: ConfigOptions) => ({

@@ -4,8 +4,8 @@ import React from 'react';
 import { jsx } from 'theme-ui';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import { Maybe } from '../../lib/graphql';
-import { BASELINE } from '../gatsby-plugin-theme-ui';
 import BlogPostHeader from './blog-post-header';
+import contentStyle from '../common/content-style';
 
 interface Props {
   body: string;
@@ -29,36 +29,7 @@ const BlogPost: React.FunctionComponent<Props> = ({
   year,
 }) => {
   return (
-    <article
-      sx={{
-        '.gatsby-resp-image-wrapper': {
-          borderStyle: 'solid',
-          borderColor: 'text',
-          borderWidth: 3,
-          my: 2,
-        },
-
-        'p, ul': {
-          marginTop: BASELINE * 0.75,
-        },
-
-        '* + h4': {
-          marginTop: BASELINE * 1.5,
-        },
-
-        'h4 + *': {
-          marginTop: BASELINE * 0.5,
-        },
-
-        li: {
-          marginTop: BASELINE * 0.5,
-        },
-
-        ul: {
-          px: 2
-        }
-      }}
-    >
+    <article sx={contentStyle}>
       <BlogPostHeader title={title} date={{ month, day, year }} slug={slug} />
 
       {/* {project && (
