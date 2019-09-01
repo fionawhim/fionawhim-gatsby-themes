@@ -7,6 +7,7 @@ import { Maybe } from '../../lib/graphql';
 import BlogPostHeader from './blog-post-header';
 
 interface Props {
+  isPermalinkPage?: boolean;
   body: string;
   slug: string;
   title: string;
@@ -20,6 +21,7 @@ interface Props {
 }
 
 const BlogPost: React.FunctionComponent<Props> = ({
+  isPermalinkPage,
   body,
   title,
   slug,
@@ -36,7 +38,12 @@ const BlogPost: React.FunctionComponent<Props> = ({
         },
       }}
     >
-      <BlogPostHeader title={title} date={{ month, day, year }} slug={slug} />
+      <BlogPostHeader
+        headerElement={isPermalinkPage ? 'h2' : 'h3'}
+        title={title}
+        date={{ month, day, year }}
+        slug={slug}
+      />
       <MDXRenderer>{body}</MDXRenderer>
     </article>
   );

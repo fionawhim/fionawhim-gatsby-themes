@@ -3,8 +3,9 @@ import { graphql } from 'gatsby';
 
 import { ExtendedPostPageQuery } from '../../lib/graphql';
 
-import Layout from '../components/layout';
+import Layout, { Content, Sidebar } from '../components/layout';
 import BlogPost from '../components/blog-post';
+import BlogPostSidebar from '../components/blog-post-sidebar';
 
 interface Props {
   data: ExtendedPostPageQuery.Query;
@@ -12,7 +13,17 @@ interface Props {
 
 const Post: React.FunctionComponent<Props> = ({ data }) => (
   <Layout title={data.blogPost!.title}>
-    <BlogPost {...data.blogPost!} />
+    <Content>
+      <BlogPost isPermalinkPage {...data.blogPost!} />
+    </Content>
+
+    <Sidebar>
+      <BlogPostSidebar
+        post={data.blogPost!}
+        previous={data.previous}
+        next={data.next}
+      />
+    </Sidebar>
   </Layout>
 );
 
@@ -32,6 +43,7 @@ export const query = graphql`
       title
       tags
       keywords
+      date(formatString: "MMMM DD, YYYY")
       day: date(formatString: "DD")
       month: date(formatString: "MMMM")
       year: date(formatString: "YYYY")

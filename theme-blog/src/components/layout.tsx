@@ -15,6 +15,7 @@ import SIDEBAR_THEME from '../style/sidebar-theme';
 
 import SiteIcons from './site-icons';
 import SiteHeader from './site-header';
+import SiteFooter from './site-footer';
 
 const LAYOUT_REGIONS = {
   content: 'content',
@@ -42,6 +43,7 @@ const Layout: React.FunctionComponent<Props> = ({ title, children }) => {
     query LayoutQuery {
       site {
         siteMetadata {
+          author
           title
           description
         }
@@ -94,6 +96,11 @@ const Layout: React.FunctionComponent<Props> = ({ title, children }) => {
             {children}
           </main>
         </MDXProvider>
+
+        <SiteFooter
+          author={data.site!.siteMetadata!.author!}
+          startYear={2019}
+        />
       </Styled.root>
     </React.Fragment>
   );

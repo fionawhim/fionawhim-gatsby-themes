@@ -2516,6 +2516,8 @@ export namespace LayoutQuery {
   export type SiteMetadata = {
     __typename?: 'SiteSiteMetadata';
 
+    author: Maybe<string>;
+
     title: Maybe<string>;
 
     description: Maybe<string>;
@@ -2555,6 +2557,8 @@ export namespace ExtendedPostPageQuery {
     tags: (Maybe<string>)[];
 
     keywords: (Maybe<string>)[];
+
+    date: Date;
 
     day: Date;
 

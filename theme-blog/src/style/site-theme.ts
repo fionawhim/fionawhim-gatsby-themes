@@ -46,6 +46,8 @@ export default {
     large: `@media screen and (min-width: ${BREAKPOINTS[1]})`,
   },
 
+  // Full palette: #F4BDE1,#EA48B1,#EB0099,#BC007B,#72004A,#B9E2ED,#49BBDB,#07AEDE,#027798,#01485C,#1C0365
+
   colors: {
     primary: '#BC007B',
     secondary: '#027798',
@@ -53,6 +55,7 @@ export default {
     text: '#1C0365',
     white: '#ffffff',
     black: '#000000',
+    secondaryBackground: '#B9E2ED',
   },
 
   fonts: {

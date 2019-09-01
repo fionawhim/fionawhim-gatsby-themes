@@ -7,7 +7,7 @@ import BlogPost from './blog-post';
 const LatestBlogPosts: React.FunctionComponent = () => {
   const data: LatestBlogPostsQuery.Query = useStaticQuery(graphql`
     query LatestBlogPostsQuery {
-      allBlogPost(sort: { fields: [date, title], order: DESC }, limit: 10) {
+      allBlogPost(sort: { fields: [date, title], order: DESC }, limit: 5) {
         nodes {
           id
           body

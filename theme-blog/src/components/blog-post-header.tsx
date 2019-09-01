@@ -3,9 +3,9 @@
 import React from 'react';
 import { Link } from 'gatsby';
 import { Styled, jsx } from 'theme-ui';
-import { HUGE_TEXT } from '../style/site-theme';
 
 interface Props {
+  headerElement?: React.ElementType;
   slug: string;
   title: string;
   date: {
@@ -16,6 +16,7 @@ interface Props {
 }
 
 const BlogPostHeader: React.FunctionComponent<Props> = ({
+  headerElement,
   title,
   slug,
   date: { day, month, year },
@@ -29,6 +30,7 @@ const BlogPostHeader: React.FunctionComponent<Props> = ({
       }}
     >
       <Styled.h3
+        as={headerElement}
         sx={{
           lineHeight: [, 1.125],
           alignSelf: ['flex-start', , 'center'],
