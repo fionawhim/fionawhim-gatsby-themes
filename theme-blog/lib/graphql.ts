@@ -597,9 +597,13 @@ export interface SitePluginPluginOptionsFilterInput {
 
   extensions?: Maybe<StringQueryOperatorInput>;
 
+  defaultLayouts?: Maybe<SitePluginPluginOptionsDefaultLayoutsFilterInput>;
+
   gatsbyRemarkPlugins?: Maybe<
     SitePluginPluginOptionsGatsbyRemarkPluginsFilterListInput
   >;
+
+  mdx?: Maybe<BooleanQueryOperatorInput>;
 
   contentPath?: Maybe<StringQueryOperatorInput>;
 
@@ -626,6 +630,10 @@ export interface SitePluginPluginOptionsFeedsFilterInput {
   output?: Maybe<StringQueryOperatorInput>;
 
   title?: Maybe<StringQueryOperatorInput>;
+}
+
+export interface SitePluginPluginOptionsDefaultLayoutsFilterInput {
+  default?: Maybe<StringQueryOperatorInput>;
 }
 
 export interface SitePluginPluginOptionsGatsbyRemarkPluginsFilterListInput {
@@ -1811,8 +1819,10 @@ export enum SitePageFieldsEnum {
   pluginCreator___pluginOptions___name = 'pluginCreator___pluginOptions___name',
   pluginCreator___pluginOptions___path = 'pluginCreator___pluginOptions___path',
   pluginCreator___pluginOptions___extensions = 'pluginCreator___pluginOptions___extensions',
+  pluginCreator___pluginOptions___defaultLayouts___default = 'pluginCreator___pluginOptions___defaultLayouts___default',
   pluginCreator___pluginOptions___gatsbyRemarkPlugins = 'pluginCreator___pluginOptions___gatsbyRemarkPlugins',
   pluginCreator___pluginOptions___gatsbyRemarkPlugins___resolve = 'pluginCreator___pluginOptions___gatsbyRemarkPlugins___resolve',
+  pluginCreator___pluginOptions___mdx = 'pluginCreator___pluginOptions___mdx',
   pluginCreator___pluginOptions___contentPath = 'pluginCreator___pluginOptions___contentPath',
   pluginCreator___pluginOptions___basePath = 'pluginCreator___pluginOptions___basePath',
   pluginCreator___pluginOptions___blogContentPath = 'pluginCreator___pluginOptions___blogContentPath',
@@ -1944,6 +1954,7 @@ export enum SitePluginFieldsEnum {
   pluginOptions___name = 'pluginOptions___name',
   pluginOptions___path = 'pluginOptions___path',
   pluginOptions___extensions = 'pluginOptions___extensions',
+  pluginOptions___defaultLayouts___default = 'pluginOptions___defaultLayouts___default',
   pluginOptions___gatsbyRemarkPlugins = 'pluginOptions___gatsbyRemarkPlugins',
   pluginOptions___gatsbyRemarkPlugins___resolve = 'pluginOptions___gatsbyRemarkPlugins___resolve',
   pluginOptions___gatsbyRemarkPlugins___options___maxWidth = 'pluginOptions___gatsbyRemarkPlugins___options___maxWidth',
@@ -1956,6 +1967,7 @@ export enum SitePluginFieldsEnum {
   pluginOptions___gatsbyRemarkPlugins___options___withWebp = 'pluginOptions___gatsbyRemarkPlugins___options___withWebp',
   pluginOptions___gatsbyRemarkPlugins___options___tracedSVG = 'pluginOptions___gatsbyRemarkPlugins___options___tracedSVG',
   pluginOptions___gatsbyRemarkPlugins___options___loading = 'pluginOptions___gatsbyRemarkPlugins___options___loading',
+  pluginOptions___mdx = 'pluginOptions___mdx',
   pluginOptions___contentPath = 'pluginOptions___contentPath',
   pluginOptions___basePath = 'pluginOptions___basePath',
   pluginOptions___blogContentPath = 'pluginOptions___blogContentPath',
@@ -2520,33 +2532,11 @@ export namespace ExtendedPostPageQuery {
   export type Query = {
     __typename?: 'Query';
 
-    mdx: Maybe<Mdx>;
-
     blogPost: Maybe<BlogPost>;
 
     previous: Maybe<Previous>;
 
     next: Maybe<Next>;
-  };
-
-  export type Mdx = {
-    __typename?: 'Mdx';
-
-    fields: Maybe<Fields>;
-  };
-
-  export type Fields = {
-    __typename?: 'MdxFields';
-
-    project: Maybe<Project>;
-  };
-
-  export type Project = {
-    __typename?: 'Project';
-
-    title: Maybe<string>;
-
-    slug: Maybe<string>;
   };
 
   export type BlogPost = {

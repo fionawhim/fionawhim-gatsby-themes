@@ -12,10 +12,7 @@ interface Props {
 
 const Post: React.FunctionComponent<Props> = ({ data }) => (
   <Layout title={data.blogPost!.title}>
-    <BlogPost
-      {...data.blogPost!}
-      project={data.mdx!.fields && data.mdx!.fields.project}
-    />
+    <BlogPost {...data.blogPost!} />
   </Layout>
 );
 
@@ -27,15 +24,6 @@ export const query = graphql`
     $previousId: String
     $nextId: String
   ) {
-    mdx(childMdxBlogPost: { id: { eq: $id } }) {
-      fields {
-        project {
-          title
-          slug
-        }
-      }
-    }
-
     blogPost(id: { eq: $id }) {
       id
       excerpt
