@@ -1,23 +1,41 @@
 /** @jsx jsx */
-import {
-  jsx,
-  Styled,
-  Layout as ThemedLayout,
-  Header,
-  Main,
-  Container,
-} from 'theme-ui';
 
 import React from 'react';
-import { useStaticQuery, graphql, Link } from 'gatsby';
+import { useStaticQuery, graphql } from 'gatsby';
 import { Helmet } from 'react-helmet';
+import { Styled, ThemeProvider, jsx } from 'theme-ui';
 import { Global } from '@emotion/core';
+import { MDXProvider } from '@mdx-js/react';
+import reset from 'emotion-reset';
+
 import { LayoutQuery } from '../../lib/graphql';
-import { BASELINE } from '../gatsby-plugin-theme-ui';
+
+import CONTENT_THEME from '../style/content-theme';
+import SIDEBAR_THEME from '../style/sidebar-theme';
+
+import SiteIcons from './site-icons';
+import SiteHeader from './site-header';
+
+const LAYOUT_REGIONS = {
+  content: 'content',
+  sidebar: 'sidebar',
+};
 
 interface Props {
   title?: string;
 }
+
+export const Content: React.FunctionComponent = ({ children }) => (
+  <ThemeProvider theme={CONTENT_THEME}>
+    <section css={{ gridArea: LAYOUT_REGIONS.content }}>{children}</section>
+  </ThemeProvider>
+);
+
+export const Sidebar: React.FunctionComponent = ({ children }) => (
+  <ThemeProvider theme={SIDEBAR_THEME}>
+    <aside css={{ gridArea: LAYOUT_REGIONS.sidebar }}>{children}</aside>
+  </ThemeProvider>
+);
 
 const Layout: React.FunctionComponent<Props> = ({ title, children }) => {
   const data: LayoutQuery.Query = useStaticQuery(graphql`
@@ -30,138 +48,54 @@ const Layout: React.FunctionComponent<Props> = ({ title, children }) => {
       }
     }
   `);
+  {
+    /* <link rel="stylesheet" href="//basehold.it/24"></link> */
+  }
 
   return (
-    <ThemedLayout>
-      <Helmet>
-        <title>
-          {title ? `${title} | ` : ''}
-          {data.site!.siteMetadata!.title}
-        </title>
-
-        <link
-          rel="apple-touch-icon"
-          sizes="180x180"
-          href="/apple-touch-icon.png"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="32x32"
-          href="/favicon-32x32.png"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="16x16"
-          href="/favicon-16x16.png"
-        />
-        <link rel="manifest" href="/site.webmanifest" />
-        <meta name="msapplication-TileColor" content="#ffffff" />
-        <meta name="theme-color" content="#BC007B" />
-
-        {/* <link rel="stylesheet" href="//basehold.it/24"></link> */}
-      </Helmet>
-
+    <React.Fragment>
       <Styled.root>
-        <Global
-          styles={theme => ({
-            body: {
-              margin: 0,
-              padding: 0,
-            },
+        <Helmet>
+          <title>
+            {title ? `${title} | ` : ''}
+            {data.site!.siteMetadata!.title}
+          </title>
 
-            '*, *:before, *:after': {
-              boxSizing: 'border-box',
-            },
+          <SiteIcons />
+        </Helmet>
 
-            'h1, h2, h3, h4, h5, h6, p, ul, ol': {
-              margin: 0,
-            },
+        <Global styles={reset} />
 
-            a: {
-              textDecoration: 'none',
-              color: theme.colors.primary,
-            },
-
-            'p a, li a': {
-              textDecoration: 'underline',
-            },
-
-            'p a:visited, li a:visited': {
-              color: theme.colors.dark,
-            },
-
-            'h1::after': {
-              content: '"<<<"',
-            },
-
-            'section h2::before': {
-              content: '"&"',
-            },
-
-            'aside h3:nth-of-type(1)::after': {
-              content: '"/"',
-            },
-
-            'aside h3:nth-of-type(2)::before': {
-              content: '"…"',
-            },
-
-            'h3 a::before': {
-              content: '""',
-            },
-
-            'a:hover': {
-              textDecoration: 'underline',
-              color: theme.colors.active,
-            },
-
-            // HACK(fiona): Work-around for https://github.com/gatsbyjs/gatsby/issues/15486
-            '.gatsby-resp-image-image': {
-              width: '100%',
-              height: '100%',
-              margin: 0,
-              verticalAlign: 'middle',
-              position: 'absolute',
-              top: 0,
-              left: 0,
-            },
-          })}
+        <SiteHeader
+          title={data.site!.siteMetadata!.title!}
+          description={data.site!.siteMetadata!.description!}
         />
 
-        <Header
-          sx={{
-            p: 1,
-            bg: 'banner',
-            color: 'text',
-            flexDirection: 'column',
-          }}
-        >
-          <Styled.h1 sx={{ m: 0, color: 'secondary' }}>
-            <Link to="/" style={{ color: 'inherit' }}>
-              {data.site!.siteMetadata!.title}
-            </Link>
-          </Styled.h1>
-
-          <div sx={{ fontFamily: 'heading' }}>
-            {data.site!.siteMetadata!.description}
-          </div>
-        </Header>
-
-        <Main sx={{ p: 2 }}>
-          <Container
+        <MDXProvider components={{ Content, Sidebar }}>
+          <main
             sx={{
-              marginLeft: 0,
-              padding: 0,
-              display: ['block', 'block', 'flex'],
+              padding: 2,
+              maxWidth: (({ baseline }) => baseline * 40) as any,
+
+              display: 'grid',
+
+              gridGap: 4,
+
+              gridTemplateColumns: ['1fr', '8fr 4fr'],
+              gridTemplateAreas: [
+                `
+    "${LAYOUT_REGIONS.content}"
+    "${LAYOUT_REGIONS.sidebar}"
+    `,
+                `"${LAYOUT_REGIONS.content} ${LAYOUT_REGIONS.sidebar}"`,
+              ],
             }}
           >
             {children}
-          </Container>
-        </Main>
+          </main>
+        </MDXProvider>
       </Styled.root>
-    </ThemedLayout>
+    </React.Fragment>
   );
 };
 

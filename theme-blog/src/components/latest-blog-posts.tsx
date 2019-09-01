@@ -1,7 +1,4 @@
-/** @jsx jsx */
-
 import React from 'react';
-import { Styled, jsx } from 'theme-ui';
 import { graphql, useStaticQuery } from 'gatsby';
 import { LatestBlogPostsQuery } from '../../lib/graphql';
 
@@ -39,7 +36,7 @@ const LatestBlogPosts: React.FunctionComponent = () => {
   `);
 
   return (
-    <Styled.div sx={{ variant: 'containers.content' }}>
+    <>
       {data.allBlogPost.nodes.map(p => (
         <BlogPost
           key={p.slug}
@@ -47,7 +44,7 @@ const LatestBlogPosts: React.FunctionComponent = () => {
           project={p.parent!.fields && p.parent!.fields.project}
         />
       ))}
-    </Styled.div>
+    </>
   );
 };
 

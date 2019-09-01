@@ -5,7 +5,6 @@ import { jsx } from 'theme-ui';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import { Maybe } from '../../lib/graphql';
 import BlogPostHeader from './blog-post-header';
-import contentStyle from '../common/content-style';
 
 interface Props {
   body: string;
@@ -29,10 +28,24 @@ const BlogPost: React.FunctionComponent<Props> = ({
   year,
 }) => {
   return (
-    <article sx={contentStyle}>
+    <article
+      sx={{
+        mt: 2,
+        ':first-of-type': {
+          mt: 0,
+        },
+      }}
+    >
       <BlogPostHeader title={title} date={{ month, day, year }} slug={slug} />
+      <MDXRenderer>{body}</MDXRenderer>
+    </article>
+  );
+};
 
-      {/* {project && (
+export default BlogPost;
+
+{
+  /* {project && (
         <div
           sx={{
             fontSize: 0,
@@ -45,13 +58,5 @@ const BlogPost: React.FunctionComponent<Props> = ({
         >
           Filed under: <Link to={project.slug!}>{project.title!}</Link>
         </div>
-      )} */}
-
-      <div>
-        <MDXRenderer>{body}</MDXRenderer>
-      </div>
-    </article>
-  );
-};
-
-export default BlogPost;
+      )} */
+}

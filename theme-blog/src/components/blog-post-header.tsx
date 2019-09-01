@@ -1,8 +1,9 @@
 /** @jsx jsx */
 
 import React from 'react';
-import { Styled, jsx } from 'theme-ui';
 import { Link } from 'gatsby';
+import { Styled, jsx } from 'theme-ui';
+import { HUGE_TEXT } from '../style/site-theme';
 
 interface Props {
   slug: string;
@@ -20,45 +21,51 @@ const BlogPostHeader: React.FunctionComponent<Props> = ({
   date: { day, month, year },
 }) => {
   return (
-    // At larger breakpoints we can go to a row to put the date next to the
-    // title.
     <div
       sx={{
-        display: 'flex',
-        flexDirection: ['column-reverse', 'row-reverse'],
-        alignItems: ['flex-start', 'center'],
-        height: ['auto', 3],
         mb: 1,
+        display: 'flex',
+        flexDirection: ['column-reverse', , 'row-reverse'],
       }}
     >
-      <Styled.h3 css={{ flex: 1 }} sx={{ variant: 'text.xlargeCentered' }}>
+      <Styled.h3
+        sx={{
+          lineHeight: [, 1.125],
+          alignSelf: ['flex-start', , 'center'],
+          flex: 1,
+        }}
+      >
         <Link to={slug}>{title}</Link>
       </Styled.h3>
 
       <div
         sx={{
-          width: ['auto', 6],
-          marginRight: [0, 1],
-          borderRight: ['none', '4px solid'],
-          borderColor: 'muted',
-          textAlign: 'left',
-          color: 'muted',
           fontFamily: 'heading',
+          color: 'secondary',
+
+          mr: [, , 1],
+          width: ({ baseline }) => [, , 6 * baseline],
+          borderRight: [, , '4px solid'],
+          borderColor: 'secondary',
         }}
       >
-        <div
+        <span
           sx={{
-            variant: ['text.normal', 'text.huge'],
-            fontFamily: 'heading',
-            fontWeight: ['normal', 'bold'],
-            display: ['inline', 'block'],
+            display: [, , 'block'],
+            fontSize: [, , 3],
+            lineHeight: [, , 3],
+            fontWeight: [, , 'bold'],
           }}
         >
           {day}
-        </div>{' '}
-        <div sx={{ display: ['inline', 'block'] }}>
+        </span>{' '}
+        <span
+          sx={{
+            display: [, , 'block'],
+          }}
+        >
           {month} {year}
-        </div>
+        </span>
       </div>
     </div>
   );

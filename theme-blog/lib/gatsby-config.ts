@@ -46,6 +46,7 @@ export = (options: ConfigOptions) => ({
     'gatsby-plugin-emotion',
     'gatsby-plugin-theme-ui',
     'gatsby-plugin-react-helmet',
+    'gatsby-plugin-sitemap',
     {
       resolve: require.resolve('gatsby-plugin-extract-schema'),
       options: {
@@ -104,10 +105,32 @@ export = (options: ConfigOptions) => ({
         path: 'src/pages',
       },
     },
-
+    {
+      resolve: 'gatsby-plugin-mdx',
+      options: {
+        extensions: ['.mdx', '.md'],
+        defaultLayouts: {
+          default: require.resolve('../src/components/layout.tsx'),
+        },
+        gatsbyRemarkPlugins: [
+          {
+            resolve: 'gatsby-remark-images',
+            options: {
+              maxWidth: 960,
+              linkImagesToOriginal: false,
+            },
+          },
+          { resolve: 'gatsby-remark-copy-linked-files' },
+          { resolve: 'gatsby-remark-smartypants' },
+          { resolve: 'gatsby-remark-responsive-iframe' },
+        ],
+        remarkPlugins: [require('remark-slug')],
+      },
+    },
     {
       resolve: 'gatsby-theme-blog-core',
       options: {
+        mdx: false,
         contentPath: options.blogContentPath,
         basePath: options.blogPostPath || DEFAULT_CONFIG_OPTIONS.blogPostPath,
       },
