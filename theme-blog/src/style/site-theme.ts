@@ -1,43 +1,123 @@
 import { HOVER_A_UNDERLINES } from './util';
 
-const BASELINE = 24;
+const BASE_FONT = 16;
+const BASE_LINE_HEIGHT = 1.5;
+const BASELINE = BASE_FONT * BASE_LINE_HEIGHT;
 
 const BREAKPOINTS = ['768px', '960px'];
 
-export const MEGA_TEXT = {
+// https://www.modularscale.com/?16&&1.414
+const RATIO = 1.414;
+
+const FONT_SIZES = [0, 1, 2, 3, 4, 5].map(n =>
+  Math.round(BASE_FONT * RATIO ** n)
+);
+
+const LINE_HEIGHTS = FONT_SIZES.map(
+  f => (Math.ceil(f / BASELINE) * BASELINE) / f
+);
+
+export const TEXT_MEGA = {
   fontSize: [3, 4, 5],
   lineHeight: [3, 4, 5],
 };
 
-export const HUGE_TEXT = {
+export const TEXT_HUGE = {
   fontSize: [2, 3],
   lineHeight: [2, 3],
 };
 
-export const EXTRA_LARGE_TEXT = {
+export const TEXT_XLARGE = {
   fontSize: [1, 2],
   lineHeight: [1, 2],
 };
 
-export const LARGE_TEXT = {
+export const TEXT_LARGE = {
   fontSize: [0, 1],
   lineHeight: [0, 1],
 };
 
-export const NORMAL_TEXT = {
-  fontSize: 0,
-  lineHeight: 0,
-};
+const baselineMultiple = w => theme => theme.baseline * w;
 
-export const baselineMultiple = w => theme => theme.baseline * w;
+const PRISM_STYLE = {
+  '&[class*=language-]': {
+    color: 'text',
+
+    tabSize: 4,
+    hyphens: 'none',
+
+    '.namespace': {
+      opacity: 0.7,
+    },
+
+    [['.token.comment', '.token.prolog', '.token.doctype', '.token.cdata'].join(
+      ','
+    )]: {
+      color: '#93a1a1' /* base1 */,
+    },
+
+    [[
+      '.token.property',
+      '.token.tag',
+      '.token.boolean',
+      '.token.number',
+      '.token.constant',
+      '.token.symbol',
+      '.token.deleted',
+    ].join(',')]: {
+      color: 'dark' /* blue */,
+    },
+
+    '.token.punctuation': {
+      color: '#586e75' /* base01 */,
+    },
+
+    [[
+      '.token.selector',
+      '.token.attr-name',
+      '.token.string',
+      '.token.char',
+      '.token.builtin',
+      '.token.url',
+      '.token.inserted',
+    ].join(',')]: {
+      color: 'secondary',
+    },
+
+    '.token.entity': {
+      color: '#657b83' /* base00 */,
+      background: '#eee8d5' /* base2 */,
+      cursor: 'help',
+    },
+
+    [['.token.atrule', '.token.attr-value', '.token.keyword'].join(',')]: {
+      color: '#859900' /* green */,
+    },
+
+    [['.token.function', '.token.class-name'].join(',')]: {
+      color: '#b58900' /* yellow */,
+    },
+
+    [['.token.regex', '.token.important', '.token.variable'].join(',')]: {
+      color: '#cb4b16' /* orange */,
+    },
+
+    [['.token.important', '.token.bold'].join(',')]: {
+      fontWeight: 'bold',
+    },
+
+    '.token.italic': {
+      fontStyle: 'italic',
+    },
+  },
+};
 
 export default {
   baseline: BASELINE,
+  space: [0, 1, 2, 4, 8].map(s => s * BASELINE),
 
-  space: [0, BASELINE, BASELINE * 2, BASELINE * 3, BASELINE * 4, BASELINE * 5],
-
-  fontSizes: [16, 23, 32, 45, 64, 90],
-  lineHeights: [1.5, 1.0434, 1.5, 1.06666, 1.125, 1.066666],
+  fontSizes: FONT_SIZES,
+  lineHeights: LINE_HEIGHTS,
 
   breakpoints: BREAKPOINTS,
 
@@ -64,10 +144,13 @@ export default {
     code: 'Menlo, monospace',
   },
 
+  code: {},
+
   styles: {
     root: {
       fontFamily: 'body',
-      ...NORMAL_TEXT,
+      fontSize: 0,
+      lineHeight: 0,
 
       a: {
         color: 'primary',
@@ -91,7 +174,7 @@ export default {
     h1: {
       fontFamily: 'heading',
       fontWeight: 'bold',
-      ...MEGA_TEXT,
+      ...TEXT_MEGA,
       ...HOVER_A_UNDERLINES,
 
       color: 'white',
@@ -110,7 +193,7 @@ export default {
     h2: {
       fontFamily: 'heading',
       fontWeight: 'bold',
-      ...HUGE_TEXT,
+      ...TEXT_HUGE,
 
       color: 'secondary',
 
@@ -124,7 +207,7 @@ export default {
     h3: {
       fontFamily: 'heading',
       fontWeight: 'bold',
-      ...EXTRA_LARGE_TEXT,
+      ...TEXT_XLARGE,
       ...HOVER_A_UNDERLINES,
 
       color: 'primary',
@@ -145,7 +228,7 @@ export default {
     h4: {
       fontFamily: 'heading',
       fontWeight: 'bold',
-      ...LARGE_TEXT,
+      ...TEXT_LARGE,
 
       '* + &': {
         mt: baselineMultiple(1.5),
@@ -154,6 +237,14 @@ export default {
 
     p: {
       mt: baselineMultiple(0.75),
+    },
+
+    strong: {
+      fontWeight: 'bold',
+    },
+
+    em: {
+      fontStyle: 'italic',
     },
 
     ul: {
@@ -167,7 +258,30 @@ export default {
       mt: baselineMultiple(0.5),
     },
 
+    pre: {
+      fontFamily: 'code',
+      my: 1,
+      fontSize: '14px',
+      lineHeight: '1.142857143 ',
+
+      '&[class*="language-"]': {
+        overflow: 'auto',
+
+        paddingLeft: `${BASELINE - 3}px`,
+        borderLeft: '3px solid',
+        borderColor: 'primary',
+      },
+    },
+
+    code: {
+      ...PRISM_STYLE,
+      fontFamily: 'code',
+      // Monospace fonts always feel too big
+      fontSize: '85%',
+    },
+
     inlineCode: {
+      ...PRISM_STYLE,
       fontFamily: 'code',
       // Monospace fonts always feel too big
       fontSize: '85%',

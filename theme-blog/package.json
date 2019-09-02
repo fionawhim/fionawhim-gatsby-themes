@@ -31,11 +31,13 @@
     "gatsby-plugin-typescript": "^2.1.2",
     "gatsby-remark-images": "^3.1.19",
     "gatsby-remark-copy-linked-files": "^2.1.13",
+    "gatsby-remark-prismjs": "^3.2.7",
     "gatsby-remark-smartypants": "^2.1.5",
     "gatsby-remark-responsive-iframe": "^2.2.10",
     "gatsby-source-filesystem": "^2.1.10",
     "gatsby-theme-blog-core": "^1.1.0",
     "mkdirp": "^0.5.1",
+    "prismjs": "^1.17.1",
     "react-helmet": "^5.2.1",
     "remark-slug": "^5.1.2",
     "theme-ui": "^0.2.36"

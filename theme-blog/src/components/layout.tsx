@@ -4,7 +4,7 @@ import React from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 import { Helmet } from 'react-helmet';
 import { Styled, ThemeProvider, jsx } from 'theme-ui';
-import { Global } from '@emotion/core';
+import { Global, css } from '@emotion/core';
 import { MDXProvider } from '@mdx-js/react';
 import reset from 'emotion-reset';
 
@@ -66,7 +66,7 @@ const Layout: React.FunctionComponent<Props> = ({ title, children }) => {
           <SiteIcons />
         </Helmet>
 
-        <Global styles={reset} />
+        <Global styles={css(reset, { '*': { boxSizing: 'border-box' } })} />
 
         <SiteHeader
           title={data.site!.siteMetadata!.title!}
@@ -81,7 +81,7 @@ const Layout: React.FunctionComponent<Props> = ({ title, children }) => {
 
               display: 'grid',
 
-              gridGap: 4,
+              gridGap: 3,
 
               gridTemplateColumns: ['1fr', '8fr 4fr'],
               gridTemplateAreas: [

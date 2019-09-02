@@ -153,9 +153,8 @@ exports.onCreateNode = async (
   }
 };
 
-exports.onCreatePage = ({ page, actions }: CreatePageArgs) => {
+exports.onCreatePage = ({ page, actions }: CreatePageArgs, options) => {
   const { createPage, deletePage } = actions;
-  const oldPage = { ...page };
 
   // We can’t shadow the posts-query file from gatsby-theme-blog-core in a way
   // that lets us change its GraphQL query, so we have to modify it this way.
@@ -163,17 +162,18 @@ exports.onCreatePage = ({ page, actions }: CreatePageArgs) => {
     page.component ===
     require.resolve('gatsby-theme-blog-core/src/templates/posts-query')
   ) {
-    deletePage(oldPage as any);
+    deletePage(page as any);
   }
 
   if (
     page.component ===
     require.resolve('gatsby-theme-blog-core/src/templates/post-query')
   ) {
-    page.component = PostTemplate;
-
-    deletePage(oldPage as any);
-    createPage(page as any);
+    deletePage(page as any);
+    createPage({
+      ...page,
+      component: PostTemplate,
+    } as any);
   }
 
   const ext = path.extname((page as any).component);
@@ -185,9 +185,10 @@ exports.onCreatePage = ({ page, actions }: CreatePageArgs) => {
     frontmatter.path &&
     page.path !== frontmatter.path
   ) {
-    page.path = frontmatter.path;
-
-    deletePage(oldPage as any);
-    createPage(page as any);
+    deletePage(page as any);
+    createPage({
+      ...(page as any),
+      path: frontmatter.path,
+    });
   }
 };

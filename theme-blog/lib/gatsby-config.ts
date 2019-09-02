@@ -110,7 +110,7 @@ export = (options: ConfigOptions) => ({
       options: {
         extensions: ['.mdx', '.md'],
         defaultLayouts: {
-          default: require.resolve('../src/components/layout.tsx'),
+          pages: require.resolve('../src/components/layout.tsx'),
         },
         gatsbyRemarkPlugins: [
           {
@@ -123,6 +123,12 @@ export = (options: ConfigOptions) => ({
           { resolve: 'gatsby-remark-copy-linked-files' },
           { resolve: 'gatsby-remark-smartypants' },
           { resolve: 'gatsby-remark-responsive-iframe' },
+          {
+            resolve: 'gatsby-remark-prismjs',
+            options: {
+              inlineCodeMarker: '›',
+            },
+          },
         ],
         remarkPlugins: [require('remark-slug')],
       },

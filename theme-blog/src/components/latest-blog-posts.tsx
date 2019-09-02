@@ -13,7 +13,7 @@ const LatestBlogPosts: React.FunctionComponent = () => {
           body
           slug
           title
-          day: date(formatString: "DD")
+          day: date(formatString: "D")
           month: date(formatString: "MMMM")
           year: date(formatString: "YYYY")
 
