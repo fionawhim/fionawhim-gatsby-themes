@@ -28,13 +28,17 @@ interface Props {
 
 export const Content: React.FunctionComponent = ({ children }) => (
   <ThemeProvider theme={CONTENT_THEME}>
-    <section css={{ gridArea: LAYOUT_REGIONS.content }}>{children}</section>
+    <section css={{ gridArea: LAYOUT_REGIONS.content, overflow: 'hidden' }}>
+      {children}
+    </section>
   </ThemeProvider>
 );
 
 export const Sidebar: React.FunctionComponent = ({ children }) => (
   <ThemeProvider theme={SIDEBAR_THEME}>
-    <aside css={{ gridArea: LAYOUT_REGIONS.sidebar }}>{children}</aside>
+    <aside css={{ gridArea: LAYOUT_REGIONS.sidebar, overflow: 'hidden' }}>
+      {children}
+    </aside>
   </ThemeProvider>
 );
 
