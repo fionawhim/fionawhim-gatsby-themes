@@ -1,6 +1,10 @@
 # fionawh.im blog theme
 
+This is the Gatsby theme behind [fionawh.im](https://fionawh.im/).
 
+The demo in this repository _may_ work, but I don’t put too much effort into
+keeping it working. This repo is mostly here in case you want to browse the code
+for how-tos and insipiration.
 
 ## Development Notes
 
