@@ -18,6 +18,7 @@ import SiteHeader from './site-header';
 import SiteFooter from './site-footer';
 
 const LAYOUT_REGIONS = {
+  title: 'title',
   content: 'content',
   sidebar: 'sidebar',
 };
@@ -26,9 +27,23 @@ interface Props {
   title?: string;
 }
 
+export const Title: React.FunctionComponent = ({ children }) => (
+  <ThemeProvider theme={CONTENT_THEME}>
+    <header
+      sx={CONTENT_THEME.styles.root}
+      css={{ gridArea: LAYOUT_REGIONS.title }}
+    >
+      {children}
+    </header>
+  </ThemeProvider>
+);
+
 export const Content: React.FunctionComponent = ({ children }) => (
   <ThemeProvider theme={CONTENT_THEME}>
-    <section css={{ gridArea: LAYOUT_REGIONS.content, overflow: 'hidden' }}>
+    <section
+      sx={CONTENT_THEME.styles.root}
+      css={{ gridArea: LAYOUT_REGIONS.content }}
+    >
       {children}
     </section>
   </ThemeProvider>
@@ -36,7 +51,10 @@ export const Content: React.FunctionComponent = ({ children }) => (
 
 export const Sidebar: React.FunctionComponent = ({ children }) => (
   <ThemeProvider theme={SIDEBAR_THEME}>
-    <aside css={{ gridArea: LAYOUT_REGIONS.sidebar, overflow: 'hidden' }}>
+    <aside
+      sx={SIDEBAR_THEME.styles.root}
+      css={{ gridArea: LAYOUT_REGIONS.sidebar }}
+    >
       {children}
     </aside>
   </ThemeProvider>
@@ -70,7 +88,12 @@ const Layout: React.FunctionComponent<Props> = ({ title, children }) => {
           <SiteIcons />
         </Helmet>
 
-        <Global styles={css(reset, { '*': { boxSizing: 'border-box' } })} />
+        <Global
+          styles={css(reset, {
+            '*': { boxSizing: 'border-box' },
+            '#gatsby-noscript': { display: 'none' },
+          })}
+        />
 
         <SiteHeader
           title={data.site!.siteMetadata!.title!}
@@ -85,15 +108,22 @@ const Layout: React.FunctionComponent<Props> = ({ title, children }) => {
 
               display: 'grid',
 
-              gridGap: 3,
+              gridColumnGap: 3,
 
-              gridTemplateColumns: ['1fr', '8fr 4fr'],
+              gridTemplateColumns: [
+                'minmax(0, 1fr)',
+                'minmax(0, 8fr) minmax(0, 4fr)',
+              ],
               gridTemplateAreas: [
                 `
-    "${LAYOUT_REGIONS.content}"
-    "${LAYOUT_REGIONS.sidebar}"
-    `,
-                `"${LAYOUT_REGIONS.content} ${LAYOUT_REGIONS.sidebar}"`,
+                "${LAYOUT_REGIONS.title}"
+                "${LAYOUT_REGIONS.content}"
+                "${LAYOUT_REGIONS.sidebar}"
+                `,
+                `
+                "${LAYOUT_REGIONS.title} ${LAYOUT_REGIONS.title}"
+                "${LAYOUT_REGIONS.content} ${LAYOUT_REGIONS.sidebar}"
+                `,
               ],
             }}
           >

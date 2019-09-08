@@ -2,6 +2,7 @@ import { TEXT_LARGE } from './site-theme';
 
 export default {
   styles: {
+    root: {},
     h2: {
       'aside &': {
         ...TEXT_LARGE,

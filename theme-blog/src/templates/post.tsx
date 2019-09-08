@@ -3,29 +3,42 @@ import { graphql } from 'gatsby';
 
 import { ExtendedPostPageQuery } from '../../lib/graphql';
 
-import Layout, { Content, Sidebar } from '../components/layout';
+import Layout, { Content, Sidebar, Title } from '../components/layout';
 import BlogPost from '../components/blog-post';
 import BlogPostSidebar from '../components/blog-post-sidebar';
+import BlogPostHeader from '../components/blog-post-header';
 
 interface Props {
   data: ExtendedPostPageQuery.Query;
 }
 
-const Post: React.FunctionComponent<Props> = ({ data }) => (
-  <Layout title={data.blogPost!.title}>
-    <Content>
-      <BlogPost isPermalinkPage {...data.blogPost!} />
-    </Content>
+const Post: React.FunctionComponent<Props> = ({
+  data: { blogPost, previous, next },
+}) => {
+  return (
+    <Layout title={blogPost!.title}>
+      <Title>
+        <BlogPostHeader
+          headerElement={'h2'}
+          title={blogPost!.title}
+          date={{
+            month: blogPost!.month,
+            day: blogPost!.day,
+            year: blogPost!.year,
+          }}
+          slug={blogPost!.slug}
+        />
+      </Title>
+      <Content>
+        <BlogPost isPermalinkPage {...blogPost!} />
+      </Content>
 
-    <Sidebar>
-      <BlogPostSidebar
-        post={data.blogPost!}
-        previous={data.previous}
-        next={data.next}
-      />
-    </Sidebar>
-  </Layout>
-);
+      <Sidebar>
+        <BlogPostSidebar post={blogPost!} previous={previous} next={next} />
+      </Sidebar>
+    </Layout>
+  );
+};
 
 export default Post;
 
@@ -43,7 +56,7 @@ export const query = graphql`
       title
       tags
       keywords
-      date(formatString: "MMMM DD, YYYY")
+      date(formatString: "MMMM D, YYYY")
       day: date(formatString: "D")
       month: date(formatString: "MMMM")
       year: date(formatString: "YYYY")
@@ -54,7 +67,7 @@ export const query = graphql`
       excerpt
       slug
       title
-      date(formatString: "MMMM DD, YYYY")
+      date(formatString: "MMMM D, YYYY")
     }
 
     next: blogPost(id: { eq: $nextId }) {
@@ -62,7 +75,7 @@ export const query = graphql`
       excerpt
       slug
       title
-      date(formatString: "MMMM DD, YYYY")
+      date(formatString: "MMMM D, YYYY")
     }
   }
 `;

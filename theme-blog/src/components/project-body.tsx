@@ -14,28 +14,15 @@ interface Props {
 
 const Project: React.FunctionComponent<Props> = ({ body, title, slug }) => {
   return (
-    <div
-      sx={{
-        '.gatsby-resp-image-wrapper': {
-          borderStyle: 'solid',
-          borderColor: 'text',
-          borderWidth: 3,
-        },
-
-        marginBottom: '5em',
-        position: 'relative',
-      }}
-    >
+    <React.Fragment>
       <Styled.h2>
         Project:
         <br />
         <Link to={slug}>{title}</Link>
       </Styled.h2>
 
-      <div style={{ position: 'relative' }}>
-        <MDXRenderer>{body}</MDXRenderer>
-      </div>
-    </div>
+      <MDXRenderer>{body}</MDXRenderer>
+    </React.Fragment>
   );
 };
 

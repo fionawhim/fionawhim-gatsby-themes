@@ -5,8 +5,9 @@ import { Styled, jsx } from 'theme-ui';
 import { graphql, PageRendererProps, Link } from 'gatsby';
 import { ProjectPageQuery } from '../../lib/graphql';
 
-import Layout from '../components/layout';
+import Layout, { Content, Sidebar } from '../components/layout';
 import ProjectBody from '../components/project-body';
+import BlogPostListItem from '../components/blog-post-list-item';
 
 export interface Context {
   slug: string;
@@ -22,35 +23,33 @@ const ProjectPage: React.FunctionComponent<Props> = props => {
 
   return (
     <Layout title={data.mdx!.frontmatter!.title}>
-      <ProjectBody
-        title={data.mdx!.frontmatter!.title}
-        slug={pathContext.slug}
-        body={data.mdx!.body}
-      />
+      <Content>
+        <ProjectBody
+          title={data.mdx!.frontmatter!.title}
+          slug={pathContext.slug}
+          body={data.mdx!.body}
+        />
+      </Content>
 
-      {data.relatedPosts.nodes.length !== 0 && (
-        <React.Fragment>
-          <Styled.h3>Related Posts</Styled.h3>
-          <ul>
-            {data.relatedPosts.nodes.map(
-              ({ childMdxBlogPost }) =>
-                childMdxBlogPost && (
-                  <li key={childMdxBlogPost.slug}>
-                    <Styled.h4 sx={{ mb: 1 }}>
-                      <Link to={childMdxBlogPost.slug}>
-                        {childMdxBlogPost.title}
-                      </Link>
-                    </Styled.h4>
+      <Sidebar>
+        {data.relatedPosts.nodes.length !== 0 && (
+          <React.Fragment>
+            <Styled.h2 as="h3">Related Posts</Styled.h2>
 
-                    <Styled.p css={{ marginTop: 0 }}>
-                      {childMdxBlogPost.excerpt}
-                    </Styled.p>
-                  </li>
-                )
-            )}
-          </ul>
-        </React.Fragment>
-      )}
+            <dl>
+              {data.relatedPosts.nodes.map(
+                ({ childMdxBlogPost }) =>
+                  childMdxBlogPost && (
+                    <BlogPostListItem
+                      key={childMdxBlogPost.slug}
+                      post={childMdxBlogPost}
+                    />
+                  )
+              )}
+            </dl>
+          </React.Fragment>
+        )}
+      </Sidebar>
     </Layout>
   );
 };
@@ -71,7 +70,7 @@ export const query = graphql`
     ) {
       nodes {
         childMdxBlogPost {
-          date
+          date(formatString: "MMMM D, YYYY")
           excerpt
           slug
           title

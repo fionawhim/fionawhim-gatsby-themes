@@ -50,9 +50,13 @@ exports.createPages = async (
 
   const result = await graphql<CreateProjectPagesQuery.Query>(gql`
     query CreateProjectPagesQuery {
-      allFile(filter: { sourceInstanceName: { eq: "${projectsContentPath}" } }) {
+      allFile(filter: {
+        sourceInstanceName: { eq: "${projectsContentPath}" } ,
+        extension: {in: ["md", "mdx"]}
+      }) {
         nodes {
           childMdx {
+
             fields {
               projectId
               slug
@@ -65,7 +69,7 @@ exports.createPages = async (
 
   if (result.errors) {
     // OH NO
-    reporter.panic('Error loading styleguide mdx files', result.errors);
+    reporter.panic('Error loading project mdx files', result.errors);
   }
 
   result.data!.allFile.nodes.forEach(node => {
