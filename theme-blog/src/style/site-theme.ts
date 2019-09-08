@@ -183,10 +183,23 @@ export default {
       mt: baselineMultiple(0.75),
 
       px: [1, 2],
+
+      li: {
+        listStyleType: 'square',
+      },
+    },
+
+    ol: {
+      mt: baselineMultiple(0.75),
+
+      px: [1, 2],
+
+      li: {
+        listStyleType: 'number',
+      },
     },
 
     li: {
-      listStyleType: 'square',
       mt: baselineMultiple(0.5),
     },
 
@@ -217,6 +230,12 @@ export default {
       fontFamily: 'code',
       // Monospace fonts always feel too big
       fontSize: '85%',
+    },
+
+    hr: {
+      borderColor: 'secondary',
+      borderStyle: 'solid',
+      my: 1,
     },
   },
 };

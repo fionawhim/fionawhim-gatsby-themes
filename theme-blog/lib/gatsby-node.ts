@@ -4,7 +4,7 @@ import {
   CreateNodeArgs,
   NodePluginArgs,
 } from 'gatsby';
-import { createFilePath } from 'gatsby-source-filesystem';
+import { createFilePath, FileSystemNode } from 'gatsby-source-filesystem';
 import { urlResolve } from 'gatsby-core-utils';
 import path from 'path';
 import fs from 'fs';
@@ -107,7 +107,7 @@ exports.onCreateNode = async (
   }
 
   // Create source field (according to contentPath)
-  const fileNode = getNode(node.parent);
+  const fileNode: FileSystemNode = getNode(node.parent);
   const source = fileNode.sourceInstanceName;
 
   if (source === projectsContentPath) {

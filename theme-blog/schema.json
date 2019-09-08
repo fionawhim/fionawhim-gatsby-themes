@@ -3757,7 +3757,7 @@
             "defaultValue": null
           },
           {
-            "name": "project",
+            "name": "tags",
             "description": "",
             "type": {
               "kind": "INPUT_OBJECT",
@@ -3767,7 +3767,7 @@
             "defaultValue": null
           },
           {
-            "name": "tags",
+            "name": "project",
             "description": "",
             "type": {
               "kind": "INPUT_OBJECT",
@@ -5882,14 +5882,6 @@
             "deprecationReason": null
           },
           {
-            "name": "project",
-            "description": null,
-            "args": [],
-            "type": { "kind": "SCALAR", "name": "String", "ofType": null },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "tags",
             "description": null,
             "args": [],
@@ -5898,6 +5890,14 @@
               "name": null,
               "ofType": { "kind": "SCALAR", "name": "String", "ofType": null }
             },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "project",
+            "description": null,
+            "args": [],
+            "type": { "kind": "SCALAR", "name": "String", "ofType": null },
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -9087,13 +9087,13 @@
             "deprecationReason": null
           },
           {
-            "name": "childMdx___frontmatter___project",
+            "name": "childMdx___frontmatter___tags",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "childMdx___frontmatter___tags",
+            "name": "childMdx___frontmatter___project",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
@@ -10506,13 +10506,13 @@
             "deprecationReason": null
           },
           {
-            "name": "frontmatter___project",
+            "name": "frontmatter___tags",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "frontmatter___tags",
+            "name": "frontmatter___project",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
