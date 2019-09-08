@@ -38,12 +38,14 @@ const BlogPost: React.FunctionComponent<Props> = ({
         },
       }}
     >
-      <BlogPostHeader
-        headerElement={isPermalinkPage ? 'h2' : 'h3'}
-        title={title}
-        date={{ month, day, year }}
-        slug={slug}
-      />
+      {!isPermalinkPage && (
+        <BlogPostHeader
+          headerElement="h3"
+          title={title}
+          date={{ month, day, year }}
+          slug={slug}
+        />
+      )}
       <MDXRenderer>{body}</MDXRenderer>
     </article>
   );
