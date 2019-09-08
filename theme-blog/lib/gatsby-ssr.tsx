@@ -8,11 +8,16 @@ export const onRenderBody = ({ bodyHtml, setHeadComponents }) => {
 
   setHeadComponents([
     // The extracted CSS from Emotion
-    <style type="text/css" dangerouslySetInnerHTML={{ __html: css }}></style>,
+    <style
+      key="hydrated-emotion-css"
+      type="text/css"
+      dangerouslySetInnerHTML={{ __html: css }}
+    ></style>,
 
     // We write the IDs onto the page so we can call hydrate when the app
     // starts up.
     <script
+      key="hydrated-emotion-ids"
       id="hydrated-emotion-ids"
       type="application/json"
       dangerouslySetInnerHTML={{ __html: JSON.stringify(ids) }}

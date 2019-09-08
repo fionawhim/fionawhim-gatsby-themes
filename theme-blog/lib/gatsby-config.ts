@@ -56,7 +56,7 @@ export = (options: ConfigOptions) => ({
     {
       resolve: 'gatsby-plugin-google-fonts',
       options: {
-        fonts: ['poppins:400,400i,900,900i,700,700i'],
+        fonts: ['poppins:400,400i,700,700i'],
       },
     },
     {
