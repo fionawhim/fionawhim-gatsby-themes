@@ -16,7 +16,6 @@ import SIDEBAR_THEME from '../style/sidebar-theme';
 import SiteIcons from './site-icons';
 import SiteHeader from './site-header';
 import SiteFooter from './site-footer';
-import YouTube from './YouTube';
 
 const LAYOUT_REGIONS = {
   title: 'title',
@@ -61,6 +60,11 @@ export const Sidebar: React.FunctionComponent = ({ children }) => (
   </ThemeProvider>
 );
 
+/**
+ * Shortcodes that are relevant for children of this layout.
+ */
+const MDX_COMPONENTS = { Content, Sidebar };
+
 const Layout: React.FunctionComponent<Props> = ({ title, children }) => {
   const data: LayoutQuery.Query = useStaticQuery(graphql`
     query LayoutQuery {
@@ -101,7 +105,7 @@ const Layout: React.FunctionComponent<Props> = ({ title, children }) => {
           description={data.site!.siteMetadata!.description!}
         />
 
-        <MDXProvider components={{ Content, Sidebar, YouTube }}>
+        <MDXProvider components={MDX_COMPONENTS}>
           <main
             sx={{
               padding: 2,

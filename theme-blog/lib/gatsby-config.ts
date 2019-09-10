@@ -80,8 +80,10 @@ export = (options: ConfigOptions) => ({
               }));
             },
             query: FEED_POSTS_QUERY,
-            output: '/rss.xml',
-            title: 'fionawh.im',
+            output: options.feedPath || DEFAULT_CONFIG_OPTIONS.feedPath,
+            title: options.feedName || DEFAULT_CONFIG_OPTIONS.feedName,
+            // This regexp won’t ever match. https://stackoverflow.com/a/2302992/51835
+            match: options.feedUrl ? '/^\b$/' : undefined,
           },
         ],
       },

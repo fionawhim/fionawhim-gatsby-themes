@@ -2,6 +2,9 @@ import React from 'react';
 
 import { hydrate, cache } from 'emotion';
 import { CacheProvider } from '@emotion/core';
+import { MDXProvider } from '@mdx-js/react';
+
+import MDX_COMPONENTS from '../src/shortcodes';
 
 export const onClientEntry = () => {
   // This JSON script gets written in gatsby-ssr
@@ -14,5 +17,7 @@ export const onClientEntry = () => {
 };
 
 export const wrapRootElement = ({ element }) => (
-  <CacheProvider value={cache}>{element}</CacheProvider>
+  <CacheProvider value={cache}>
+    <MDXProvider components={MDX_COMPONENTS}>{element}</MDXProvider>
+  </CacheProvider>
 );

@@ -2,8 +2,16 @@ import React from 'react';
 import { CacheProvider } from '@emotion/core';
 import { cache } from 'emotion';
 import { extractCritical } from 'emotion-server';
+import { MDXProvider } from '@mdx-js/react';
 
-export const onRenderBody = ({ bodyHtml, setHeadComponents }) => {
+import { ConfigOptions, DEFAULT_CONFIG_OPTIONS } from './config-options';
+
+import MDX_COMPONENTS from '../src/shortcodes';
+
+export const onRenderBody = (
+  { bodyHtml, setHeadComponents },
+  configOptions: ConfigOptions
+) => {
   const { ids, css } = extractCritical(bodyHtml);
 
   setHeadComponents([
@@ -13,6 +21,15 @@ export const onRenderBody = ({ bodyHtml, setHeadComponents }) => {
       type="text/css"
       dangerouslySetInnerHTML={{ __html: css }}
     ></style>,
+
+    configOptions.feedUrl && (
+      <link
+        rel="alternate"
+        type="application/rss+xml"
+        title={configOptions.feedName || DEFAULT_CONFIG_OPTIONS.feedName}
+        href={configOptions.feedUrl}
+      />
+    ),
 
     // We write the IDs onto the page so we can call hydrate when the app
     // starts up.
@@ -26,5 +43,7 @@ export const onRenderBody = ({ bodyHtml, setHeadComponents }) => {
 };
 
 export const wrapRootElement = ({ element }) => (
-  <CacheProvider value={cache}>{element}</CacheProvider>
+  <CacheProvider value={cache}>
+    <MDXProvider components={MDX_COMPONENTS}>{element}</MDXProvider>
+  </CacheProvider>
 );
