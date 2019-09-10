@@ -16,6 +16,7 @@ import SIDEBAR_THEME from '../style/sidebar-theme';
 import SiteIcons from './site-icons';
 import SiteHeader from './site-header';
 import SiteFooter from './site-footer';
+import YouTube from './YouTube';
 
 const LAYOUT_REGIONS = {
   title: 'title',
@@ -100,7 +101,7 @@ const Layout: React.FunctionComponent<Props> = ({ title, children }) => {
           description={data.site!.siteMetadata!.description!}
         />
 
-        <MDXProvider components={{ Content, Sidebar }}>
+        <MDXProvider components={{ Content, Sidebar, YouTube }}>
           <main
             sx={{
               padding: 2,
