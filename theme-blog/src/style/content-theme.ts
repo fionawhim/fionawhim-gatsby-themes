@@ -7,6 +7,19 @@ export default {
         my: 1,
       },
 
+      '.gatsby-resp-image-figure': {
+        my: 0,
+        textAlign: 'center',
+
+        figcaption: {
+          fontStyle: 'italic',
+        },
+
+        '>.gatsby-resp-image-wrapper': {
+          my: 0,
+        },
+      },
+
       '.gatsby-resp-iframe-wrapper': {
         my: 1,
       },

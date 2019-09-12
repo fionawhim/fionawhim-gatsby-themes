@@ -18,6 +18,8 @@ export const YouTube: React.FunctionComponent<{
       // Be compatible with gatsby-remark-responsive-iframe
       className="gatsby-resp-iframe-wrapper"
       style={{
+        border: '3px solid',
+        borderColor: 'text',
         // HD aspect ratio
         paddingBottom: '56.25%',
         height: 0,
@@ -55,6 +57,7 @@ const Placeholder: React.FunctionComponent<{
         width: '100%',
         height: '100%',
         position: 'absolute',
+
         ':hover': theme => ({
           'svg>g': {
             fill: theme.colors.primary,

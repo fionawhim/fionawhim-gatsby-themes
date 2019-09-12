@@ -201,7 +201,7 @@ export default {
       '&[class*="language-"]': {
         overflow: 'auto',
 
-        paddingLeft: `${BASELINE - 3}px`,
+        paddingLeft: `${BASELINE / 2 - 3}px`,
         borderLeft: '3px solid',
         borderColor: 'primary',
       },
