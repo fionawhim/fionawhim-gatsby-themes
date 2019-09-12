@@ -86,17 +86,6 @@ export default {
           color: 'dark',
         },
       },
-
-      // HACK(fiona): Work-around for https://github.com/gatsbyjs/gatsby/issues/15486
-      '.gatsby-resp-image-image': {
-        width: '100%',
-        height: '100%',
-        margin: 0,
-        verticalAlign: 'middle',
-        position: 'absolute',
-        top: 0,
-        left: 0,
-      },
     },
 
     h1: {

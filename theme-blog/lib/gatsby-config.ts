@@ -120,6 +120,8 @@ export = (options: ConfigOptions) => ({
             options: {
               maxWidth: 960,
               linkImagesToOriginal: false,
+              showCaptions: ['title'],
+              markdownCaptions: true,
             },
           },
           { resolve: 'gatsby-remark-copy-linked-files' },
