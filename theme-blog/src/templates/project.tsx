@@ -2,7 +2,9 @@
 
 import React from 'react';
 import { Styled, jsx } from 'theme-ui';
-import { graphql, PageRendererProps, Link } from 'gatsby';
+import { graphql, PageRendererProps } from 'gatsby';
+import { MDXRenderer } from 'gatsby-plugin-mdx';
+
 import { ProjectPageQuery } from '../../lib/graphql';
 
 import Layout, { Content, Sidebar } from '../components/layout';
@@ -49,6 +51,13 @@ const ProjectPage: React.FunctionComponent<Props> = props => {
             </dl>
           </React.Fragment>
         )}
+
+        {data.allSidebar.nodes.map(sidebar => (
+          <React.Fragment>
+            <Styled.h2 as="h3">{sidebar.title}</Styled.h2>
+            <MDXRenderer>{sidebar.parent!.body}</MDXRenderer>
+          </React.Fragment>
+        ))}
       </Sidebar>
     </Layout>
   );
@@ -57,10 +66,15 @@ const ProjectPage: React.FunctionComponent<Props> = props => {
 export default ProjectPage;
 
 export const query = graphql`
-  query ProjectPageQuery($slug: String!, $projectId: String!) {
+  query ProjectPageQuery(
+    $slug: String!
+    $projectId: String!
+    $sidebarSlugs: [String!]
+  ) {
     mdx(fields: { slug: { eq: $slug } }) {
       frontmatter {
         title
+        sidebar
       }
       body
     }
@@ -74,6 +88,18 @@ export const query = graphql`
           excerpt
           slug
           title
+        }
+      }
+    }
+
+    allSidebar(filter: { slug: { in: $sidebarSlugs } }) {
+      nodes {
+        slug
+        title
+        parent {
+          ... on Mdx {
+            body
+          }
         }
       }
     }

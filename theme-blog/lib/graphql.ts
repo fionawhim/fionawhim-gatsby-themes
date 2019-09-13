@@ -175,11 +175,17 @@ export interface MdxFrontmatterFilterInput {
 
   status?: Maybe<StringQueryOperatorInput>;
 
+  license?: Maybe<StringQueryOperatorInput>;
+
+  sidebar?: Maybe<StringQueryOperatorInput>;
+
   path?: Maybe<StringQueryOperatorInput>;
 
   date?: Maybe<DateQueryOperatorInput>;
 
   project?: Maybe<StringQueryOperatorInput>;
+
+  tags?: Maybe<StringQueryOperatorInput>;
 }
 
 export interface MdxHeadingMdxFilterListInput {
@@ -541,6 +547,8 @@ export interface SitePageContextFilterInput {
 
   projectId?: Maybe<StringQueryOperatorInput>;
 
+  sidebarSlugs?: Maybe<StringQueryOperatorInput>;
+
   id?: Maybe<StringQueryOperatorInput>;
 
   previousId?: Maybe<StringQueryOperatorInput>;
@@ -617,6 +625,14 @@ export interface SitePluginPluginOptionsFilterInput {
 
   projectsPath?: Maybe<StringQueryOperatorInput>;
 
+  sidebarContentPath?: Maybe<StringQueryOperatorInput>;
+
+  feedName?: Maybe<StringQueryOperatorInput>;
+
+  feedPath?: Maybe<StringQueryOperatorInput>;
+
+  feedUrl?: Maybe<StringQueryOperatorInput>;
+
   pathCheck?: Maybe<BooleanQueryOperatorInput>;
 }
 
@@ -630,10 +646,12 @@ export interface SitePluginPluginOptionsFeedsFilterInput {
   output?: Maybe<StringQueryOperatorInput>;
 
   title?: Maybe<StringQueryOperatorInput>;
+
+  match?: Maybe<StringQueryOperatorInput>;
 }
 
 export interface SitePluginPluginOptionsDefaultLayoutsFilterInput {
-  default?: Maybe<StringQueryOperatorInput>;
+  pages?: Maybe<StringQueryOperatorInput>;
 }
 
 export interface SitePluginPluginOptionsGatsbyRemarkPluginsFilterListInput {
@@ -651,21 +669,25 @@ export interface SitePluginPluginOptionsGatsbyRemarkPluginsOptionsFilterInput {
 
   linkImagesToOriginal?: Maybe<BooleanQueryOperatorInput>;
 
+  showCaptions?: Maybe<StringQueryOperatorInput>;
+
+  markdownCaptions?: Maybe<BooleanQueryOperatorInput>;
+
   pathPrefix?: Maybe<StringQueryOperatorInput>;
 
   wrapperStyle?: Maybe<StringQueryOperatorInput>;
 
   backgroundColor?: Maybe<StringQueryOperatorInput>;
 
-  showCaptions?: Maybe<BooleanQueryOperatorInput>;
-
-  markdownCaptions?: Maybe<BooleanQueryOperatorInput>;
-
   withWebp?: Maybe<BooleanQueryOperatorInput>;
 
   tracedSVG?: Maybe<BooleanQueryOperatorInput>;
 
   loading?: Maybe<StringQueryOperatorInput>;
+
+  disableBgImageOnAlpha?: Maybe<BooleanQueryOperatorInput>;
+
+  inlineCodeMarker?: Maybe<StringQueryOperatorInput>;
 }
 
 export interface SitePluginPackageJsonFilterInput {
@@ -900,6 +922,26 @@ export interface ProjectSortInput {
   order?: (Maybe<SortOrderEnum>)[];
 }
 
+export interface SidebarFilterInput {
+  id?: Maybe<StringQueryOperatorInput>;
+
+  parent?: Maybe<NodeFilterInput>;
+
+  children?: Maybe<NodeFilterListInput>;
+
+  internal?: Maybe<InternalFilterInput>;
+
+  slug?: Maybe<StringQueryOperatorInput>;
+
+  title?: Maybe<StringQueryOperatorInput>;
+}
+
+export interface SidebarSortInput {
+  fields?: Maybe<(Maybe<SidebarFieldsEnum>)[]>;
+
+  order?: (Maybe<SortOrderEnum>)[];
+}
+
 export enum BlogPostFieldsEnum {
   id = 'id',
   title = 'title',
@@ -1086,9 +1128,12 @@ export enum FileFieldsEnum {
   childMdx___fileAbsolutePath = 'childMdx___fileAbsolutePath',
   childMdx___frontmatter___title = 'childMdx___frontmatter___title',
   childMdx___frontmatter___status = 'childMdx___frontmatter___status',
+  childMdx___frontmatter___license = 'childMdx___frontmatter___license',
+  childMdx___frontmatter___sidebar = 'childMdx___frontmatter___sidebar',
   childMdx___frontmatter___path = 'childMdx___frontmatter___path',
   childMdx___frontmatter___date = 'childMdx___frontmatter___date',
   childMdx___frontmatter___project = 'childMdx___frontmatter___project',
+  childMdx___frontmatter___tags = 'childMdx___frontmatter___tags',
   childMdx___body = 'childMdx___body',
   childMdx___excerpt = 'childMdx___excerpt',
   childMdx___headings = 'childMdx___headings',
@@ -1265,9 +1310,12 @@ export enum MdxFieldsEnum {
   fileAbsolutePath = 'fileAbsolutePath',
   frontmatter___title = 'frontmatter___title',
   frontmatter___status = 'frontmatter___status',
+  frontmatter___license = 'frontmatter___license',
+  frontmatter___sidebar = 'frontmatter___sidebar',
   frontmatter___path = 'frontmatter___path',
   frontmatter___date = 'frontmatter___date',
   frontmatter___project = 'frontmatter___project',
+  frontmatter___tags = 'frontmatter___tags',
   body = 'body',
   excerpt = 'excerpt',
   headings = 'headings',
@@ -1764,6 +1812,7 @@ export enum SitePageFieldsEnum {
   isCreatedByStatefulCreatePages = 'isCreatedByStatefulCreatePages',
   context___slug = 'context___slug',
   context___projectId = 'context___projectId',
+  context___sidebarSlugs = 'context___sidebarSlugs',
   context___id = 'context___id',
   context___previousId = 'context___previousId',
   context___nextId = 'context___nextId',
@@ -1816,10 +1865,11 @@ export enum SitePageFieldsEnum {
   pluginCreator___pluginOptions___feeds___query = 'pluginCreator___pluginOptions___feeds___query',
   pluginCreator___pluginOptions___feeds___output = 'pluginCreator___pluginOptions___feeds___output',
   pluginCreator___pluginOptions___feeds___title = 'pluginCreator___pluginOptions___feeds___title',
+  pluginCreator___pluginOptions___feeds___match = 'pluginCreator___pluginOptions___feeds___match',
   pluginCreator___pluginOptions___name = 'pluginCreator___pluginOptions___name',
   pluginCreator___pluginOptions___path = 'pluginCreator___pluginOptions___path',
   pluginCreator___pluginOptions___extensions = 'pluginCreator___pluginOptions___extensions',
-  pluginCreator___pluginOptions___defaultLayouts___default = 'pluginCreator___pluginOptions___defaultLayouts___default',
+  pluginCreator___pluginOptions___defaultLayouts___pages = 'pluginCreator___pluginOptions___defaultLayouts___pages',
   pluginCreator___pluginOptions___gatsbyRemarkPlugins = 'pluginCreator___pluginOptions___gatsbyRemarkPlugins',
   pluginCreator___pluginOptions___gatsbyRemarkPlugins___resolve = 'pluginCreator___pluginOptions___gatsbyRemarkPlugins___resolve',
   pluginCreator___pluginOptions___mdx = 'pluginCreator___pluginOptions___mdx',
@@ -1829,6 +1879,10 @@ export enum SitePageFieldsEnum {
   pluginCreator___pluginOptions___blogPostPath = 'pluginCreator___pluginOptions___blogPostPath',
   pluginCreator___pluginOptions___projectsContentPath = 'pluginCreator___pluginOptions___projectsContentPath',
   pluginCreator___pluginOptions___projectsPath = 'pluginCreator___pluginOptions___projectsPath',
+  pluginCreator___pluginOptions___sidebarContentPath = 'pluginCreator___pluginOptions___sidebarContentPath',
+  pluginCreator___pluginOptions___feedName = 'pluginCreator___pluginOptions___feedName',
+  pluginCreator___pluginOptions___feedPath = 'pluginCreator___pluginOptions___feedPath',
+  pluginCreator___pluginOptions___feedUrl = 'pluginCreator___pluginOptions___feedUrl',
   pluginCreator___pluginOptions___pathCheck = 'pluginCreator___pluginOptions___pathCheck',
   pluginCreator___nodeAPIs = 'pluginCreator___nodeAPIs',
   pluginCreator___browserAPIs = 'pluginCreator___browserAPIs',
@@ -1951,22 +2005,25 @@ export enum SitePluginFieldsEnum {
   pluginOptions___feeds___query = 'pluginOptions___feeds___query',
   pluginOptions___feeds___output = 'pluginOptions___feeds___output',
   pluginOptions___feeds___title = 'pluginOptions___feeds___title',
+  pluginOptions___feeds___match = 'pluginOptions___feeds___match',
   pluginOptions___name = 'pluginOptions___name',
   pluginOptions___path = 'pluginOptions___path',
   pluginOptions___extensions = 'pluginOptions___extensions',
-  pluginOptions___defaultLayouts___default = 'pluginOptions___defaultLayouts___default',
+  pluginOptions___defaultLayouts___pages = 'pluginOptions___defaultLayouts___pages',
   pluginOptions___gatsbyRemarkPlugins = 'pluginOptions___gatsbyRemarkPlugins',
   pluginOptions___gatsbyRemarkPlugins___resolve = 'pluginOptions___gatsbyRemarkPlugins___resolve',
   pluginOptions___gatsbyRemarkPlugins___options___maxWidth = 'pluginOptions___gatsbyRemarkPlugins___options___maxWidth',
   pluginOptions___gatsbyRemarkPlugins___options___linkImagesToOriginal = 'pluginOptions___gatsbyRemarkPlugins___options___linkImagesToOriginal',
+  pluginOptions___gatsbyRemarkPlugins___options___showCaptions = 'pluginOptions___gatsbyRemarkPlugins___options___showCaptions',
+  pluginOptions___gatsbyRemarkPlugins___options___markdownCaptions = 'pluginOptions___gatsbyRemarkPlugins___options___markdownCaptions',
   pluginOptions___gatsbyRemarkPlugins___options___pathPrefix = 'pluginOptions___gatsbyRemarkPlugins___options___pathPrefix',
   pluginOptions___gatsbyRemarkPlugins___options___wrapperStyle = 'pluginOptions___gatsbyRemarkPlugins___options___wrapperStyle',
   pluginOptions___gatsbyRemarkPlugins___options___backgroundColor = 'pluginOptions___gatsbyRemarkPlugins___options___backgroundColor',
-  pluginOptions___gatsbyRemarkPlugins___options___showCaptions = 'pluginOptions___gatsbyRemarkPlugins___options___showCaptions',
-  pluginOptions___gatsbyRemarkPlugins___options___markdownCaptions = 'pluginOptions___gatsbyRemarkPlugins___options___markdownCaptions',
   pluginOptions___gatsbyRemarkPlugins___options___withWebp = 'pluginOptions___gatsbyRemarkPlugins___options___withWebp',
   pluginOptions___gatsbyRemarkPlugins___options___tracedSVG = 'pluginOptions___gatsbyRemarkPlugins___options___tracedSVG',
   pluginOptions___gatsbyRemarkPlugins___options___loading = 'pluginOptions___gatsbyRemarkPlugins___options___loading',
+  pluginOptions___gatsbyRemarkPlugins___options___disableBgImageOnAlpha = 'pluginOptions___gatsbyRemarkPlugins___options___disableBgImageOnAlpha',
+  pluginOptions___gatsbyRemarkPlugins___options___inlineCodeMarker = 'pluginOptions___gatsbyRemarkPlugins___options___inlineCodeMarker',
   pluginOptions___mdx = 'pluginOptions___mdx',
   pluginOptions___contentPath = 'pluginOptions___contentPath',
   pluginOptions___basePath = 'pluginOptions___basePath',
@@ -1974,6 +2031,10 @@ export enum SitePluginFieldsEnum {
   pluginOptions___blogPostPath = 'pluginOptions___blogPostPath',
   pluginOptions___projectsContentPath = 'pluginOptions___projectsContentPath',
   pluginOptions___projectsPath = 'pluginOptions___projectsPath',
+  pluginOptions___sidebarContentPath = 'pluginOptions___sidebarContentPath',
+  pluginOptions___feedName = 'pluginOptions___feedName',
+  pluginOptions___feedPath = 'pluginOptions___feedPath',
+  pluginOptions___feedUrl = 'pluginOptions___feedUrl',
   pluginOptions___pathCheck = 'pluginOptions___pathCheck',
   nodeAPIs = 'nodeAPIs',
   browserAPIs = 'browserAPIs',
@@ -2312,6 +2373,97 @@ export enum ProjectFieldsEnum {
   title = 'title',
 }
 
+export enum SidebarFieldsEnum {
+  id = 'id',
+  parent___id = 'parent___id',
+  parent___parent___id = 'parent___parent___id',
+  parent___parent___parent___id = 'parent___parent___parent___id',
+  parent___parent___parent___children = 'parent___parent___parent___children',
+  parent___parent___children = 'parent___parent___children',
+  parent___parent___children___id = 'parent___parent___children___id',
+  parent___parent___children___children = 'parent___parent___children___children',
+  parent___parent___internal___content = 'parent___parent___internal___content',
+  parent___parent___internal___contentDigest = 'parent___parent___internal___contentDigest',
+  parent___parent___internal___description = 'parent___parent___internal___description',
+  parent___parent___internal___fieldOwners = 'parent___parent___internal___fieldOwners',
+  parent___parent___internal___ignoreType = 'parent___parent___internal___ignoreType',
+  parent___parent___internal___mediaType = 'parent___parent___internal___mediaType',
+  parent___parent___internal___owner = 'parent___parent___internal___owner',
+  parent___parent___internal___type = 'parent___parent___internal___type',
+  parent___children = 'parent___children',
+  parent___children___id = 'parent___children___id',
+  parent___children___parent___id = 'parent___children___parent___id',
+  parent___children___parent___children = 'parent___children___parent___children',
+  parent___children___children = 'parent___children___children',
+  parent___children___children___id = 'parent___children___children___id',
+  parent___children___children___children = 'parent___children___children___children',
+  parent___children___internal___content = 'parent___children___internal___content',
+  parent___children___internal___contentDigest = 'parent___children___internal___contentDigest',
+  parent___children___internal___description = 'parent___children___internal___description',
+  parent___children___internal___fieldOwners = 'parent___children___internal___fieldOwners',
+  parent___children___internal___ignoreType = 'parent___children___internal___ignoreType',
+  parent___children___internal___mediaType = 'parent___children___internal___mediaType',
+  parent___children___internal___owner = 'parent___children___internal___owner',
+  parent___children___internal___type = 'parent___children___internal___type',
+  parent___internal___content = 'parent___internal___content',
+  parent___internal___contentDigest = 'parent___internal___contentDigest',
+  parent___internal___description = 'parent___internal___description',
+  parent___internal___fieldOwners = 'parent___internal___fieldOwners',
+  parent___internal___ignoreType = 'parent___internal___ignoreType',
+  parent___internal___mediaType = 'parent___internal___mediaType',
+  parent___internal___owner = 'parent___internal___owner',
+  parent___internal___type = 'parent___internal___type',
+  children = 'children',
+  children___id = 'children___id',
+  children___parent___id = 'children___parent___id',
+  children___parent___parent___id = 'children___parent___parent___id',
+  children___parent___parent___children = 'children___parent___parent___children',
+  children___parent___children = 'children___parent___children',
+  children___parent___children___id = 'children___parent___children___id',
+  children___parent___children___children = 'children___parent___children___children',
+  children___parent___internal___content = 'children___parent___internal___content',
+  children___parent___internal___contentDigest = 'children___parent___internal___contentDigest',
+  children___parent___internal___description = 'children___parent___internal___description',
+  children___parent___internal___fieldOwners = 'children___parent___internal___fieldOwners',
+  children___parent___internal___ignoreType = 'children___parent___internal___ignoreType',
+  children___parent___internal___mediaType = 'children___parent___internal___mediaType',
+  children___parent___internal___owner = 'children___parent___internal___owner',
+  children___parent___internal___type = 'children___parent___internal___type',
+  children___children = 'children___children',
+  children___children___id = 'children___children___id',
+  children___children___parent___id = 'children___children___parent___id',
+  children___children___parent___children = 'children___children___parent___children',
+  children___children___children = 'children___children___children',
+  children___children___children___id = 'children___children___children___id',
+  children___children___children___children = 'children___children___children___children',
+  children___children___internal___content = 'children___children___internal___content',
+  children___children___internal___contentDigest = 'children___children___internal___contentDigest',
+  children___children___internal___description = 'children___children___internal___description',
+  children___children___internal___fieldOwners = 'children___children___internal___fieldOwners',
+  children___children___internal___ignoreType = 'children___children___internal___ignoreType',
+  children___children___internal___mediaType = 'children___children___internal___mediaType',
+  children___children___internal___owner = 'children___children___internal___owner',
+  children___children___internal___type = 'children___children___internal___type',
+  children___internal___content = 'children___internal___content',
+  children___internal___contentDigest = 'children___internal___contentDigest',
+  children___internal___description = 'children___internal___description',
+  children___internal___fieldOwners = 'children___internal___fieldOwners',
+  children___internal___ignoreType = 'children___internal___ignoreType',
+  children___internal___mediaType = 'children___internal___mediaType',
+  children___internal___owner = 'children___internal___owner',
+  children___internal___type = 'children___internal___type',
+  internal___content = 'internal___content',
+  internal___contentDigest = 'internal___contentDigest',
+  internal___description = 'internal___description',
+  internal___fieldOwners = 'internal___fieldOwners',
+  internal___ignoreType = 'internal___ignoreType',
+  internal___mediaType = 'internal___mediaType',
+  internal___owner = 'internal___owner',
+  internal___type = 'internal___type',
+  slug = 'slug',
+  title = 'title',
+}
+
 /** A date string, such as 2007-12-03, compliant with the ISO 8601 standard for representation of dates and times using the Gregorian calendar. */
 export type Date = any;
 
@@ -2423,6 +2575,8 @@ export namespace CreateProjectPagesQuery {
     __typename?: 'Mdx';
 
     fields: Maybe<Fields>;
+
+    frontmatter: Maybe<Frontmatter>;
   };
 
   export type Fields = {
@@ -2431,6 +2585,12 @@ export namespace CreateProjectPagesQuery {
     projectId: Maybe<string>;
 
     slug: Maybe<string>;
+  };
+
+  export type Frontmatter = {
+    __typename?: 'MdxFrontmatter';
+
+    sidebar: Maybe<(Maybe<string>)[]>;
   };
 }
 
@@ -2600,6 +2760,7 @@ export namespace ProjectPageQuery {
   export type Variables = {
     slug: string;
     projectId: string;
+    sidebarSlugs?: Maybe<string[]>;
   };
 
   export type Query = {
@@ -2608,6 +2769,8 @@ export namespace ProjectPageQuery {
     mdx: Maybe<Mdx>;
 
     relatedPosts: RelatedPosts;
+
+    allSidebar: AllSidebar;
   };
 
   export type Mdx = {
@@ -2622,6 +2785,8 @@ export namespace ProjectPageQuery {
     __typename?: 'MdxFrontmatter';
 
     title: string;
+
+    sidebar: Maybe<(Maybe<string>)[]>;
   };
 
   export type RelatedPosts = {
@@ -2646,5 +2811,29 @@ export namespace ProjectPageQuery {
     slug: string;
 
     title: string;
+  };
+
+  export type AllSidebar = {
+    __typename?: 'SidebarConnection';
+
+    nodes: _Nodes[];
+  };
+
+  export type _Nodes = {
+    __typename?: 'Sidebar';
+
+    slug: Maybe<string>;
+
+    title: Maybe<string>;
+
+    parent: Maybe<Parent>;
+  };
+
+  export type Parent = MdxInlineFragment;
+
+  export type MdxInlineFragment = {
+    __typename?: 'Mdx';
+
+    body: string;
   };
 }

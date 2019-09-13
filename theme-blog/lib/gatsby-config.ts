@@ -99,7 +99,17 @@ export = (options: ConfigOptions) => ({
           DEFAULT_CONFIG_OPTIONS.projectsContentPath,
       },
     },
-
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        name:
+          options.sidebarContentPath ||
+          DEFAULT_CONFIG_OPTIONS.sidebarContentPath,
+        path:
+          options.sidebarContentPath ||
+          DEFAULT_CONFIG_OPTIONS.sidebarContentPath,
+      },
+    },
     {
       resolve: 'gatsby-source-filesystem',
       options: {

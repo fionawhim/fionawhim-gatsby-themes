@@ -1,3 +1,5 @@
+import { BASELINE } from './styles';
+
 export default {
   styles: {
     root: {
@@ -5,18 +7,22 @@ export default {
         border: '3px solid',
         borderColor: 'text',
         my: 1,
+        mx: '-3px !important',
       },
 
       '.gatsby-resp-image-figure': {
-        my: 0,
+        my: 1,
+        mx: '-3px',
         textAlign: 'center',
 
         figcaption: {
           fontStyle: 'italic',
+          mt: 0.5 * BASELINE,
+          mb: 1.5 * BASELINE,
         },
 
         '>.gatsby-resp-image-wrapper': {
-          my: 0,
+          m: 0,
         },
       },
 

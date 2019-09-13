@@ -17,11 +17,11 @@ export const YouTube: React.FunctionComponent<{
     <div
       // Be compatible with gatsby-remark-responsive-iframe
       className="gatsby-resp-iframe-wrapper"
-      style={{
+      sx={{
         border: '3px solid',
         borderColor: 'text',
-        // HD aspect ratio
-        paddingBottom: '56.25%',
+        // HD aspect ratio with adjustment for border
+        paddingBottom: 'calc(56.25% - 4px)',
         height: 0,
         position: 'relative',
         overflow: 'hidden',

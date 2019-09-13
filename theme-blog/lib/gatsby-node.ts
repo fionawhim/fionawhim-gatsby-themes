@@ -56,10 +56,13 @@ exports.createPages = async (
       }) {
         nodes {
           childMdx {
-
             fields {
               projectId
               slug
+            }
+
+            frontmatter {
+              sidebar
             }
           }
         }
@@ -79,6 +82,7 @@ exports.createPages = async (
     const context = {
       slug,
       projectId,
+      sidebarSlugs: node.childMdx!.frontmatter!.sidebar || [],
     };
 
     createPage({
@@ -98,6 +102,7 @@ exports.onCreateNode = async (
   const {
     projectsPath = DEFAULT_CONFIG_OPTIONS.projectsPath,
     projectsContentPath = DEFAULT_CONFIG_OPTIONS.projectsContentPath,
+    sidebarContentPath = DEFAULT_CONFIG_OPTIONS.sidebarContentPath,
     blogContentPath = DEFAULT_CONFIG_OPTIONS.blogContentPath,
   } = options;
 
@@ -141,6 +146,20 @@ exports.onCreateNode = async (
       title,
       internal: {
         type: 'Project',
+        contentDigest: node.internal.contentDigest,
+      },
+    });
+  } else if (source === sidebarContentPath) {
+    const title = (node as any).frontmatter.title;
+    const slug = fileNode.name;
+
+    createNode({
+      id: createNodeId(`Sidebar${slug}`),
+      parent: node.id,
+      slug,
+      title,
+      internal: {
+        type: 'Sidebar',
         contentDigest: node.internal.contentDigest,
       },
     });
