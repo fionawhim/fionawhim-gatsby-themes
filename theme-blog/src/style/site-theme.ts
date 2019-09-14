@@ -176,6 +176,17 @@ export default {
       li: {
         listStyleType: 'square',
       },
+
+      'li.task-list-item': {
+        listStyleType: 'none',
+        position: 'relative',
+
+        'input:first-child': {
+          position: 'absolute',
+          top: `${BASE_FONT - 13}px`,
+          left: -BASELINE,
+        },
+      },
     },
 
     ol: {

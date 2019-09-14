@@ -70,7 +70,7 @@ const Placeholder: React.FunctionComponent<{
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 1280.000000 1126.000000"
         preserveAspectRatio="xMidYMid meet"
-        aria-labeledby="youtube-player-play-button-title"
+        aria-labelledby="youtube-player-play-button-title"
         style={{
           position: 'absolute',
           // Vertically center our 4em self
@@ -122,6 +122,7 @@ const Placeholder: React.FunctionComponent<{
     )}
   </React.Fragment>
 );
+
 const PlayingVideo: React.FunctionComponent<{ id: string }> = ({ id }) => (
   <iframe
     src={`https://www.youtube-nocookie.com/embed/${id}?rel=0&modestbranding=1&autoplay=1`}
