@@ -89,9 +89,9 @@ const Layout: React.FunctionComponent<Props> = ({ title, children }) => {
             {title ? `${title} | ` : ''}
             {data.site!.siteMetadata!.title}
           </title>
-
-          <SiteIcons />
         </Helmet>
+
+        <SiteIcons />
 
         <Global
           styles={css(reset, {

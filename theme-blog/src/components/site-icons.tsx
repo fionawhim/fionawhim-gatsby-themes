@@ -1,11 +1,12 @@
 import React from 'react';
+import { Helmet } from 'react-helmet';
 import { useThemeUI } from 'theme-ui';
 
 const SiteIcons: React.FunctionComponent = () => {
   const { theme } = useThemeUI();
 
   return (
-    <>
+    <Helmet>
       <link
         rel="apple-touch-icon"
         sizes="180x180"
@@ -27,7 +28,7 @@ const SiteIcons: React.FunctionComponent = () => {
 
       <meta name="msapplication-TileColor" content="#ffffff" />
       <meta name="theme-color" content={theme.colors!.primary} />
-    </>
+    </Helmet>
   );
 };
 
