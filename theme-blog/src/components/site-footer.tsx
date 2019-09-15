@@ -17,11 +17,10 @@ const SiteFooter: React.FunctionComponent<Props> = ({ startYear, author }) => (
       backgroundColor: 'secondaryBackground',
     }}
   >
-    © {startYear} {author}. Custom GatsbyJS theme:{' '}
+    © {startYear} {author} • <a href="/rss.xml">RSS</a> • See the code:{' '}
     <a href="https://github.com/fionawhim/fionawhim-gatsby-themes">
       @fionawhim/fionawhim-gatsby-themes
-    </a>
-    .
+    </a>{' '}
   </footer>
 );
 

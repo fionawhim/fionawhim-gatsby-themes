@@ -28,6 +28,21 @@ const BlogPostSidebar: React.FunctionComponent<Props> = ({
       {previous && <BlogPostListItem post={previous} />}
     </dl>
 
+    <Styled.h2 as="h3">Subscribe</Styled.h2>
+
+    <Styled.p>
+      Don’t rely on a serendipitous web search to bring you back here! Subscribe
+      to the <a href="/rss.xml">RSS feed</a> of these blog posts.
+    </Styled.p>
+
+    <Styled.p>
+      If you’re looking for a place to start, try{' '}
+      <a href="https://feedbin.com/">Feedbin</a>! It works great in the browser,
+      and for syncing other apps. I use{' '}
+      <a href="https://ranchero.com/netnewswire/">NetNewsWire</a> on OS X and{' '}
+      <a href="https://reederapp.com/">Reeder</a> on iOS.
+    </Styled.p>
+
     {/* TODO(fiona): archives link */}
   </React.Fragment>
 );
