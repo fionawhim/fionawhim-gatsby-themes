@@ -43,6 +43,7 @@ const FEED_POSTS_QUERY = gql`
 export = (options: ConfigOptions) => ({
   plugins: [
     'gatsby-plugin-typescript',
+    'gatsby-plugin-twitter',
     'gatsby-plugin-emotion',
     'gatsby-plugin-theme-ui',
     'gatsby-plugin-react-helmet',
