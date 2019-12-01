@@ -17,30 +17,37 @@ const BlogPostListItem: React.FunctionComponent<{
   bullet?: string;
 }> = ({ post, onOwnPage: isCurrent, bullet }) => (
   <React.Fragment>
-    <dt
+    <li
       sx={{
         ...HOVER_A_UNDERLINES,
-        mt: 1,
+        mt: ({ baseline }) => [baseline * 0.5],
         position: 'relative',
         fontFamily: 'heading',
         fontWeight: isCurrent ? 'bold' : 'normal',
 
         '::before': bullet
           ? {
-              content: `"${bullet} "`,
+              content: `"${bullet}\u00A0"`,
               position: 'absolute',
-              left: '-1em',
+              right: '100%',
             }
           : {},
       }}
     >
-      {isCurrent ? post.title : <Link to={post.slug}>{post.title}</Link>}
-    </dt>
-
-    <dd>
-      <div sx={{ fontFamily: 'heading' }}>{post.date}</div>
-      {!isCurrent && <p>{post.excerpt}</p>}
-    </dd>
+      <Link to={post.slug}>{post.title}</Link>
+      {
+        <span
+          sx={{
+            fontFamily: 'heading',
+            fontWeight: 'normal',
+            whiteSpace: 'nowrap',
+          }}
+        >
+          {' '}
+          • {post.date}
+        </span>
+      }
+    </li>
   </React.Fragment>
 );
 

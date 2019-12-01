@@ -1,33 +1,37 @@
 /** @jsx jsx */
 
 import React from 'react';
-import { jsx } from 'theme-ui';
+import { Styled, jsx } from 'theme-ui';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
-import { Maybe } from '../../lib/graphql';
+import { ExtendedPostPageQuery } from '../../lib/graphql';
 import BlogPostHeader from './blog-post-header';
+import CommentForm from './comment-form';
+import Comment from './comment';
 
-interface Props {
-  isPermalinkPage?: boolean;
+type Props = {
   body: string;
   slug: string;
   title: string;
   day: string;
   month: string;
   year: string;
-  project?: null | {
-    slug: Maybe<string>;
-    title: Maybe<string>;
-  };
-}
+} & (
+  | {
+      isPermalinkPage?: false;
+    }
+  | {
+      isPermalinkPage: true;
+      comments: ExtendedPostPageQuery.Comments['nodes'];
+    });
 
 const BlogPost: React.FunctionComponent<Props> = ({
-  isPermalinkPage,
   body,
   title,
   slug,
   day,
   month,
   year,
+  ...post
 }) => {
   return (
     <article
@@ -38,7 +42,7 @@ const BlogPost: React.FunctionComponent<Props> = ({
         },
       }}
     >
-      {!isPermalinkPage && (
+      {!post.isPermalinkPage && (
         <BlogPostHeader
           headerElement="h3"
           title={title}
@@ -47,6 +51,20 @@ const BlogPost: React.FunctionComponent<Props> = ({
         />
       )}
       <MDXRenderer>{body}</MDXRenderer>
+
+      {post.isPermalinkPage && (
+        <React.Fragment>
+          <div sx={{ mt: 2 }} id="comments">
+            <Styled.h3>Comments</Styled.h3>
+
+            {post.comments.map(comment => (
+              <Comment key={comment.id} comment={comment} />
+            ))}
+
+            <CommentForm path={slug} />
+          </div>
+        </React.Fragment>
+      )}
     </article>
   );
 };

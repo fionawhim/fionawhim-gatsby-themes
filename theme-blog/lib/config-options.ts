@@ -10,6 +10,9 @@ export interface ConfigOptions {
   feedName?: string;
   feedPath?: string;
   feedUrl?: string | null;
+
+  firebaseKeyPath?: string;
+  firebaseConfig?: { [key: string]: any };
 }
 
 export const DEFAULT_CONFIG_OPTIONS: Required<ConfigOptions> = {
@@ -24,4 +27,7 @@ export const DEFAULT_CONFIG_OPTIONS: Required<ConfigOptions> = {
   feedName: 'RSS feed',
   feedPath: '/rss.xml',
   feedUrl: null,
+
+  firebaseKeyPath: '',
+  firebaseConfig: {},
 };

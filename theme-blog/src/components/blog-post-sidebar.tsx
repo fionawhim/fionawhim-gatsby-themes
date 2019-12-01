@@ -2,10 +2,8 @@
 
 import React from 'react';
 import { jsx, Styled } from 'theme-ui';
-import { Link } from 'gatsby';
 
 import { ExtendedPostPageQuery, Maybe } from '../../lib/graphql';
-import { HOVER_A_UNDERLINES } from '../style/util';
 import BlogPostListItem from './blog-post-list-item';
 
 type Props = {
@@ -22,11 +20,13 @@ const BlogPostSidebar: React.FunctionComponent<Props> = ({
   <React.Fragment>
     <Styled.h2 as="h3">Navigation</Styled.h2>
 
-    <dl>
-      {next && <BlogPostListItem post={next} />}
+    <ul>
+      {next && <BlogPostListItem post={next} bullet=">" />}
       <BlogPostListItem post={post} onOwnPage bullet="<" />
-      {previous && <BlogPostListItem post={previous} />}
-    </dl>
+      {previous && <BlogPostListItem post={previous} bullet=">" />}
+    </ul>
+
+    <Styled.hr />
 
     <Styled.h2 as="h3">Subscribe</Styled.h2>
 

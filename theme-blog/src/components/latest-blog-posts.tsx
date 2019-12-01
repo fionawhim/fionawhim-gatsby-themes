@@ -16,20 +16,6 @@ const LatestBlogPosts: React.FunctionComponent = () => {
           day: date(formatString: "D")
           month: date(formatString: "MMMM")
           year: date(formatString: "YYYY")
-
-          ... on MdxBlogPost {
-            parent {
-              ... on Mdx {
-                fields {
-                  project {
-                    projectId
-                    slug
-                    title
-                  }
-                }
-              }
-            }
-          }
         }
       }
     }
@@ -38,11 +24,7 @@ const LatestBlogPosts: React.FunctionComponent = () => {
   return (
     <>
       {data.allBlogPost.nodes.map(p => (
-        <BlogPost
-          key={p.slug}
-          {...p}
-          project={p.parent!.fields && p.parent!.fields.project}
-        />
+        <BlogPost key={p.slug} {...p} />
       ))}
     </>
   );

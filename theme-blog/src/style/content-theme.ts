@@ -72,5 +72,10 @@ export default {
     },
 
     img: {},
+
+    // Styles for the content region itself
+    content: {
+      mb: [2, 2, 0],
+    },
   },
 };

@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@fionawhim-site/gatsby-theme-blog": "*",
-    "gatsby": "^2.13.67",
+    "gatsby": "^2.18.2",
 
     "gatsby-theme-style-guide": "^0.2.35",
     "react": "^16.9.0",

@@ -40,6 +40,16 @@ export const TEXT_LARGE = {
 
 const baselineMultiple = w => theme => theme.baseline * w;
 
+export const COLORS = {
+  primary: '#BC007B',
+  secondary: '#027798',
+  dark: '#72004A',
+  text: '#1C0365',
+  white: '#ffffff',
+  black: '#000000',
+  secondaryBackground: '#B9E2ED',
+};
+
 export default {
   baseline: BASELINE,
   space: [0, 1, 2, 4, 8].map(s => s * BASELINE),
@@ -56,15 +66,7 @@ export default {
 
   // Full palette: #F4BDE1,#EA48B1,#EB0099,#BC007B,#72004A,#B9E2ED,#49BBDB,#07AEDE,#027798,#01485C,#1C0365
 
-  colors: {
-    primary: '#BC007B',
-    secondary: '#027798',
-    dark: '#72004A',
-    text: '#1C0365',
-    white: '#ffffff',
-    black: '#000000',
-    secondaryBackground: '#B9E2ED',
-  },
+  colors: COLORS,
 
   fonts: {
     heading: 'Poppins, sans-serif',
@@ -150,6 +152,15 @@ export default {
       fontFamily: 'heading',
       fontWeight: 'bold',
       ...TEXT_LARGE,
+
+      '* + &': {
+        mt: baselineMultiple(1.5),
+      },
+    },
+
+    h5: {
+      fontFamily: 'heading',
+      fontWeight: 'bold',
 
       '* + &': {
         mt: baselineMultiple(1.5),

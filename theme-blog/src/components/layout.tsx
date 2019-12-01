@@ -41,7 +41,7 @@ export const Title: React.FunctionComponent = ({ children }) => (
 export const Content: React.FunctionComponent = ({ children }) => (
   <ThemeProvider theme={CONTENT_THEME}>
     <section
-      sx={CONTENT_THEME.styles.root}
+      sx={{ ...CONTENT_THEME.styles.root, ...CONTENT_THEME.styles.content }}
       css={{ gridArea: LAYOUT_REGIONS.content }}
     >
       {children}

@@ -1,8 +1,8 @@
 overwrite: true
 schema: "./schema.json"
 documents:
-  - ./lib/**/*.{ts,tsx}
-  - ./src/**/*.{ts,tsx}
+  - ./lib/**/*.{js,ts,tsx}
+  - ./src/**/*.{js,ts,tsx}
   - ../node_modules/gatsby-theme-*/**/templates/*.js
 generates:
   lib/graphql.ts:
