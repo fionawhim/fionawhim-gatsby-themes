@@ -17,8 +17,7 @@ const ReadMoreContext = React.createContext<ReadMoreState | null>(null);
 
 export function hasReadMore(body: string) {
   return body.includes(`mdx(ReadMore, {
-    mdxType: "ReadMore"
-  })`);
+    mdxType: "ReadMore"`);
 }
 
 export const ReadMoreWrapper: React.FunctionComponent = ({ children }) => {
@@ -26,21 +25,24 @@ export const ReadMoreWrapper: React.FunctionComponent = ({ children }) => {
 
   let childrenArray = React.Children.toArray(children);
 
-  if (readMoreState) {
-    const readMoreIdx = childrenArray.findIndex(
-      (node: any) =>
-        typeof node === 'object' &&
-        node.props &&
-        node.props.mdxType === 'ReadMore'
-    );
+  const readMoreIdx = childrenArray.findIndex(
+    (node: any) =>
+      typeof node === 'object' &&
+      node.props &&
+      node.props.mdxType === 'ReadMore'
+  );
 
-    if (~readMoreIdx) {
-      childrenArray = childrenArray.slice(0, readMoreIdx);
+  if (~readMoreIdx) {
+    if (readMoreState) {
+      childrenArray = childrenArray.slice(0, readMoreIdx + 1);
       childrenArray.push(
         <React.Fragment key="ReadMoreWrapper">
           {readMoreState.renderLink()}
         </React.Fragment>
       );
+    } else {
+      childrenArray = [...childrenArray];
+      childrenArray.splice(readMoreIdx, 1);
     }
   }
 
