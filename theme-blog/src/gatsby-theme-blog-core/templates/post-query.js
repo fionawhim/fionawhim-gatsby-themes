@@ -21,6 +21,12 @@ export const query = graphql`
       day: date(formatString: "D")
       month: date(formatString: "MMMM")
       year: date(formatString: "YYYY")
+
+      ... on MdxBlogPost {
+        fields {
+          commentsStatus
+        }
+      }
     }
 
     comments: allPostComment(

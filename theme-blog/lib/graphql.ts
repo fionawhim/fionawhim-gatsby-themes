@@ -308,6 +308,10 @@ export interface ImageSharpSortInput {
   order?: (Maybe<SortOrderEnum>)[];
 }
 
+export interface MdxBlogPostFieldsFilterInput {
+  commentsStatus?: Maybe<StringQueryOperatorInput>;
+}
+
 export interface MdxBlogPostFilterInput {
   id?: Maybe<StringQueryOperatorInput>;
 
@@ -324,6 +328,8 @@ export interface MdxBlogPostFilterInput {
   excerpt?: Maybe<StringQueryOperatorInput>;
 
   body?: Maybe<StringQueryOperatorInput>;
+
+  fields?: Maybe<MdxBlogPostFieldsFilterInput>;
 
   parent?: Maybe<NodeFilterInput>;
 
@@ -391,11 +397,13 @@ export interface MdxFrontmatterFilterInput {
 
   date?: Maybe<DateQueryOperatorInput>;
 
+  projects?: Maybe<StringQueryOperatorInput>;
+
   project?: Maybe<StringQueryOperatorInput>;
 
   tags?: Maybe<StringQueryOperatorInput>;
 
-  projects?: Maybe<StringQueryOperatorInput>;
+  comments?: Maybe<StringQueryOperatorInput>;
 }
 
 export interface MdxHeadingMdxFilterListInput {
@@ -565,23 +573,25 @@ export interface PostCommentFilterInput {
 
   body?: Maybe<StringQueryOperatorInput>;
 
-  gravatarHash?: Maybe<StringQueryOperatorInput>;
-
   createdAt?: Maybe<DateQueryOperatorInput>;
+
+  gravatarHash?: Maybe<StringQueryOperatorInput>;
 
   post?: Maybe<MdxBlogPostFilterInput>;
 
-  email?: Maybe<StringQueryOperatorInput>;
+  isSpam?: Maybe<BooleanQueryOperatorInput>;
 
   inReplyTo?: Maybe<StringQueryOperatorInput>;
 
+  url?: Maybe<StringQueryOperatorInput>;
+
+  email?: Maybe<StringQueryOperatorInput>;
+
+  isTrashed?: Maybe<BooleanQueryOperatorInput>;
+
   ip?: Maybe<StringQueryOperatorInput>;
 
-  message?: Maybe<StringQueryOperatorInput>;
-
   path?: Maybe<StringQueryOperatorInput>;
-
-  url?: Maybe<StringQueryOperatorInput>;
 
   id?: Maybe<StringQueryOperatorInput>;
 
@@ -689,6 +699,8 @@ export interface SitePluginPluginOptionsFilterInput {
 
   feedUrl?: Maybe<StringQueryOperatorInput>;
 
+  firebaseKeyPath?: Maybe<StringQueryOperatorInput>;
+
   firebaseConfig?: Maybe<SitePluginPluginOptionsFirebaseConfigFilterInput>;
 
   pathCheck?: Maybe<BooleanQueryOperatorInput>;
@@ -735,19 +747,7 @@ export interface SitePluginPluginOptionsGatsbyRemarkPluginsOptionsFilterInput {
 }
 
 export interface SitePluginPluginOptionsFirebaseConfigFilterInput {
-  apiKey?: Maybe<StringQueryOperatorInput>;
-
-  authDomain?: Maybe<StringQueryOperatorInput>;
-
   databaseURL?: Maybe<StringQueryOperatorInput>;
-
-  projectId?: Maybe<StringQueryOperatorInput>;
-
-  storageBucket?: Maybe<StringQueryOperatorInput>;
-
-  messagingSenderId?: Maybe<StringQueryOperatorInput>;
-
-  appId?: Maybe<StringQueryOperatorInput>;
 }
 
 export interface SitePluginPackageJsonFilterInput {
@@ -1193,6 +1193,7 @@ export enum MdxBlogPostFieldsEnum {
   keywords = 'keywords',
   excerpt = 'excerpt',
   body = 'body',
+  fields___commentsStatus = 'fields___commentsStatus',
   parent___id = 'parent___id',
   parent___parent___id = 'parent___parent___id',
   parent___parent___parent___id = 'parent___parent___parent___id',
@@ -1509,9 +1510,10 @@ export enum FileFieldsEnum {
   childMdx___frontmatter___sidebar = 'childMdx___frontmatter___sidebar',
   childMdx___frontmatter___path = 'childMdx___frontmatter___path',
   childMdx___frontmatter___date = 'childMdx___frontmatter___date',
+  childMdx___frontmatter___projects = 'childMdx___frontmatter___projects',
   childMdx___frontmatter___project = 'childMdx___frontmatter___project',
   childMdx___frontmatter___tags = 'childMdx___frontmatter___tags',
-  childMdx___frontmatter___projects = 'childMdx___frontmatter___projects',
+  childMdx___frontmatter___comments = 'childMdx___frontmatter___comments',
   childMdx___body = 'childMdx___body',
   childMdx___excerpt = 'childMdx___excerpt',
   childMdx___headings = 'childMdx___headings',
@@ -1605,6 +1607,7 @@ export enum FileFieldsEnum {
   childMdx___childMdxBlogPost___keywords = 'childMdx___childMdxBlogPost___keywords',
   childMdx___childMdxBlogPost___excerpt = 'childMdx___childMdxBlogPost___excerpt',
   childMdx___childMdxBlogPost___body = 'childMdx___childMdxBlogPost___body',
+  childMdx___childMdxBlogPost___fields___commentsStatus = 'childMdx___childMdxBlogPost___fields___commentsStatus',
   childMdx___childMdxBlogPost___parent___id = 'childMdx___childMdxBlogPost___parent___id',
   childMdx___childMdxBlogPost___parent___children = 'childMdx___childMdxBlogPost___parent___children',
   childMdx___childMdxBlogPost___children = 'childMdx___childMdxBlogPost___children',
@@ -1629,9 +1632,10 @@ export enum MdxFieldsEnum {
   frontmatter___sidebar = 'frontmatter___sidebar',
   frontmatter___path = 'frontmatter___path',
   frontmatter___date = 'frontmatter___date',
+  frontmatter___projects = 'frontmatter___projects',
   frontmatter___project = 'frontmatter___project',
   frontmatter___tags = 'frontmatter___tags',
-  frontmatter___projects = 'frontmatter___projects',
+  frontmatter___comments = 'frontmatter___comments',
   body = 'body',
   excerpt = 'excerpt',
   headings = 'headings',
@@ -1821,6 +1825,7 @@ export enum MdxFieldsEnum {
   childMdxBlogPost___keywords = 'childMdxBlogPost___keywords',
   childMdxBlogPost___excerpt = 'childMdxBlogPost___excerpt',
   childMdxBlogPost___body = 'childMdxBlogPost___body',
+  childMdxBlogPost___fields___commentsStatus = 'childMdxBlogPost___fields___commentsStatus',
   childMdxBlogPost___parent___id = 'childMdxBlogPost___parent___id',
   childMdxBlogPost___parent___parent___id = 'childMdxBlogPost___parent___parent___id',
   childMdxBlogPost___parent___parent___children = 'childMdxBlogPost___parent___parent___children',
@@ -1863,8 +1868,8 @@ export enum MdxFieldsEnum {
 export enum PostCommentFieldsEnum {
   name = 'name',
   body = 'body',
-  gravatarHash = 'gravatarHash',
   createdAt = 'createdAt',
+  gravatarHash = 'gravatarHash',
   post___id = 'post___id',
   post___title = 'post___title',
   post___slug = 'post___slug',
@@ -1873,6 +1878,7 @@ export enum PostCommentFieldsEnum {
   post___keywords = 'post___keywords',
   post___excerpt = 'post___excerpt',
   post___body = 'post___body',
+  post___fields___commentsStatus = 'post___fields___commentsStatus',
   post___parent___id = 'post___parent___id',
   post___parent___parent___id = 'post___parent___parent___id',
   post___parent___parent___children = 'post___parent___parent___children',
@@ -1910,12 +1916,13 @@ export enum PostCommentFieldsEnum {
   post___internal___mediaType = 'post___internal___mediaType',
   post___internal___owner = 'post___internal___owner',
   post___internal___type = 'post___internal___type',
-  email = 'email',
+  isSpam = 'isSpam',
   inReplyTo = 'inReplyTo',
-  ip = 'ip',
-  message = 'message',
-  path = 'path',
   url = 'url',
+  email = 'email',
+  isTrashed = 'isTrashed',
+  ip = 'ip',
+  path = 'path',
   id = 'id',
   parent___id = 'parent___id',
   parent___parent___id = 'parent___parent___id',
@@ -2169,13 +2176,8 @@ export enum SitePageFieldsEnum {
   pluginCreator___pluginOptions___feedName = 'pluginCreator___pluginOptions___feedName',
   pluginCreator___pluginOptions___feedPath = 'pluginCreator___pluginOptions___feedPath',
   pluginCreator___pluginOptions___feedUrl = 'pluginCreator___pluginOptions___feedUrl',
-  pluginCreator___pluginOptions___firebaseConfig___apiKey = 'pluginCreator___pluginOptions___firebaseConfig___apiKey',
-  pluginCreator___pluginOptions___firebaseConfig___authDomain = 'pluginCreator___pluginOptions___firebaseConfig___authDomain',
+  pluginCreator___pluginOptions___firebaseKeyPath = 'pluginCreator___pluginOptions___firebaseKeyPath',
   pluginCreator___pluginOptions___firebaseConfig___databaseURL = 'pluginCreator___pluginOptions___firebaseConfig___databaseURL',
-  pluginCreator___pluginOptions___firebaseConfig___projectId = 'pluginCreator___pluginOptions___firebaseConfig___projectId',
-  pluginCreator___pluginOptions___firebaseConfig___storageBucket = 'pluginCreator___pluginOptions___firebaseConfig___storageBucket',
-  pluginCreator___pluginOptions___firebaseConfig___messagingSenderId = 'pluginCreator___pluginOptions___firebaseConfig___messagingSenderId',
-  pluginCreator___pluginOptions___firebaseConfig___appId = 'pluginCreator___pluginOptions___firebaseConfig___appId',
   pluginCreator___pluginOptions___pathCheck = 'pluginCreator___pluginOptions___pathCheck',
   pluginCreator___nodeAPIs = 'pluginCreator___nodeAPIs',
   pluginCreator___browserAPIs = 'pluginCreator___browserAPIs',
@@ -2321,13 +2323,8 @@ export enum SitePluginFieldsEnum {
   pluginOptions___feedName = 'pluginOptions___feedName',
   pluginOptions___feedPath = 'pluginOptions___feedPath',
   pluginOptions___feedUrl = 'pluginOptions___feedUrl',
-  pluginOptions___firebaseConfig___apiKey = 'pluginOptions___firebaseConfig___apiKey',
-  pluginOptions___firebaseConfig___authDomain = 'pluginOptions___firebaseConfig___authDomain',
+  pluginOptions___firebaseKeyPath = 'pluginOptions___firebaseKeyPath',
   pluginOptions___firebaseConfig___databaseURL = 'pluginOptions___firebaseConfig___databaseURL',
-  pluginOptions___firebaseConfig___projectId = 'pluginOptions___firebaseConfig___projectId',
-  pluginOptions___firebaseConfig___storageBucket = 'pluginOptions___firebaseConfig___storageBucket',
-  pluginOptions___firebaseConfig___messagingSenderId = 'pluginOptions___firebaseConfig___messagingSenderId',
-  pluginOptions___firebaseConfig___appId = 'pluginOptions___firebaseConfig___appId',
   pluginOptions___pathCheck = 'pluginOptions___pathCheck',
   nodeAPIs = 'nodeAPIs',
   browserAPIs = 'browserAPIs',
@@ -2917,6 +2914,8 @@ export namespace LatestBlogPostsQuery {
     __typename?: 'Query';
 
     allBlogPost: AllBlogPost;
+
+    commentCounts: CommentCounts;
   };
 
   export type AllBlogPost = {
@@ -2926,7 +2925,7 @@ export namespace LatestBlogPostsQuery {
   };
 
   export type Nodes = {
-    __typename?: 'BlogPost';
+    __typename?: MdxBlogPostInlineFragment['__typename'];
 
     id: string;
 
@@ -2941,6 +2940,34 @@ export namespace LatestBlogPostsQuery {
     month: Date;
 
     year: Date;
+  } & MdxBlogPostInlineFragment;
+
+  export type MdxBlogPostInlineFragment = {
+    __typename?: 'MdxBlogPost';
+
+    fields: Maybe<Fields>;
+  };
+
+  export type Fields = {
+    __typename?: 'MdxBlogPostFields';
+
+    commentsStatus: Maybe<string>;
+  };
+
+  export type CommentCounts = {
+    __typename?: 'PostCommentConnection';
+
+    group: Group[];
+  };
+
+  export type Group = {
+    __typename?: 'PostCommentGroupConnection';
+
+    totalCount: number;
+
+    field: string;
+
+    fieldValue: Maybe<string>;
   };
 }
 
@@ -2990,7 +3017,7 @@ export namespace ExtendedPostPageQuery {
   };
 
   export type BlogPost = {
-    __typename?: 'BlogPost';
+    __typename?: MdxBlogPostInlineFragment['__typename'];
 
     id: string;
 
@@ -3013,6 +3040,18 @@ export namespace ExtendedPostPageQuery {
     month: Date;
 
     year: Date;
+  } & MdxBlogPostInlineFragment;
+
+  export type MdxBlogPostInlineFragment = {
+    __typename?: 'MdxBlogPost';
+
+    fields: Maybe<Fields>;
+  };
+
+  export type Fields = {
+    __typename?: 'MdxBlogPostFields';
+
+    commentsStatus: Maybe<string>;
   };
 
   export type Comments = {

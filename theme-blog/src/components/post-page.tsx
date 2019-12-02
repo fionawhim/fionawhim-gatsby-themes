@@ -33,7 +33,12 @@ const PostPage: React.FunctionComponent<Props> = ({
       </Title>
 
       <Content>
-        <BlogPost isPermalinkPage {...blogPost!} comments={comments.nodes} />
+        <BlogPost
+          isPermalinkPage
+          {...blogPost!}
+          comments={comments.nodes}
+          commentsStatus={blogPost!.fields!.commentsStatus as any}
+        />
       </Content>
 
       <Sidebar>

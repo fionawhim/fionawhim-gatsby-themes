@@ -7,6 +7,8 @@ import { ExtendedPostPageQuery } from '../../lib/graphql';
 import BlogPostHeader from './blog-post-header';
 import CommentForm from './comment-form';
 import Comment from './comment';
+import { Link } from 'gatsby';
+import { hasReadMore } from './ReadMore';
 
 type Props = {
   body: string;
@@ -15,9 +17,12 @@ type Props = {
   day: string;
   month: string;
   year: string;
+
+  commentsStatus: 'open' | 'closed';
 } & (
   | {
       isPermalinkPage?: false;
+      commentsCount: number;
     }
   | {
       isPermalinkPage: true;
@@ -31,6 +36,7 @@ const BlogPost: React.FunctionComponent<Props> = ({
   day,
   month,
   year,
+
   ...post
 }) => {
   return (
@@ -50,40 +56,69 @@ const BlogPost: React.FunctionComponent<Props> = ({
           slug={slug}
         />
       )}
+
       <MDXRenderer>{body}</MDXRenderer>
 
-      {post.isPermalinkPage && (
-        <React.Fragment>
-          <div sx={{ mt: 2 }} id="comments">
-            <Styled.h3>Comments</Styled.h3>
+      {post.isPermalinkPage &&
+        (post.commentsStatus === 'open' || post.comments.length > 0) && (
+          <React.Fragment>
+            <div sx={{ mt: 2 }} id="comments">
+              <Styled.hr />
+              <Styled.h3
+                sx={{
+                  ':before': {
+                    content: '"*"',
+                  },
+                }}
+              >
+                Comments
+              </Styled.h3>
 
-            {post.comments.map(comment => (
-              <Comment key={comment.id} comment={comment} />
-            ))}
+              {post.comments.map(comment => (
+                <Comment key={comment.id} comment={comment} />
+              ))}
 
-            <CommentForm path={slug} />
+              {post.commentsStatus === 'open' && <CommentForm path={slug} />}
+            </div>
+          </React.Fragment>
+        )}
+
+      {!post.isPermalinkPage && (
+        <div
+          sx={{
+            mt: 1,
+            fontFamily: 'heading',
+            display: 'flex',
+            a: {
+              textDecoration: 'none',
+            },
+          }}
+        >
+          {hasReadMore(body) && (
+            <div>
+              <Link to={`${slug}#read-more`} style={{ fontWeight: 'bold' }}>
+                …keep reading…
+              </Link>
+            </div>
+          )}
+          <div sx={{ textAlign: 'right', flexGrow: 1 }}>
+            <Link to={slug}>#permalink</Link>
+
+            {(post.commentsStatus === 'open' || post.commentsCount > 0) && (
+              <React.Fragment>
+                {' . '}
+                <Link to={`${slug}#comments`}>
+                  {post.commentsCount === 1
+                    ? '1 comment'
+                    : `${post.commentsCount} comments`}
+                </Link>
+              </React.Fragment>
+            )}
           </div>
-        </React.Fragment>
+        </div>
       )}
     </article>
   );
 };
 
 export default BlogPost;
-
-{
-  /* {project && (
-        <div
-          sx={{
-            fontSize: 0,
-            lineHeight: 0,
-            mt: -3,
-            mb: 3,
-            fontStyle: 'italic',
-            display: 'none',
-          }}
-        >
-          Filed under: <Link to={project.slug!}>{project.title!}</Link>
-        </div>
-      )} */
-}

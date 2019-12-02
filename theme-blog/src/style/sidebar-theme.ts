@@ -5,7 +5,7 @@ export default {
     root: {
       backgroundColor: ['#f5f5f5', 'transparent'],
       m: [-2, 0],
-      mt: [-1, 0],
+      mt: [2, 0],
       p: [2, 0],
       pt: [1, 0],
     },
@@ -13,10 +13,11 @@ export default {
     hr: {
       border: 'none',
       borderTop: `2px solid ${COLORS.primary}`,
-      mt: [1, 2],
+      mt: [2, 2],
       marginLeft: 2,
       marginRight: 2,
     },
+
     h2: {
       'aside &': {
         ...TEXT_LARGE,

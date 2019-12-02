@@ -16,7 +16,6 @@ import mkdirp from 'mkdirp';
 import gql from 'fake-tag';
 
 import { CreateProjectPagesQuery } from './graphql';
-
 import { ConfigOptions, DEFAULT_CONFIG_OPTIONS } from './config-options';
 
 const ProjectTemplate = require.resolve(`../src/templates/project-query.tsx`);
@@ -258,7 +257,18 @@ function transformMdxNode(
   }
 }
 
-function transformMdxBlogPostNode(_args: CreateNodeArgs) {}
+function transformMdxBlogPostNode({ node, actions, getNode }: CreateNodeArgs) {
+  const { createNodeField } = actions;
+
+  const mdxParent = getNode(node.parent);
+  const commentsStatus = mdxParent.frontmatter.comments || 'open';
+
+  createNodeField({
+    node,
+    name: 'commentsStatus',
+    value: commentsStatus,
+  });
+}
 
 exports.onCreatePage = ({ page, actions }: CreatePageArgs, options) => {
   const { createPage, deletePage } = actions;
