@@ -7,7 +7,6 @@ export default {
         border: '3px solid',
         borderColor: 'text',
         my: 1,
-        mx: '-3px !important',
       },
 
       '.gatsby-resp-image-figure': {
