@@ -68,7 +68,7 @@ const SiteSeo: React.FunctionComponent<{
           name: `twitter:description`,
           content: description,
         },
-      ]}
+      ].filter(f => !!f)}
     />
   );
 };
