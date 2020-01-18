@@ -3150,6 +3150,8 @@ export namespace SiteSeoQuery {
 
     author: Maybe<string>;
 
+    siteUrl: Maybe<string>;
+
     social: Maybe<(Maybe<Social>)[]>;
   };
 

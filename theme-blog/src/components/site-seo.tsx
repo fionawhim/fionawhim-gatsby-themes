@@ -15,6 +15,7 @@ const SiteSeo: React.FunctionComponent<{
         site {
           siteMetadata {
             author
+            siteUrl
             social {
               name
             }
@@ -50,7 +51,9 @@ const SiteSeo: React.FunctionComponent<{
 
         featuredImage && {
           name: 'twitter:image',
-          content: featuredImage.childImageSharp!.fluid!.src!,
+          content:
+            site!.siteMetadata!.siteUrl!.replace(/\/$/, '') +
+            featuredImage.childImageSharp!.fluid!.src!,
         },
         {
           name: `twitter:creator`,
