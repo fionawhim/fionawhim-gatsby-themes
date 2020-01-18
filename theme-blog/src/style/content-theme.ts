@@ -3,10 +3,15 @@ import { BASELINE } from './styles';
 export default {
   styles: {
     root: {
-      '.gatsby-resp-image-wrapper': {
+      '.gatsby-resp-image-wrapper, .gatsby-video-aspect-ratio': {
         border: '3px solid',
         borderColor: 'text',
         my: 1,
+      },
+
+      '.gatsby-video-aspect-ratio': {
+        marginLeft: '-3px',
+        marginRight: '-3px',
       },
 
       '.gatsby-resp-image-figure': {
