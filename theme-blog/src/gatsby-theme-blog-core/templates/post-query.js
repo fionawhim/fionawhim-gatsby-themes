@@ -26,6 +26,21 @@ export const query = graphql`
         fields {
           commentsStatus
         }
+
+        parent {
+          ... on Mdx {
+            frontmatter {
+              description
+              featured_image {
+                childImageSharp {
+                  fluid(maxWidth: 800) {
+                    src
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
 
@@ -48,6 +63,12 @@ export const query = graphql`
       slug
       title
       date(formatString: "LL")
+
+      ... on MdxBlogPost {
+        fields {
+          description
+        }
+      }
     }
 
     next: blogPost(id: { eq: $nextId }) {
@@ -56,6 +77,12 @@ export const query = graphql`
       slug
       title
       date(formatString: "LL")
+
+      ... on MdxBlogPost {
+        fields {
+          description
+        }
+      }
     }
   }
 `;

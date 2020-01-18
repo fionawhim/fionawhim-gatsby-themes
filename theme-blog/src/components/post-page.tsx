@@ -18,7 +18,13 @@ const PostPage: React.FunctionComponent<Props> = ({
   data: { blogPost, comments, previous, next },
 }) => {
   return (
-    <Layout title={blogPost!.title}>
+    <Layout
+      title={blogPost!.title}
+      description={
+        blogPost!.parent!.frontmatter!.description || blogPost!.excerpt
+      }
+      featuredImage={blogPost!.parent!.frontmatter!.featured_image}
+    >
       <Title>
         <BlogPostHeader
           headerElement={'h2'}

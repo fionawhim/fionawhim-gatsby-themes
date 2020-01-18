@@ -205,6 +205,8 @@ function transformMdxNode(
     });
 
     const title = (node as any).frontmatter.title;
+    const description = (node as any).frontmatter.description;
+
     const slug = urlResolve(projectsPath, filePath);
     const projectId = path.basename(slug);
 
@@ -229,6 +231,7 @@ function transformMdxNode(
       projectId,
       slug,
       title,
+      description,
       internal: {
         type: 'Project',
         contentDigest: node.internal.contentDigest,
@@ -262,11 +265,18 @@ function transformMdxBlogPostNode({ node, actions, getNode }: CreateNodeArgs) {
 
   const mdxParent = getNode(node.parent);
   const commentsStatus = mdxParent.frontmatter.comments || 'open';
+  const description = mdxParent.frontmatter.description || 'open';
 
   createNodeField({
     node,
     name: 'commentsStatus',
     value: commentsStatus,
+  });
+
+  createNodeField({
+    node,
+    name: 'description',
+    value: description,
   });
 }
 

@@ -8,11 +8,12 @@ import { Global, css } from '@emotion/core';
 import { MDXProvider } from '@mdx-js/react';
 import reset from 'emotion-reset';
 
-import { LayoutQuery } from '../../lib/graphql';
+import { LayoutQuery, ExtendedPostPageQuery } from '../../lib/graphql';
 
 import CONTENT_THEME from '../style/content-theme';
 import SIDEBAR_THEME from '../style/sidebar-theme';
 
+import SiteSeo from './site-seo';
 import SiteIcons from './site-icons';
 import SiteHeader from './site-header';
 import SiteFooter from './site-footer';
@@ -25,6 +26,8 @@ const LAYOUT_REGIONS = {
 
 interface Props {
   title?: string;
+  description?: string;
+  featuredImage?: ExtendedPostPageQuery.FeaturedImage | null;
 }
 
 export const Title: React.FunctionComponent = ({ children }) => (
@@ -65,7 +68,12 @@ export const Sidebar: React.FunctionComponent = ({ children }) => (
  */
 const MDX_COMPONENTS = { Content, Sidebar };
 
-const Layout: React.FunctionComponent<Props> = ({ title, children }) => {
+const Layout: React.FunctionComponent<Props> = ({
+  title,
+  description,
+  featuredImage,
+  children,
+}) => {
   const data: LayoutQuery.Query = useStaticQuery(graphql`
     query LayoutQuery {
       site {
@@ -92,6 +100,12 @@ const Layout: React.FunctionComponent<Props> = ({ title, children }) => {
         </Helmet>
 
         <SiteIcons />
+
+        <SiteSeo
+          title={title || data.site!.siteMetadata!.title!}
+          description={description || data.site!.siteMetadata!.description!}
+          featuredImage={featuredImage}
+        />
 
         <Global
           styles={css(reset, {
