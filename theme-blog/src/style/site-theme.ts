@@ -206,7 +206,7 @@ export default {
       px: [1, 2],
 
       li: {
-        listStyleType: 'number',
+        listStyleType: 'decimal',
       },
     },
 
