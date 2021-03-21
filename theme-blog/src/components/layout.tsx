@@ -153,6 +153,7 @@ const Layout: React.FunctionComponent<Props> = ({
         <SiteFooter
           author={data.site!.siteMetadata!.author!}
           startYear={2019}
+          endYear={new Date().getFullYear()}
         />
       </Styled.root>
     </React.Fragment>
