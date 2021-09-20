@@ -43,7 +43,7 @@
     "gatsby-theme-blog-core": "^1.0.31",
     "gatsby-transformer-sharp": "2.3.4",
     "mkdirp": "^0.5.1",
-    "prismjs": "^1.17.1",
+    "prismjs": "^1.25.0",
     "react-helmet": "^5.2.1",
     "remark-slug": "^5.1.2",
     "theme-ui": "^0.2.36",
