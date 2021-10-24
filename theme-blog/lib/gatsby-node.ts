@@ -15,7 +15,7 @@ import crypto from 'crypto';
 import mkdirp from 'mkdirp';
 import gql from 'fake-tag';
 
-import { CreateProjectPagesQuery } from './graphql';
+import { CreateProjectPagesQueryQuery } from './graphql';
 import { ConfigOptions, DEFAULT_CONFIG_OPTIONS } from './config-options';
 
 const ProjectTemplate = require.resolve(`../src/templates/project-query.tsx`);
@@ -58,7 +58,7 @@ exports.onPreBootstrap = (args: NodePluginArgs, options: ConfigOptions) => {
     options.projectsContentPath || DEFAULT_CONFIG_OPTIONS.projectsContentPath,
   ];
 
-  dirs.forEach(p => {
+  dirs.forEach((p) => {
     const dir = path.join(program.directory, p);
 
     if (!fs.existsSync(dir)) {
@@ -68,8 +68,43 @@ exports.onPreBootstrap = (args: NodePluginArgs, options: ConfigOptions) => {
 };
 
 exports.sourceNodes = async ({ actions }: SourceNodesArgs) => {
-  const { createNode, createTypes } = actions;
+  const { createNode } = actions;
 
+  if (firebase.apps.length > 0) {
+    const db = firebase.firestore();
+
+    const comments = await db
+      .collection('comments')
+      .where('isTrashed', '==', false)
+      .get();
+
+    comments.forEach((doc) => {
+      const comment: PostComment = doc.data() as any;
+
+      createNode({
+        ...comment,
+        id: `PostComment-${doc.id}`,
+        createdAt: new Date(comment.createdAt.seconds * 1000),
+
+        gravatarHash: crypto
+          .createHash('md5')
+          .update(comment.email.trim().toLowerCase())
+          .digest('hex'),
+
+        internal: {
+          mediaType: 'application/json',
+          type: 'PostComment',
+          // Comments can’t change
+          contentDigest: doc.id,
+          description: 'Comment from the Firestore',
+        },
+      });
+    });
+  }
+};
+
+exports.createSchemaCustomization = ({ actions }) => {
+  const { createTypes } = actions;
   const typeDefs = `
     type PostComment implements Node @dontinfer {
       name: String!
@@ -79,38 +114,35 @@ exports.sourceNodes = async ({ actions }: SourceNodesArgs) => {
       gravatarHash: String!
       post: MdxBlogPost! @link(by: "slug", from: "path")
     }
+
+    type SiteSiteMetadata {
+      addCommentUrl: String
+    }
+
+    type Mdx implements Node {
+      frontmatter: MdxFrontmatter
+    }
+
+    type MdxBlogPost implements Node {
+      fields: MdxFields
+    }
+
+    type MdxFields {
+      description: String
+      commentsStatus: String
+    }
+
+    type MdxFrontmatter {
+      description: String
+      featured_image: FeaturedImage
+      sidebar: [String]
+    }
+
+    type FeaturedImage {
+      childImageSharp: ImageSharp
+    }
   `;
-
   createTypes(typeDefs);
-
-  const db = firebase.firestore();
-  const comments = await db
-    .collection('comments')
-    .where('isTrashed', '==', false)
-    .get();
-
-  comments.forEach(doc => {
-    const comment: PostComment = doc.data() as any;
-
-    createNode({
-      ...comment,
-      id: `PostComment-${doc.id}`,
-      createdAt: new Date(comment.createdAt.seconds * 1000),
-
-      gravatarHash: crypto
-        .createHash('md5')
-        .update(comment.email.trim().toLowerCase())
-        .digest('hex'),
-
-      internal: {
-        mediaType: 'application/json',
-        type: 'PostComment',
-        // Comments can’t change
-        contentDigest: doc.id,
-        description: 'Comment from the Firestore',
-      },
-    });
-  });
 };
 
 exports.createPages = async (
@@ -119,11 +151,10 @@ exports.createPages = async (
 ) => {
   const { createPage } = actions;
 
-  const {
-    projectsContentPath = DEFAULT_CONFIG_OPTIONS.projectsContentPath,
-  } = options;
+  const { projectsContentPath = DEFAULT_CONFIG_OPTIONS.projectsContentPath } =
+    options;
 
-  const result = await graphql<CreateProjectPagesQuery.Query>(gql`
+  const result = await graphql<CreateProjectPagesQueryQuery>(gql`
     query CreateProjectPagesQuery {
       allFile(filter: {
         sourceInstanceName: { eq: "${projectsContentPath}" } ,
@@ -150,7 +181,7 @@ exports.createPages = async (
     reporter.panic('Error loading project mdx files', result.errors);
   }
 
-  result.data!.allFile.nodes.forEach(node => {
+  result.data!.allFile.nodes.forEach((node) => {
     const projectId = node.childMdx!.fields!.projectId!;
     const slug = node.childMdx!.fields!.slug!;
 
@@ -193,8 +224,12 @@ function transformMdxNode(
     sidebarContentPath = DEFAULT_CONFIG_OPTIONS.sidebarContentPath,
   } = options;
 
+  if (!node.parent) {
+    return;
+  }
+
   // Create source field (according to contentPath)
-  const fileNode: FileSystemNode = getNode(node.parent);
+  const fileNode = getNode(node.parent) as FileSystemNode;
   const source = fileNode.sourceInstanceName;
 
   if (source === projectsContentPath) {
@@ -263,7 +298,11 @@ function transformMdxNode(
 function transformMdxBlogPostNode({ node, actions, getNode }: CreateNodeArgs) {
   const { createNodeField } = actions;
 
-  const mdxParent = getNode(node.parent);
+  if (!node.parent) {
+    return;
+  }
+
+  const mdxParent = getNode(node.parent) as any;
   const commentsStatus = mdxParent.frontmatter.comments || 'open';
   const description = mdxParent.frontmatter.description || 'open';
 

@@ -8,7 +8,11 @@ import { Global, css } from '@emotion/core';
 import { MDXProvider } from '@mdx-js/react';
 import reset from 'emotion-reset';
 
-import { LayoutQuery, ExtendedPostPageQuery } from '../../lib/graphql';
+import {
+  LayoutQuery,
+  ExtendedPostPageQuery,
+  FeaturedImage,
+} from '../../lib/graphql';
 
 import CONTENT_THEME from '../style/content-theme';
 import SIDEBAR_THEME from '../style/sidebar-theme';
@@ -27,40 +31,36 @@ const LAYOUT_REGIONS = {
 interface Props {
   title?: string;
   description?: string;
-  featuredImage?: ExtendedPostPageQuery.FeaturedImage | null;
+  featuredImage?: FeaturedImage | null;
 }
 
 export const Title: React.FunctionComponent = ({ children }) => (
-  <ThemeProvider theme={CONTENT_THEME}>
-    <header
-      sx={CONTENT_THEME.styles.root}
-      css={{ gridArea: LAYOUT_REGIONS.title }}
-    >
-      {children}
-    </header>
-  </ThemeProvider>
+  <header
+    sx={CONTENT_THEME.styles.root as any}
+    css={{ gridArea: LAYOUT_REGIONS.title }}
+  >
+    {children}
+  </header>
 );
 
 export const Content: React.FunctionComponent = ({ children }) => (
-  <ThemeProvider theme={CONTENT_THEME}>
-    <section
-      sx={{ ...CONTENT_THEME.styles.root, ...CONTENT_THEME.styles.content }}
-      css={{ gridArea: LAYOUT_REGIONS.content }}
-    >
-      {children}
-    </section>
-  </ThemeProvider>
+  <section
+    sx={
+      { ...CONTENT_THEME.styles.root, ...CONTENT_THEME.styles.content } as any
+    }
+    css={{ gridArea: LAYOUT_REGIONS.content }}
+  >
+    {children}
+  </section>
 );
 
 export const Sidebar: React.FunctionComponent = ({ children }) => (
-  <ThemeProvider theme={SIDEBAR_THEME}>
-    <aside
-      sx={SIDEBAR_THEME.styles.root}
-      css={{ gridArea: LAYOUT_REGIONS.sidebar }}
-    >
-      {children}
-    </aside>
-  </ThemeProvider>
+  <aside
+    sx={SIDEBAR_THEME.styles.root}
+    css={{ gridArea: LAYOUT_REGIONS.sidebar }}
+  >
+    <ThemeProvider theme={SIDEBAR_THEME}>{children}</ThemeProvider>
+  </aside>
 );
 
 /**
@@ -74,8 +74,8 @@ const Layout: React.FunctionComponent<Props> = ({
   featuredImage,
   children,
 }) => {
-  const data: LayoutQuery.Query = useStaticQuery(graphql`
-    query LayoutQuery {
+  const data: LayoutQuery = useStaticQuery(graphql`
+    query Layout {
       site {
         siteMetadata {
           author
@@ -120,34 +120,36 @@ const Layout: React.FunctionComponent<Props> = ({
         />
 
         <MDXProvider components={MDX_COMPONENTS}>
-          <main
-            sx={{
-              padding: 2,
-              maxWidth: (({ baseline }) => baseline * 40) as any,
+          <ThemeProvider theme={CONTENT_THEME as any}>
+            <main
+              sx={{
+                padding: 2,
+                maxWidth: (({ baseline }) => baseline * 40) as any,
 
-              display: 'grid',
+                display: 'grid',
 
-              gridColumnGap: 3,
+                gridColumnGap: 3,
 
-              gridTemplateColumns: [
-                'minmax(0, 1fr)',
-                'minmax(0, 8fr) minmax(0, 4fr)',
-              ],
-              gridTemplateAreas: [
-                `
-                "${LAYOUT_REGIONS.title}"
-                "${LAYOUT_REGIONS.content}"
-                "${LAYOUT_REGIONS.sidebar}"
-                `,
-                `
-                "${LAYOUT_REGIONS.title} ${LAYOUT_REGIONS.title}"
-                "${LAYOUT_REGIONS.content} ${LAYOUT_REGIONS.sidebar}"
-                `,
-              ],
-            }}
-          >
-            {children}
-          </main>
+                gridTemplateColumns: [
+                  'minmax(0, 1fr)',
+                  'minmax(0, 8fr) minmax(0, 4fr)',
+                ],
+                gridTemplateAreas: [
+                  `
+                  "${LAYOUT_REGIONS.title}"
+                  "${LAYOUT_REGIONS.content}"
+                  "${LAYOUT_REGIONS.sidebar}"
+                  `,
+                  `
+                  "${LAYOUT_REGIONS.title} ${LAYOUT_REGIONS.title}"
+                  "${LAYOUT_REGIONS.content} ${LAYOUT_REGIONS.sidebar}"
+                  `,
+                ],
+              }}
+            >
+              {children}
+            </main>
+          </ThemeProvider>
         </MDXProvider>
 
         <SiteFooter

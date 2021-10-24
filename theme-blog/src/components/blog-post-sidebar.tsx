@@ -1,15 +1,15 @@
 /** @jsx jsx */
 
 import React from 'react';
-import { jsx, Styled } from 'theme-ui';
+import { jsx, Themed } from 'theme-ui';
 
-import { ExtendedPostPageQuery, Maybe } from '../../lib/graphql';
+import { ExtendedPostPageQuery } from '../../lib/graphql';
 import BlogPostListItem from './blog-post-list-item';
 
 type Props = {
-  post: ExtendedPostPageQuery.BlogPost;
-  previous: Maybe<ExtendedPostPageQuery.Previous>;
-  next: Maybe<ExtendedPostPageQuery.Next>;
+  post: NonNullable<ExtendedPostPageQuery['blogPost']>;
+  previous: ExtendedPostPageQuery['previous'];
+  next: ExtendedPostPageQuery['next'];
 };
 
 const BlogPostSidebar: React.FunctionComponent<Props> = ({
@@ -18,7 +18,7 @@ const BlogPostSidebar: React.FunctionComponent<Props> = ({
   next,
 }) => (
   <React.Fragment>
-    <Styled.h2 as="h3">Navigation</Styled.h2>
+    <Themed.h2 as="h3">Navigation</Themed.h2>
 
     <ul>
       {next && <BlogPostListItem post={next} bullet=">" />}
@@ -26,22 +26,22 @@ const BlogPostSidebar: React.FunctionComponent<Props> = ({
       {previous && <BlogPostListItem post={previous} bullet=">" />}
     </ul>
 
-    <Styled.hr />
+    <Themed.hr />
 
-    <Styled.h2 as="h3">Subscribe</Styled.h2>
+    <Themed.h2 as="h3">Subscribe</Themed.h2>
 
-    <Styled.p>
+    <Themed.p>
       Don’t rely on a serendipitous web search to bring you back here! Subscribe
       to the <a href="/rss.xml">RSS feed</a> of these blog posts.
-    </Styled.p>
+    </Themed.p>
 
-    <Styled.p>
+    <Themed.p>
       If you’re looking for a place to start, try{' '}
       <a href="https://feedbin.com/">Feedbin</a>! It works great in the browser,
       and for syncing other apps. I use{' '}
       <a href="https://ranchero.com/netnewswire/">NetNewsWire</a> on OS X and{' '}
       <a href="https://reederapp.com/">Reeder</a> on iOS.
-    </Styled.p>
+    </Themed.p>
 
     {/* TODO(fiona): archives link */}
   </React.Fragment>

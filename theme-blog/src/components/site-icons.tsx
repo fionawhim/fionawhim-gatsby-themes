@@ -27,7 +27,7 @@ const SiteIcons: React.FunctionComponent = () => {
       <link rel="manifest" href="/site.webmanifest" />
 
       <meta name="msapplication-TileColor" content="#ffffff" />
-      <meta name="theme-color" content={theme.colors!.primary} />
+      <meta name="theme-color" content={theme.colors!.primary as string} />
     </Helmet>
   );
 };

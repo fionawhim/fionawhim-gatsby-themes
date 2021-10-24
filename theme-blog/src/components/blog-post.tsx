@@ -1,9 +1,9 @@
 /** @jsx jsx */
 
 import React from 'react';
-import { Styled, jsx } from 'theme-ui';
+import { Themed, jsx } from 'theme-ui';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
-import { ExtendedPostPageQuery } from '../../lib/graphql';
+import { PostComment } from '../../lib/graphql';
 import BlogPostHeader from './blog-post-header';
 import CommentForm from './comment-form';
 import Comment from './comment';
@@ -26,8 +26,12 @@ type Props = {
     }
   | {
       isPermalinkPage: true;
-      comments: ExtendedPostPageQuery.Comments['nodes'];
-    });
+      comments: Pick<
+        PostComment,
+        'id' | 'body' | 'name' | 'createdAt' | 'gravatarHash'
+      >[];
+    }
+);
 
 const BlogPost: React.FunctionComponent<Props> = ({
   body,
@@ -63,8 +67,8 @@ const BlogPost: React.FunctionComponent<Props> = ({
         (post.commentsStatus === 'open' || post.comments.length > 0) && (
           <React.Fragment>
             <div sx={{ mt: 2 }} id="comments">
-              <Styled.hr />
-              <Styled.h3
+              <Themed.hr />
+              <Themed.h3
                 sx={{
                   ':before': {
                     content: '"*"',
@@ -72,9 +76,9 @@ const BlogPost: React.FunctionComponent<Props> = ({
                 }}
               >
                 Comments
-              </Styled.h3>
+              </Themed.h3>
 
-              {post.comments.map(comment => (
+              {post.comments.map((comment) => (
                 <Comment key={comment.id} comment={comment} />
               ))}
 

@@ -19,7 +19,7 @@ const ProfileIcon: React.FunctionComponent<Props> = ({
         marginRight: '1em',
       }}
       alt={name}
-      src={require(`../../assets/logos/${icon}.svg`)}
+      src={require(`../../assets/logos/${icon}.svg`).default}
       width="48"
       height="48"
     />

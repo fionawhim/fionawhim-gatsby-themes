@@ -1,20 +1,12 @@
 import React from 'react';
 
-import { hydrate, cache } from 'emotion';
-import { CacheProvider } from '@emotion/core';
+import { CacheProvider } from '@emotion/react';
+import createCache from '@emotion/cache';
 import { MDXProvider } from '@mdx-js/react';
 
 import MDX_COMPONENTS from '../src/shortcodes';
 
-export const onClientEntry = () => {
-  // This JSON script gets written in gatsby-ssr
-  const idsTag = document.getElementById('hydrated-emotion-ids');
-
-  if (idsTag) {
-    const ids = JSON.parse(idsTag.innerHTML);
-    hydrate(ids);
-  }
-};
+const cache = createCache({ key: 'fionawhim' });
 
 export const wrapRootElement = ({ element }) => (
   <CacheProvider value={cache}>

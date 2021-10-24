@@ -1,5 +1,5 @@
 overwrite: true
-schema: "./schema.json"
+schema: './schema.graphql'
 documents:
   - ./lib/**/*.{js,ts,tsx}
   - ./src/**/*.{js,ts,tsx}
@@ -7,9 +7,12 @@ documents:
 generates:
   lib/graphql.ts:
     plugins:
-      - "typescript-common"
-      - "typescript-client"
+      - typescript
+      - typescript-operations
 config:
+  preResolveTypes: false
+  skipTypeNameForRoot: true
+  skipTypename: true
   namingConvention:
     enumValues: keep
 

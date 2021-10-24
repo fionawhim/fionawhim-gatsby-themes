@@ -20,7 +20,7 @@ const BlogPostListItem: React.FunctionComponent<{
     <li
       sx={{
         ...HOVER_A_UNDERLINES,
-        mt: ({ baseline }) => [baseline * 0.5],
+        mt: (theme) => [(theme as any).baseline * 0.5],
         position: 'relative',
         fontFamily: 'heading',
         fontWeight: isCurrent ? 'bold' : 'normal',

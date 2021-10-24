@@ -2,14 +2,14 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import { useStaticQuery, graphql } from 'gatsby';
 
-import { SiteSeoQuery, ExtendedPostPageQuery } from '../../lib/graphql';
+import { SiteSeoQueryQuery, FeaturedImage } from '../../lib/graphql';
 
 const SiteSeo: React.FunctionComponent<{
   title: string;
   description: string;
-  featuredImage?: ExtendedPostPageQuery.FeaturedImage | null;
+  featuredImage?: FeaturedImage | null;
 }> = ({ title, description, featuredImage }) => {
-  const { site }: SiteSeoQuery.Query = useStaticQuery(
+  const { site }: SiteSeoQueryQuery = useStaticQuery(
     graphql`
       query SiteSeoQuery {
         site {
@@ -71,7 +71,7 @@ const SiteSeo: React.FunctionComponent<{
           name: `twitter:description`,
           content: description,
         },
-      ].filter(f => !!f)}
+      ].filter((f) => !!f)}
     />
   );
 };

@@ -4,11 +4,11 @@ import React, { FormEvent } from 'react';
 import { jsx } from 'theme-ui';
 import { useStaticQuery, graphql } from 'gatsby';
 import { CommentFormQuery } from '../../lib/graphql';
-import { Styled } from 'theme-ui';
+import { Themed } from 'theme-ui';
 
 const CommentForm: React.FunctionComponent<{ path: string }> = ({ path }) => {
-  const data: CommentFormQuery.Query = useStaticQuery(graphql`
-    query CommentFormQuery {
+  const data: CommentFormQuery = useStaticQuery(graphql`
+    query CommentForm {
       site {
         siteMetadata {
           addCommentUrl
@@ -86,7 +86,7 @@ const CommentForm: React.FunctionComponent<{ path: string }> = ({ path }) => {
           fontFamily: 'heading',
           fontWeight: 'bold',
           color: 'secondary',
-        },
+        } as any,
         'input, textarea': {
           border: '1px solid',
           borderColor: 'secondaryBackground',
@@ -105,7 +105,7 @@ const CommentForm: React.FunctionComponent<{ path: string }> = ({ path }) => {
         },
       }}
     >
-      <Styled.h4 sx={{ mb: 1 }}>Post a Comment</Styled.h4>
+      <Themed.h4 sx={{ mb: 1 }}>Post a Comment</Themed.h4>
 
       {success && (
         <React.Fragment>
@@ -156,7 +156,10 @@ const CommentForm: React.FunctionComponent<{ path: string }> = ({ path }) => {
               id="comment-body"
               name="comment"
               ref={bodyTextAreaRef}
-              sx={{ width: '100%', height: ({ baseline }) => [baseline * 4] }}
+              sx={{
+                width: '100%',
+                height: (theme) => [(theme as any).baseline * 4],
+              }}
             ></textarea>
           </div>
 

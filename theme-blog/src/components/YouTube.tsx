@@ -53,7 +53,7 @@ const Placeholder: React.FunctionComponent<{
     <React.Fragment>
       <a
         href={videoPageUrl}
-        onClick={ev => {
+        onClick={(ev) => {
           ev.preventDefault();
           setPlaying(true);
         }}
@@ -125,7 +125,7 @@ const Placeholder: React.FunctionComponent<{
             padding: '1em',
           }}
           sx={{
-            fontFamily: theme => theme.fonts.heading,
+            fontFamily: (theme) => (theme?.fonts as any).heading,
             textDecoration: 'none',
 
             ':hover': {

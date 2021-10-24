@@ -23,6 +23,10 @@ export default {
         ...TEXT_LARGE,
         color: 'black',
 
+        '&::before': {
+          content: 'none',
+        },
+
         '&:nth-of-type(1)::after': {
           content: '"/"',
         },

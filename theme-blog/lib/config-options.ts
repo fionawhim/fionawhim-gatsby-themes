@@ -5,7 +5,7 @@ export interface ConfigOptions {
   projectsContentPath?: string;
   projectsPath?: string;
 
-  sidebarContentPath?: string | null;
+  sidebarContentPath?: string;
 
   feedName?: string;
   feedPath?: string;
@@ -22,7 +22,7 @@ export const DEFAULT_CONFIG_OPTIONS: Required<ConfigOptions> = {
   projectsContentPath: 'content/projects',
   projectsPath: '/projects',
 
-  sidebarContentPath: null,
+  sidebarContentPath: 'content/sidebar',
 
   feedName: 'RSS feed',
   feedPath: '/rss.xml',

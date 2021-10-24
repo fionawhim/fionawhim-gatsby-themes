@@ -1,44 +1,43 @@
 import React from 'react';
-import { CacheProvider } from '@emotion/core';
-import { cache } from 'emotion';
-import { extractCritical } from 'emotion-server';
+
+import { CacheProvider } from '@emotion/react';
+import createEmotionServer from '@emotion/server/create-instance';
+import createCache from '@emotion/cache';
+
 import { MDXProvider } from '@mdx-js/react';
 
 import { ConfigOptions, DEFAULT_CONFIG_OPTIONS } from './config-options';
 
 import MDX_COMPONENTS from '../src/shortcodes';
 
+const key = 'custom';
+const cache = createCache({ key });
+
+const { extractCritical } = createEmotionServer(cache);
+
 export const onRenderBody = (
   { bodyHtml, setHeadComponents },
   configOptions: ConfigOptions
 ) => {
-  const { ids, css } = extractCritical(bodyHtml);
+  const { css, ids } = extractCritical(bodyHtml);
 
   setHeadComponents([
-    // The extracted CSS from Emotion
     <style
       key="hydrated-emotion-css"
       type="text/css"
+      data-emotion={`${key} ${ids.join(' ')}`}
       dangerouslySetInnerHTML={{ __html: css }}
-    ></style>,
+    />,
 
     configOptions.feedUrl && (
       <link
+        key="rss-link"
         rel="alternate"
         type="application/rss+xml"
         title={configOptions.feedName || DEFAULT_CONFIG_OPTIONS.feedName}
         href={configOptions.feedUrl}
       />
     ),
-
-    // We write the IDs onto the page so we can call hydrate when the app
-    // starts up.
-    <script
-      key="hydrated-emotion-ids"
-      id="hydrated-emotion-ids"
-      type="application/json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(ids) }}
-    ></script>,
   ]);
 };
 

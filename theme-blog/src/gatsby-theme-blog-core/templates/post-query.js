@@ -4,11 +4,7 @@ import PostPage from '../../components/post-page';
 export default PostPage;
 
 export const query = graphql`
-  query ExtendedPostPageQuery(
-    $id: String!
-    $previousId: String
-    $nextId: String
-  ) {
+  query ExtendedPostPage($id: String!, $previousId: String, $nextId: String) {
     blogPost(id: { eq: $id }) {
       id
       excerpt
@@ -16,7 +12,6 @@ export const query = graphql`
       slug
       title
       tags
-      keywords
       date(formatString: "LL")
       day: date(formatString: "D")
       month: date(formatString: "MMMM")

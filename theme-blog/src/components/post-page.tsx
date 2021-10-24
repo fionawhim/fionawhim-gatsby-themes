@@ -3,7 +3,7 @@
 import React from 'react';
 import { jsx } from 'theme-ui';
 
-import { ExtendedPostPageQuery } from '../../lib/graphql';
+import { ExtendedPostPageQuery, Mdx } from '../../lib/graphql';
 
 import Layout, { Content, Sidebar, Title } from './layout';
 import BlogPost from './blog-post';
@@ -11,7 +11,7 @@ import BlogPostSidebar from './blog-post-sidebar';
 import BlogPostHeader from './blog-post-header';
 
 interface Props {
-  data: ExtendedPostPageQuery.Query;
+  data: ExtendedPostPageQuery;
 }
 
 const PostPage: React.FunctionComponent<Props> = ({
@@ -21,9 +21,9 @@ const PostPage: React.FunctionComponent<Props> = ({
     <Layout
       title={blogPost!.title}
       description={
-        blogPost!.parent!.frontmatter!.description || blogPost!.excerpt
+        (blogPost!.parent! as Mdx).frontmatter!.description || blogPost!.excerpt
       }
-      featuredImage={blogPost!.parent!.frontmatter!.featured_image}
+      featuredImage={(blogPost!.parent! as Mdx).frontmatter!.featured_image}
     >
       <Title>
         <BlogPostHeader

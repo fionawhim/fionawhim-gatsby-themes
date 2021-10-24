@@ -1,16 +1,15 @@
 /** @jsx jsx */
 
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { graphql, useStaticQuery, Link } from 'gatsby';
-import { jsx, Styled } from 'theme-ui';
-import { LatestBlogPostsQuery } from '../../lib/graphql';
+import { graphql, useStaticQuery } from 'gatsby';
+import { jsx } from 'theme-ui';
+import { LatestBlogPostsQueryQuery } from '../../lib/graphql';
 
 import BlogPost from './blog-post';
 import { ReplaceReadMore } from './ReadMore';
 
 const LatestBlogPosts: React.FunctionComponent = () => {
-  const data: LatestBlogPostsQuery.Query = useStaticQuery(graphql`
+  const data: LatestBlogPostsQueryQuery = useStaticQuery(graphql`
     query LatestBlogPostsQuery {
       allBlogPost(sort: { fields: [date, title], order: DESC }, limit: 10) {
         nodes {
@@ -50,7 +49,7 @@ const LatestBlogPosts: React.FunctionComponent = () => {
 
   return (
     <React.Fragment>
-      {data.allBlogPost.nodes.map(p => {
+      {data.allBlogPost.nodes.map((p) => {
         return (
           <ReplaceReadMore key={p.slug} renderLink={() => null}>
             <BlogPost

@@ -46,7 +46,7 @@ const BlogPostHeader: React.FunctionComponent<Props> = ({
           color: 'secondary',
 
           mr: [, , 1],
-          width: ({ baseline }) => [, , 6 * baseline],
+          width: (theme) => [, , 6 * (theme as any).baseline],
           borderRight: [, , '4px solid'],
           borderColor: 'secondary',
         }}
