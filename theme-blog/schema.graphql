@@ -1011,13 +1011,13 @@ type PostComment implements Node {
   ): Date!
   gravatarHash: String!
   post: MdxBlogPost!
+  isTrashed: Boolean
+  path: String
   email: String
   inReplyTo: String
-  url: String
-  path: String
   isSpam: Boolean
-  isTrashed: Boolean
   ip: String
+  url: String
   id: ID!
   parent: Node
   children: [Node!]!
@@ -1079,7 +1079,7 @@ type Query {
   allBlogPost(filter: BlogPostFilterInput, sort: BlogPostSortInput, skip: Int, limit: Int): BlogPostConnection!
   mdxBlogPost(id: StringQueryOperatorInput, title: StringQueryOperatorInput, slug: StringQueryOperatorInput, date: DateQueryOperatorInput, tags: StringQueryOperatorInput, excerpt: StringQueryOperatorInput, image: FileFilterInput, imageAlt: StringQueryOperatorInput, imageCaptionText: StringQueryOperatorInput, imageCaptionLink: StringQueryOperatorInput, socialImage: FileFilterInput, body: StringQueryOperatorInput, fields: MdxFieldsFilterInput, parent: NodeFilterInput, children: NodeFilterListInput, internal: InternalFilterInput): MdxBlogPost
   allMdxBlogPost(filter: MdxBlogPostFilterInput, sort: MdxBlogPostSortInput, skip: Int, limit: Int): MdxBlogPostConnection!
-  postComment(name: StringQueryOperatorInput, body: StringQueryOperatorInput, createdAt: DateQueryOperatorInput, gravatarHash: StringQueryOperatorInput, post: MdxBlogPostFilterInput, email: StringQueryOperatorInput, inReplyTo: StringQueryOperatorInput, url: StringQueryOperatorInput, path: StringQueryOperatorInput, isSpam: BooleanQueryOperatorInput, isTrashed: BooleanQueryOperatorInput, ip: StringQueryOperatorInput, id: StringQueryOperatorInput, parent: NodeFilterInput, children: NodeFilterListInput, internal: InternalFilterInput): PostComment
+  postComment(name: StringQueryOperatorInput, body: StringQueryOperatorInput, createdAt: DateQueryOperatorInput, gravatarHash: StringQueryOperatorInput, post: MdxBlogPostFilterInput, isTrashed: BooleanQueryOperatorInput, path: StringQueryOperatorInput, email: StringQueryOperatorInput, inReplyTo: StringQueryOperatorInput, isSpam: BooleanQueryOperatorInput, ip: StringQueryOperatorInput, url: StringQueryOperatorInput, id: StringQueryOperatorInput, parent: NodeFilterInput, children: NodeFilterListInput, internal: InternalFilterInput): PostComment
   allPostComment(filter: PostCommentFilterInput, sort: PostCommentSortInput, skip: Int, limit: Int): PostCommentConnection!
   sidebar(id: StringQueryOperatorInput, parent: NodeFilterInput, children: NodeFilterListInput, internal: InternalFilterInput, slug: StringQueryOperatorInput, title: StringQueryOperatorInput): Sidebar
   allSidebar(filter: SidebarFilterInput, sort: SidebarSortInput, skip: Int, limit: Int): SidebarConnection!
@@ -6655,13 +6655,13 @@ enum PostCommentFieldsEnum {
   post___internal___mediaType @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
   post___internal___owner @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
   post___internal___type @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  isTrashed
+  path
   email
   inReplyTo
-  url
-  path
   isSpam
-  isTrashed
   ip
+  url
   id
   parent___id
   parent___parent___id
@@ -6770,13 +6770,13 @@ input PostCommentFilterInput {
   createdAt: DateQueryOperatorInput
   gravatarHash: StringQueryOperatorInput
   post: MdxBlogPostFilterInput
+  isTrashed: BooleanQueryOperatorInput
+  path: StringQueryOperatorInput
   email: StringQueryOperatorInput
   inReplyTo: StringQueryOperatorInput
-  url: StringQueryOperatorInput
-  path: StringQueryOperatorInput
   isSpam: BooleanQueryOperatorInput
-  isTrashed: BooleanQueryOperatorInput
   ip: StringQueryOperatorInput
+  url: StringQueryOperatorInput
   id: StringQueryOperatorInput
   parent: NodeFilterInput
   children: NodeFilterListInput
