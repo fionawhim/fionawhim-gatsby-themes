@@ -2656,6 +2656,15 @@
     "@theme-ui/css" "0.11.3"
     deepmerge "^4.2.2"
 
+"@theme-ui/color-modes@^0.15.4":
+  version "0.15.4"
+  resolved "https://registry.yarnpkg.com/@theme-ui/color-modes/-/color-modes-0.15.4.tgz#09b1db60d7ae0a4ae37afb92f6b29fcd19eeef12"
+  integrity sha512-aM3I81GoMjLp5K2T7oI75GkOrtZHOOC41uIqcDwkQiBT63uZWn5ndTcdmS2lSVAd5R6V1T/QN+19CKKpn2Xbrw==
+  dependencies:
+    "@theme-ui/core" "^0.15.4"
+    "@theme-ui/css" "^0.15.4"
+    deepmerge "^4.2.2"
+
 "@theme-ui/components@0.11.3":
   version "0.11.3"
   resolved "https://registry.yarnpkg.com/@theme-ui/components/-/components-0.11.3.tgz#332dd382ddbfd60e7743d9eb0264ee51368d95b4"
@@ -2669,6 +2678,17 @@
     "@theme-ui/css" "0.11.3"
     "@types/styled-system" "^5.1.10"
 
+"@theme-ui/components@^0.15.4":
+  version "0.15.4"
+  resolved "https://registry.yarnpkg.com/@theme-ui/components/-/components-0.15.4.tgz#e7f0a378db79f5ad5d814353761ad70895109cb2"
+  integrity sha512-ubMIx01N/cWt6mSOm92zppOE+k2u7oFQisLcKBk6bN/nekDQ9T220xtaZDRr7IiylxrQ6GOgdMQaYIOFdPVT5w==
+  dependencies:
+    "@styled-system/color" "^5.1.2"
+    "@styled-system/should-forward-prop" "^5.1.2"
+    "@styled-system/space" "^5.1.2"
+    "@theme-ui/css" "^0.15.4"
+    "@types/styled-system" "^5.1.13"
+
 "@theme-ui/core@0.11.3":
   version "0.11.3"
   resolved "https://registry.yarnpkg.com/@theme-ui/core/-/core-0.11.3.tgz#9327ea293bb172d684447e96b8ceea492c27a357"
@@ -2679,6 +2699,14 @@
     "@theme-ui/parse-props" "0.11.3"
     deepmerge "^4.2.2"
 
+"@theme-ui/core@^0.15.4":
+  version "0.15.4"
+  resolved "https://registry.yarnpkg.com/@theme-ui/core/-/core-0.15.4.tgz#cb959a6f31515f8fb3a3d583c44089ec18cbe2e5"
+  integrity sha512-QlbRrY7TV19LEMERA+vUANnte6VUPHoFfoU76lZ2aUys9w+Rr0IZGmzUxXSOg/172v9cxsvbVG0Uleny6B6Q8A==
+  dependencies:
+    "@theme-ui/css" "^0.15.4"
+    deepmerge "^4.2.2"
+
 "@theme-ui/css@0.11.3":
   version "0.11.3"
   resolved "https://registry.yarnpkg.com/@theme-ui/css/-/css-0.11.3.tgz#9962db78b9d60a96b2f6497f858e6baa7aa0f5c5"
@@ -2686,6 +2714,13 @@
   dependencies:
     "@emotion/react" "^11.1.1"
     csstype "^3.0.5"
+
+"@theme-ui/css@^0.15.4":
+  version "0.15.4"
+  resolved "https://registry.yarnpkg.com/@theme-ui/css/-/css-0.15.4.tgz#c8d6709867c011520c30c23f06486f9e44af496c"
+  integrity sha512-6BBC2QAlS4vCSWqJc4KD4ORD2wJ6NS1aOxbI85Z+3nKzEsYaT/ihDtIvlXzPwHTd4tFTmeJqeoBVNLZrJ8L8CA==
+  dependencies:
+    csstype "^3.0.10"
 
 "@theme-ui/mdx@0.11.3":
   version "0.11.3"
@@ -2828,6 +2863,15 @@
     "@theme-ui/core" "0.11.3"
     "@theme-ui/css" "0.11.3"
     "@theme-ui/mdx" "0.11.3"
+
+"@theme-ui/theme-provider@^0.15.4":
+  version "0.15.4"
+  resolved "https://registry.yarnpkg.com/@theme-ui/theme-provider/-/theme-provider-0.15.4.tgz#5ef3f2d4f8533e77f285385a34911c5435183753"
+  integrity sha512-U4WsTwxTQIBZsVAafkM8PgHgJ0DpZxu+U4cdgRT7luoF8wbgK3jAzvds9gQ8g9nZf+C4D0/xhK6+Ef9CdZm7rg==
+  dependencies:
+    "@theme-ui/color-modes" "^0.15.4"
+    "@theme-ui/core" "^0.15.4"
+    "@theme-ui/css" "^0.15.4"
 
 "@tokenizer/token@^0.3.0":
   version "0.3.0"
@@ -3206,13 +3250,6 @@
   dependencies:
     "@types/node" "*"
 
-"@types/styled-system@*":
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/@types/styled-system/-/styled-system-5.1.0.tgz#b67fa8573daa777fe8578228b8aa7cf24cb13900"
-  integrity sha512-DJIFiOdCm+1/ztgjHNZKokDqzF3X2USx52/Pmgq+SnCoPGQqfA0jpco1g87Umyi7KKaHxE4Eqeix39GBeiTiLw==
-  dependencies:
-    csstype "^2.6.4"
-
 "@types/styled-system@^5.1.10":
   version "5.1.13"
   resolved "https://registry.yarnpkg.com/@types/styled-system/-/styled-system-5.1.13.tgz#9ad667534d3bd75720dd7778c94c783449cb5c14"
@@ -3220,22 +3257,19 @@
   dependencies:
     csstype "^3.0.2"
 
-"@types/styled-system__css@*":
-  version "5.0.4"
-  resolved "https://registry.yarnpkg.com/@types/styled-system__css/-/styled-system__css-5.0.4.tgz#df83b015cf377ab39ecf33ea31339c05eeb9230a"
-  integrity sha512-SHHoNh9cCRTG9hcmCD2ua0NeYUrLmLXoMJ7g0U/e0FjrzcwNQtM5wjjEJVCVZymU632xA1PdPEykrtoSHTIecA==
+"@types/styled-system@^5.1.13":
+  version "5.1.15"
+  resolved "https://registry.yarnpkg.com/@types/styled-system/-/styled-system-5.1.15.tgz#075f969cc028a895dba916c07708e2fe828d7077"
+  integrity sha512-1uls4wipZn8FtYFZ7upRVFDoEeOXTQTs2zuyOZPn02T6rjIxtvj2P2lG5qsxXHhKuKsu3thveCZrtaeLE/ibLg==
   dependencies:
-    csstype "^2.6.6"
+    csstype "^3.0.2"
 
-"@types/theme-ui@^0.2.1":
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/@types/theme-ui/-/theme-ui-0.2.1.tgz#d34bb135f5bc3493733866cbe4a396b0dffaa526"
-  integrity sha512-PEsbt5tM96aQCi05GyEUwMaf2U3XVUVzYC+AmM2Cu/XcTAzaqXOUg0gq8GD3fB2Odj/tOKphN5LA9WCPMgZvQA==
+"@types/theme-ui@^0.6.0":
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/@types/theme-ui/-/theme-ui-0.6.0.tgz#9e3291d9cb6620a1a885c47a882da0a5096fb32e"
+  integrity sha512-5ILl2YLBv+pdrEKiFSeAGJJs/QqCl/ZdUTUWHsLc0B+Kw+/rWK7CA6W8+ryANm6iF3Y5VV3dUvWnA46qFF67vw==
   dependencies:
-    "@types/react" "*"
-    "@types/styled-system" "*"
-    "@types/styled-system__css" "*"
-    csstype "^2.6.6"
+    theme-ui "*"
 
 "@types/tmp@^0.0.33":
   version "0.0.33"
@@ -5591,10 +5625,15 @@ csso@^4.2.0:
   dependencies:
     css-tree "^1.1.2"
 
-csstype@^2.2.0, csstype@^2.5.7, csstype@^2.6.4, csstype@^2.6.6:
+csstype@^2.2.0, csstype@^2.5.7:
   version "2.6.6"
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.6.6.tgz#c34f8226a94bbb10c32cc0d714afdf942291fc41"
   integrity sha512-RpFbQGUE74iyPgvr46U9t1xoQBM8T4BL8SxrN66Le2xYAPSaDJJKeztV3awugusb3g3G9iL8StmkBBXhcbbXhg==
+
+csstype@^3.0.10:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/csstype/-/csstype-3.1.1.tgz#841b532c45c758ee546a11d5bd7b7b473c8c30b9"
+  integrity sha512-DJR/VvkAvSZW9bTouZue2sSxDwdTN92uHjqeKVm+0dAqdfNykRzQ95tay8aXMBAAPpUiq4Qcug2L7neoRh2Egw==
 
 csstype@^3.0.2, csstype@^3.0.5:
   version "3.0.9"
@@ -5658,31 +5697,17 @@ debug@3.1.0:
   dependencies:
     ms "2.0.0"
 
-debug@4, debug@^4.0.0, debug@^4.3.1, debug@^4.3.2, debug@~4.3.1:
-  version "4.3.2"
-  resolved "https://registry.yarnpkg.com/debug/-/debug-4.3.2.tgz#f0a49c18ac8779e31d4a0c6029dfb76873c7428b"
-  integrity sha512-mOp8wKcvj7XxC78zLgw/ZA+6TSgkoE2C/ienthhRD298T7UNwAg9diBpLRxC0mOezLl4B0xV7M0cCO6P/O0Xhw==
+debug@4, debug@^4.0.0, debug@^4.0.1, debug@^4.1.0, debug@^4.1.1, debug@^4.3.1, debug@^4.3.2, debug@~4.3.1:
+  version "4.3.4"
+  resolved "https://registry.yarnpkg.com/debug/-/debug-4.3.4.tgz#1319f6579357f2338d3337d2cdd4914bb5dcc865"
+  integrity sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ==
   dependencies:
     ms "2.1.2"
 
-debug@^3.0.0, debug@^3.2.7:
+debug@^3.0.0, debug@^3.1.0, debug@^3.2.6, debug@^3.2.7:
   version "3.2.7"
   resolved "https://registry.yarnpkg.com/debug/-/debug-3.2.7.tgz#72580b7e9145fb39b6676f9c5e5fb100b934179a"
   integrity sha512-CFjzYYAi4ThfiQvizrFQevTTXHtnCqWfe7x1AhgEscTz6ZbLbfoLRLPugTQyBth6f8ZERVUSyWHFD/7Wu4t1XQ==
-  dependencies:
-    ms "^2.1.1"
-
-debug@^3.1.0, debug@^3.2.6:
-  version "3.2.6"
-  resolved "https://registry.yarnpkg.com/debug/-/debug-3.2.6.tgz#e83d17de16d8a7efb7717edbe5fb10135eee629b"
-  integrity sha512-mel+jf7nrtEl5Pn1Qx46zARXKDpBbvzezse7p7LqINmdoIk8PYP5SySaxEmYv6TZ0JyEKA1hsCId6DIhgITtWQ==
-  dependencies:
-    ms "^2.1.1"
-
-debug@^4.0.1, debug@^4.1.0, debug@^4.1.1:
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/debug/-/debug-4.1.1.tgz#3b72260255109c6b589cee050f1d516139664791"
-  integrity sha512-pYAIzeRo8J6KPEaJ0VWOh5Pzkbw/RetuzehGM7QRRX5he4fPHx2rdKMB256ehJCkX+XRQm16eZLqLNS8RSZXZw==
   dependencies:
     ms "^2.1.1"
 
@@ -14074,9 +14099,9 @@ socket.io-client@3.1.1:
     socket.io-parser "~4.0.4"
 
 socket.io-parser@~4.0.3, socket.io-parser@~4.0.4:
-  version "4.0.4"
-  resolved "https://registry.yarnpkg.com/socket.io-parser/-/socket.io-parser-4.0.4.tgz#9ea21b0d61508d18196ef04a2c6b9ab630f4c2b0"
-  integrity sha512-t+b0SS+IxG7Rxzda2EVvyBZbvFPBCjJoyHuE0P//7OAsN23GItzDRdWa6ALxZI/8R5ygK7jAR6t028/z+7295g==
+  version "4.0.5"
+  resolved "https://registry.yarnpkg.com/socket.io-parser/-/socket.io-parser-4.0.5.tgz#cb404382c32324cc962f27f3a44058cf6e0552df"
+  integrity sha512-sNjbT9dX63nqUFIOv95tTVm6elyIU4RvB1m8dOeZt+IgWwcWklFDOdmGcfo3zSiRsnR/3pJkjY5lfoGqEe4Eig==
   dependencies:
     "@types/component-emitter" "^1.2.10"
     component-emitter "~1.3.0"
@@ -14797,6 +14822,17 @@ text-table@0.2.0, text-table@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/text-table/-/text-table-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
   integrity sha1-f17oI66AUgfACvLfSoTsP8+lcLQ=
+
+theme-ui@*:
+  version "0.15.4"
+  resolved "https://registry.yarnpkg.com/theme-ui/-/theme-ui-0.15.4.tgz#9614833c0ea046d3fe0d5a8c5dc8dfe108a30f32"
+  integrity sha512-IBaylKghKgP80bAeZVl79KfC3IAuQcfvXr/hJxF6qOOLlyyHkI5PRTrb58rN6cqxE10lYORHZbR9lKLuGILWJw==
+  dependencies:
+    "@theme-ui/color-modes" "^0.15.4"
+    "@theme-ui/components" "^0.15.4"
+    "@theme-ui/core" "^0.15.4"
+    "@theme-ui/css" "^0.15.4"
+    "@theme-ui/theme-provider" "^0.15.4"
 
 theme-ui@0.11.3, theme-ui@^0.11.3:
   version "0.11.3"
